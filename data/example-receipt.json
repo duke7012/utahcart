@@ -1,0 +1,15 @@
+{
+  "store": "Smith's Marketplace",
+  "date": "2026-11-05",
+  "lines": [
+    { "rawName": "KRO LG EGGS 12CT", "itemId": "eggs", "price": 1.99, "size": 12, "unit": "count" },
+    { "rawName": "KRO 2% MILK GAL", "itemId": "milk", "price": 2.49, "size": 128, "unit": "fl_oz" },
+    { "rawName": "BNLS CHKN BRST 2LB", "itemId": "chicken", "price": 5.99, "size": 2, "unit": "lb" },
+    { "rawName": "80/20 GRND BEEF 1LB", "itemId": "ground_beef", "price": 3.99, "size": 1, "unit": "lb" },
+    { "rawName": "KRO SHRD CHEDDAR 16OZ", "itemId": "cheese", "price": 2.99, "size": 16, "unit": "oz" },
+    { "rawName": "GREEK YOGURT 32OZ", "itemId": "yogurt", "price": 2.99, "size": 32, "unit": "oz" },
+    { "rawName": "KRO WHT BREAD 20OZ", "itemId": "bread", "price": 1.79, "size": 20, "unit": "oz" },
+    { "rawName": "HONEY OAT CEREAL 18OZ", "itemId": "cereal", "price": 2.49, "size": 18, "unit": "oz" },
+    { "rawName": "REUSABLE BAG", "itemId": null, "price": 0.99, "size": 1, "unit": "count" }
+  ]
+}

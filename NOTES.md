@@ -30,3 +30,12 @@ Decisions and assumptions made while building. Newest at the bottom.
 - **Goal tabs + swipe:** the chosen goal's plan fills the screen; the other two are one swipe away. When two goals pick the same plan, the later card says "Same plan as ...".
 - **Strata column** layer heights come from `lib/geo.ts` per leg plus minutes per stop, so they can differ from the rounded total by a minute.
 - **Visual direction "Red Rock Strata"** chosen on the Impeccable decision page; contract in `.impeccable/surfaces/app-page-tsx.md`.
+
+## Phase 2
+
+- **Scanned prices live in the browser** (`localStorage` `utahcart:receipts`), not in server memory, and are sent with every `/api/plan` request. On Vercel, separate function instances don't share memory, so a server-side in-memory store could lose a just-saved price between the scan and the plan call. `/api/plan` re-validates them (`cleanQuotes`: known store and item, positive numbers, forced to `source: "receipt"`).
+- **A newer scan replaces older receipt prices** for the same store + item. Receipt prices beat demo prices (`lib/prices.ts` rank), and Instacart estimates for that store are built from the receipt price too.
+- **`/api/scan`** sends the photo to `claude-opus-5-5` (effort `low`, JSON-schema structured output, `fallbacks: "default"` for safety-classifier refusals) and never stores it. The model's JSON is validated (`parseScan`); unknown item ids become "Not on the list". The browser shrinks photos to 1600px JPEG first; the server rejects non-images and files over 5 MB.
+- **No API key → the saved example receipt** (`data/example-receipt.json`, a Smith's receipt). "Use the example receipt" on `/scan` always uses it, so the demo works offline. With it saved, the demo's Most savings plan goes from Walmart alone ($125.99) to Smith's + Walmart ($106.49).
+- **Store on the receipt** is guessed from the first word of each store name; the user confirms it in a dropdown before saving.
+- **Not verified yet:** a real Claude vision call (no `ANTHROPIC_API_KEY` on the dev machine) and a real receipt photo.

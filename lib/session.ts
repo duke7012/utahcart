@@ -1,5 +1,5 @@
 import { places } from "./catalog";
-import type { Goal, ListEntry, Mode, Place, Trip } from "./types";
+import type { Goal, ListEntry, Mode, Place, PriceQuote, Trip } from "./types";
 
 export type TripForm = { from: Place; to: Place; mode: Mode; leave: string; homeBy: string };
 export type Saved = { list: ListEntry[]; trip: TripForm; goal: Goal };
@@ -55,3 +55,31 @@ export const clock = (t: string) => {
   const h = Number(t.slice(0, 2));
   return `${((h + 11) % 12) + 1}:${t.slice(3, 5)}`;
 };
+
+const RECEIPTS = "utahcart:receipts";
+
+/** Scanned receipt prices, kept in this browser and sent with every plan request. */
+export function loadReceipts(): PriceQuote[] {
+  try {
+    return JSON.parse(localStorage.getItem(RECEIPTS) ?? "[]");
+  } catch {
+    return [];
+  }
+}
+
+/** New quotes replace older ones for the same store + item. */
+export function addReceipts(quotes: PriceQuote[]): PriceQuote[] {
+  const key = (q: PriceQuote) => q.storeId + "/" + q.itemId;
+  const fresh = new Set(quotes.map(key));
+  const all = [...loadReceipts().filter((q) => !fresh.has(key(q))), ...quotes];
+  try {
+    localStorage.setItem(RECEIPTS, JSON.stringify(all));
+  } catch {}
+  return all;
+}
+
+export function clearReceipts() {
+  try {
+    localStorage.removeItem(RECEIPTS);
+  } catch {}
+}

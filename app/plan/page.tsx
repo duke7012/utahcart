@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { itemById, storeById } from "@/lib/catalog";
 import { travelMinutes } from "@/lib/geo";
 import { appleMapsUrl, googleMapsUrl, legs, orderUrl } from "@/lib/handoff";
-import { clock, load, save, toTrip, type Saved } from "@/lib/session";
+import { clock, load, loadReceipts, save, toTrip, type Saved } from "@/lib/session";
 import type { Goal, LineItem, Plan, Trip } from "@/lib/types";
 import { CHEVRON, GOALS, Icon, Segments, TopBar } from "../ui";
 
@@ -28,7 +28,7 @@ export default function PlanPage() {
     fetch("/api/plan", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ list: s.list, trip: toTrip(s.trip), memberships: {} }),
+      body: JSON.stringify({ list: s.list, trip: toTrip(s.trip), memberships: {}, quotes: loadReceipts() }),
     })
       .then(async (r) => (r.ok ? setState({ status: "ok", plans: (await r.json()).plans }) : Promise.reject((await r.json()).error)))
       .catch((err) => setState({ status: "error", message: typeof err === "string" ? err : "Couldn't reach the planner. Check your connection and try again." }));
@@ -177,7 +177,10 @@ function PlanView({ plan, plans, trip, rim }: { plan: Plan; plans: Plan[]; trip:
             {plan.warnings.map((w) => <li key={w}>{w}</li>)}
           </ul>
         )}
-        <p className="mt-4 text-small text-varnish-soft">Times are estimates; your maps app shows the real time.</p>
+        <p className="mt-4 text-small text-varnish-soft">
+          Times are estimates; your maps app shows the real time.{" "}
+          <Link href="/scan" className="font-semibold text-varnish underline">Scan a receipt</Link> to use real prices.
+        </p>
       </div>
     </div>
   );
@@ -241,7 +244,7 @@ function Strata({ plan, trip, rim }: { plan: Plan; trip: Trip; rim: string }) {
   return (
     <figure aria-label={`About ${plan.minutes} of ${cap} minutes used; ${rim}`} className="w-[104px] shrink-0">
       <figcaption className="pb-1 text-small font-semibold leading-tight">{rim}</figcaption>
-      <div className="flex h-[min(56vh,450px)] flex-col-reverse overflow-hidden border border-t-2 border-varnish bg-varnish [border-top-style:dashed]">
+      <div className="flex h-[min(56vh,450px)] flex-col-reverse overflow-hidden border border-t-2 border-varnish [border-top-style:dashed]">
       {layers.map((l, i) => (
         <div key={i} style={{ flexGrow: l.min, animationDelay: `${i * 70}ms` }} title={`${l.label} · ${Math.round(l.min)} min`}
           className={`stratum flex min-h-0 items-center border-t border-varnish px-1.5 text-small font-semibold leading-tight ${

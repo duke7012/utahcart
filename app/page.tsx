@@ -117,7 +117,10 @@ export default function ListPage() {
               );
             })}
           </ul>
-          <p className="mt-3 text-small text-varnish-soft">All prices are demo prices until the team adds real ones.</p>
+          <p className="mt-3 text-small text-varnish-soft">
+            Prices are demo prices until you{" "}
+            <Link href="/scan" className="font-semibold text-varnish underline">scan a receipt</Link>.
+          </p>
         </section>
       </main>
 
