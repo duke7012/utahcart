@@ -5,7 +5,8 @@
     "unit": "lb",
     "typicalSize": 2,
     "aisle": "produce",
-    "search": "bananas"
+    "search": "bananas",
+    "must": "banana"
   },
   {
     "id": "apples",
@@ -13,7 +14,8 @@
     "unit": "lb",
     "typicalSize": 3,
     "aisle": "produce",
-    "search": "gala apples bag"
+    "search": "gala apples bag",
+    "must": "apple"
   },
   {
     "id": "onions",
@@ -21,7 +23,8 @@
     "unit": "lb",
     "typicalSize": 3,
     "aisle": "produce",
-    "search": "yellow onions 3 lb bag"
+    "search": "yellow onions 3 lb bag",
+    "must": "onion"
   },
   {
     "id": "potatoes",
@@ -29,7 +32,8 @@
     "unit": "lb",
     "typicalSize": 5,
     "aisle": "produce",
-    "search": "russet potatoes 5 lb bag"
+    "search": "russet potatoes 5 lb bag",
+    "must": "potato"
   },
   {
     "id": "lettuce",
@@ -37,7 +41,8 @@
     "unit": "count",
     "typicalSize": 1,
     "aisle": "produce",
-    "search": "romaine lettuce"
+    "search": "romaine lettuce",
+    "must": "romaine"
   },
   {
     "id": "tomatoes",
@@ -45,7 +50,8 @@
     "unit": "lb",
     "typicalSize": 1,
     "aisle": "produce",
-    "search": "roma tomatoes"
+    "search": "roma tomatoes",
+    "must": "tomato"
   },
   {
     "id": "carrots",
@@ -53,7 +59,8 @@
     "unit": "lb",
     "typicalSize": 2,
     "aisle": "produce",
-    "search": "carrots 2 lb bag"
+    "search": "carrots 2 lb bag",
+    "must": "carrot"
   },
   {
     "id": "broccoli",
@@ -61,7 +68,8 @@
     "unit": "lb",
     "typicalSize": 1,
     "aisle": "produce",
-    "search": "broccoli crowns"
+    "search": "broccoli crowns",
+    "must": "broccoli"
   },
   {
     "id": "avocados",
@@ -69,7 +77,8 @@
     "unit": "count",
     "typicalSize": 4,
     "aisle": "produce",
-    "search": "hass avocados bag"
+    "search": "hass avocados bag",
+    "must": "avocado"
   },
   {
     "id": "oranges",
@@ -77,7 +86,8 @@
     "unit": "lb",
     "typicalSize": 3,
     "aisle": "produce",
-    "search": "navel oranges bag"
+    "search": "navel oranges bag",
+    "must": "orange"
   },
   {
     "id": "strawberries",
@@ -85,7 +95,9 @@
     "unit": "oz",
     "typicalSize": 16,
     "aisle": "produce",
-    "search": "strawberries 16 oz"
+    "search": "strawberries 16 oz",
+    "must": "strawberr",
+    "not": "ice cream|spread|cheesecake|yogurt|preserves|sorbet"
   },
   {
     "id": "spinach",
@@ -93,7 +105,8 @@
     "unit": "oz",
     "typicalSize": 10,
     "aisle": "produce",
-    "search": "baby spinach"
+    "search": "baby spinach",
+    "must": "spinach"
   },
   {
     "id": "eggs",
@@ -101,7 +114,8 @@
     "unit": "count",
     "typicalSize": 12,
     "aisle": "dairy",
-    "search": "large white eggs 12 ct"
+    "search": "large white eggs 12 ct",
+    "must": "\\begg"
   },
   {
     "id": "milk",
@@ -109,7 +123,8 @@
     "unit": "fl_oz",
     "typicalSize": 128,
     "aisle": "dairy",
-    "search": "2% reduced fat milk gallon"
+    "search": "2% reduced fat milk gallon",
+    "must": "2%.*milk|milk.*2%"
   },
   {
     "id": "cheese",
@@ -117,7 +132,8 @@
     "unit": "oz",
     "typicalSize": 16,
     "aisle": "dairy",
-    "search": "shredded cheddar cheese"
+    "search": "shredded cheddar cheese",
+    "must": "cheddar|cheese"
   },
   {
     "id": "yogurt",
@@ -125,7 +141,8 @@
     "unit": "oz",
     "typicalSize": 32,
     "aisle": "dairy",
-    "search": "plain greek yogurt 32 oz"
+    "search": "plain greek yogurt 32 oz",
+    "must": "greek"
   },
   {
     "id": "butter",
@@ -133,7 +150,8 @@
     "unit": "oz",
     "typicalSize": 16,
     "aisle": "dairy",
-    "search": "salted butter 16 oz"
+    "search": "salted butter 16 oz",
+    "must": "butter"
   },
   {
     "id": "sour_cream",
@@ -141,7 +159,9 @@
     "unit": "oz",
     "typicalSize": 16,
     "aisle": "dairy",
-    "search": "sour cream 16 oz"
+    "search": "sour cream 16 oz",
+    "must": "sour cream",
+    "not": "dip"
   },
   {
     "id": "oat_milk",
@@ -149,7 +169,8 @@
     "unit": "fl_oz",
     "typicalSize": 64,
     "aisle": "dairy",
-    "search": "oat milk 64 oz"
+    "search": "oat milk 64 oz",
+    "must": "oat ?milk"
   },
   {
     "id": "orange_juice",
@@ -157,7 +178,9 @@
     "unit": "fl_oz",
     "typicalSize": 52,
     "aisle": "dairy",
-    "search": "orange juice 52 oz"
+    "search": "orange juice 52 oz",
+    "must": "orange juice",
+    "not": "pineapple|blend|cocktail"
   },
   {
     "id": "chicken",
@@ -165,7 +188,8 @@
     "unit": "lb",
     "typicalSize": 2,
     "aisle": "meat",
-    "search": "boneless skinless chicken breast"
+    "search": "boneless skinless chicken breast",
+    "must": "chicken breast"
   },
   {
     "id": "ground_beef",
@@ -173,7 +197,8 @@
     "unit": "lb",
     "typicalSize": 1,
     "aisle": "meat",
-    "search": "80% lean ground beef 1 lb"
+    "search": "80% lean ground beef 1 lb",
+    "must": "ground beef"
   },
   {
     "id": "bacon",
@@ -181,7 +206,9 @@
     "unit": "oz",
     "typicalSize": 12,
     "aisle": "meat",
-    "search": "bacon 12 oz"
+    "search": "bacon 12 oz",
+    "must": "bacon",
+    "not": "macaroni|salad|kit|bits|dip|cheese|seasoning|spam"
   },
   {
     "id": "salmon",
@@ -189,7 +216,8 @@
     "unit": "lb",
     "typicalSize": 1,
     "aisle": "meat",
-    "search": "atlantic salmon fillet"
+    "search": "atlantic salmon fillet",
+    "must": "salmon"
   },
   {
     "id": "deli_turkey",
@@ -197,7 +225,8 @@
     "unit": "oz",
     "typicalSize": 9,
     "aisle": "meat",
-    "search": "sliced turkey breast lunch meat"
+    "search": "sliced turkey breast lunch meat",
+    "must": "turkey"
   },
   {
     "id": "pork_chops",
@@ -205,7 +234,9 @@
     "unit": "lb",
     "typicalSize": 1.5,
     "aisle": "meat",
-    "search": "boneless pork chops"
+    "search": "boneless pork chops",
+    "must": "pork chop",
+    "not": "ribs|combo"
   },
   {
     "id": "bread",
@@ -213,7 +244,8 @@
     "unit": "oz",
     "typicalSize": 20,
     "aisle": "bakery",
-    "search": "white sandwich bread"
+    "search": "white sandwich bread",
+    "must": "bread"
   },
   {
     "id": "tortillas",
@@ -221,7 +253,8 @@
     "unit": "count",
     "typicalSize": 10,
     "aisle": "bakery",
-    "search": "flour tortillas 10 ct"
+    "search": "flour tortillas 10 ct",
+    "must": "tortilla"
   },
   {
     "id": "bagels",
@@ -229,7 +262,8 @@
     "unit": "count",
     "typicalSize": 6,
     "aisle": "bakery",
-    "search": "plain bagels 6 ct"
+    "search": "plain bagels 6 ct",
+    "must": "bagel"
   },
   {
     "id": "burger_buns",
@@ -237,7 +271,8 @@
     "unit": "count",
     "typicalSize": 8,
     "aisle": "bakery",
-    "search": "hamburger buns 8 ct"
+    "search": "hamburger buns 8 ct",
+    "must": "bun"
   },
   {
     "id": "rice",
@@ -245,7 +280,8 @@
     "unit": "oz",
     "typicalSize": 32,
     "aisle": "pantry",
-    "search": "long grain white rice 2 lb"
+    "search": "long grain white rice 2 lb",
+    "must": "rice"
   },
   {
     "id": "pasta",
@@ -253,7 +289,8 @@
     "unit": "oz",
     "typicalSize": 16,
     "aisle": "pantry",
-    "search": "spaghetti 16 oz"
+    "search": "spaghetti 16 oz",
+    "must": "spaghetti"
   },
   {
     "id": "pasta_sauce",
@@ -261,7 +298,8 @@
     "unit": "oz",
     "typicalSize": 24,
     "aisle": "pantry",
-    "search": "marinara pasta sauce 24 oz"
+    "search": "marinara pasta sauce 24 oz",
+    "must": "sauce|marinara"
   },
   {
     "id": "peanut_butter",
@@ -269,7 +307,8 @@
     "unit": "oz",
     "typicalSize": 16,
     "aisle": "pantry",
-    "search": "creamy peanut butter 16 oz"
+    "search": "creamy peanut butter 16 oz",
+    "must": "peanut butter"
   },
   {
     "id": "cereal",
@@ -277,7 +316,8 @@
     "unit": "oz",
     "typicalSize": 18,
     "aisle": "pantry",
-    "search": "honey oat cereal"
+    "search": "honey oat cereal",
+    "must": "cereal|oats|flakes"
   },
   {
     "id": "oats",
@@ -285,7 +325,8 @@
     "unit": "oz",
     "typicalSize": 42,
     "aisle": "pantry",
-    "search": "old fashioned oats 42 oz"
+    "search": "old fashioned oats 42 oz",
+    "must": "oats"
   },
   {
     "id": "black_beans",
@@ -293,7 +334,8 @@
     "unit": "oz",
     "typicalSize": 15,
     "aisle": "pantry",
-    "search": "black beans 15 oz can"
+    "search": "black beans 15 oz can",
+    "must": "black bean"
   },
   {
     "id": "canned_tomatoes",
@@ -301,7 +343,8 @@
     "unit": "oz",
     "typicalSize": 28,
     "aisle": "pantry",
-    "search": "crushed tomatoes 28 oz"
+    "search": "crushed tomatoes 28 oz",
+    "must": "crushed tomato"
   },
   {
     "id": "olive_oil",
@@ -309,7 +352,8 @@
     "unit": "fl_oz",
     "typicalSize": 17,
     "aisle": "pantry",
-    "search": "extra virgin olive oil"
+    "search": "extra virgin olive oil",
+    "must": "olive oil"
   },
   {
     "id": "coffee",
@@ -317,7 +361,8 @@
     "unit": "oz",
     "typicalSize": 12,
     "aisle": "pantry",
-    "search": "ground coffee 12 oz"
+    "search": "ground coffee 12 oz",
+    "must": "coffee"
   },
   {
     "id": "ramen",
@@ -325,7 +370,8 @@
     "unit": "count",
     "typicalSize": 12,
     "aisle": "pantry",
-    "search": "ramen noodle soup 12 pack"
+    "search": "ramen noodle soup 12 pack",
+    "must": "ramen|noodle"
   },
   {
     "id": "frozen_pizza",
@@ -333,7 +379,9 @@
     "unit": "count",
     "typicalSize": 1,
     "aisle": "frozen",
-    "search": "frozen pepperoni pizza"
+    "search": "frozen pepperoni pizza",
+    "must": "pizza",
+    "not": "meal|lean cuisine"
   },
   {
     "id": "frozen_veggies",
@@ -341,7 +389,9 @@
     "unit": "oz",
     "typicalSize": 12,
     "aisle": "frozen",
-    "search": "frozen mixed vegetables 12 oz"
+    "search": "frozen mixed vegetables 12 oz",
+    "must": "vegetable",
+    "not": "soup"
   },
   {
     "id": "ice_cream",
@@ -349,7 +399,8 @@
     "unit": "fl_oz",
     "typicalSize": 48,
     "aisle": "frozen",
-    "search": "vanilla ice cream 48 oz"
+    "search": "vanilla ice cream 48 oz",
+    "must": "ice cream"
   },
   {
     "id": "paper_towels",
@@ -357,7 +408,8 @@
     "unit": "count",
     "typicalSize": 6,
     "aisle": "household",
-    "search": "paper towels 6 rolls"
+    "search": "paper towels 6 rolls",
+    "must": "paper towel"
   },
   {
     "id": "toilet_paper",
@@ -365,7 +417,8 @@
     "unit": "count",
     "typicalSize": 12,
     "aisle": "household",
-    "search": "toilet paper 12 rolls"
+    "search": "toilet paper 12 rolls",
+    "must": "toilet paper|bath tissue"
   },
   {
     "id": "dish_soap",
@@ -373,7 +426,8 @@
     "unit": "fl_oz",
     "typicalSize": 19,
     "aisle": "household",
-    "search": "dish soap"
+    "search": "dish soap",
+    "must": "dish"
   },
   {
     "id": "laundry_detergent",
@@ -381,6 +435,7 @@
     "unit": "fl_oz",
     "typicalSize": 92,
     "aisle": "household",
-    "search": "liquid laundry detergent"
+    "search": "liquid laundry detergent",
+    "must": "detergent"
   }
 ]

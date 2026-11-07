@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { parseSize, pickQuote, toItemSize, type KrogerProduct } from "./kroger";
+import { nearestGrocery, parseSize, pickQuote, pickQuotes, toItemSize, type KrogerProduct } from "./kroger";
 import type { Item } from "./types";
 
 describe("parseSize", () => {
@@ -63,4 +63,40 @@ describe("pickQuote", () => {
   test("returns undefined when nothing fits", () => {
     expect(pickQuote(milk, [product("Milk chocolate", "4 oz", 1)], "smiths", "2026-11-06")).toBeUndefined();
   });
+});
+
+describe("pickQuotes", () => {
+  const berries: Item = { id: "strawberries", name: "Strawberries", unit: "oz", typicalSize: 16, aisle: "produce", must: "strawberr" };
+  const p = (description: string, size: string, regular: number): KrogerProduct => ({ productId: description, description, items: [{ size, price: { regular } }] });
+
+  test("keeps several real products, cheapest per unit first, and drops wrong kinds", () => {
+    const qs = pickQuotes(berries, [
+      p("Pillsbury Strawberry Frosting", "16 oz", 1.67),
+      p("Fresh Strawberries", "16 oz", 3.99),
+      p("Fresh Strawberries", "32 oz", 6.99),
+      p("Organic Strawberries", "16 oz", 5.49),
+      p("Blueberries", "16 oz", 2.99),
+      p("Strawberry Fruit Snacks", "16 oz", 2.5),
+    ], "smiths", "2026-11-06", 5);
+    expect(qs.map((q) => `${q.product} ${q.size}`)).toEqual(["Fresh Strawberries 32", "Fresh Strawberries 16", "Organic Strawberries 16"]);
+  });
+
+  test("an item's 'not' words and processed produce are left out", () => {
+    const bacon: Item = { id: "bacon", name: "Bacon", unit: "oz", typicalSize: 12, must: "bacon", not: "macaroni|salad|kit" };
+    expect(pickQuotes(bacon, [p("Bacon Ranch Macaroni and Cheese", "12 oz", 2.5), p("Thick Cut Bacon", "12 oz", 5.99)], "smiths", "2026-11-06", 5)
+      .map((q) => q.product)).toEqual(["Thick Cut Bacon"]);
+    expect(pickQuotes(berries, [p("Strawberry Frosted Cereal", "16 oz", 2), p("Fresh Strawberries", "16 oz", 3.99)], "smiths", "2026-11-06", 5)
+      .map((q) => q.product)).toEqual(["Fresh Strawberries"]);
+  });
+
+  test("caps how many products are kept", () => {
+    const many = [1, 2, 3, 4, 5, 6, 7].map((i) => p(`Fresh Strawberries ${i}`, "16 oz", 3 + i));
+    expect(pickQuotes(berries, many, "smiths", "2026-11-06", 5)).toHaveLength(5);
+  });
+});
+
+test("Express and Fuel locations are not grocery stores", () => {
+  const s = (name: string, lat: number) => ({ locationId: name, chain: "SMITHS", name, address: { addressLine1: "", city: "", state: "", zipCode: "" }, geolocation: { latitude: lat, longitude: -111.85 } });
+  const pick = nearestGrocery([s("Smith's Express - South Temple Fuel", 40.765), s("Smith's Marketplace", 40.75), s("Smith's - 800 S", 40.755)], 40.765, -111.85);
+  expect(pick?.name).toBe("Smith's - 800 S");
 });

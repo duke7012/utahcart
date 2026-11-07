@@ -1,19 +1,19 @@
 [
   {
     "id": "smiths",
-    "name": "Smith's Marketplace (500 E)",
-    "lat": 40.7597,
-    "lng": -111.8778,
+    "name": "Smith's (876 E 800 S)",
+    "lat": 40.7506102,
+    "lng": -111.8661356,
     "channels": [
       "in_person",
       "instacart"
     ],
     "link": "https://www.smithsfoodanddrug.com",
-    "coordsNote": "TODO: npm run prices:smiths sets the exact store from Kroger",
     "orderLinks": {
       "instacart": "https://www.instacart.com/store/smiths"
     },
-    "address": "455 S 500 E, Salt Lake City, UT 84102"
+    "address": "876 E 800 S, Salt Lake City, UT 84102",
+    "krogerLocationId": "70600044"
   },
   {
     "id": "harmons",

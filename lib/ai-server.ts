@@ -1,5 +1,5 @@
 /** Server-only Gemini transport. Credentials stay in headers, never URLs or error messages. */
-export const DEFAULT_GEMINI_MODEL = "gemini-3.1-flash-lite";
+export const DEFAULT_GEMINI_MODEL = "gemini-3.5-flash-lite";
 export const aiConfigured = () => !!process.env.GEMINI_API_KEY?.trim();
 
 export class AiError extends Error {

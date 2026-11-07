@@ -2,7 +2,7 @@ export type Channel = "in_person" | "instacart" | "amazon" | "doordash" | "ubere
 export type Goal = "savings" | "fewest_stops" | "time";
 export type Mode = "car" | "no_car";
 
-export type Item = { id: string; name: string; unit: "oz" | "count" | "lb" | "fl_oz"; typicalSize: number; aisle?: string; /** Store search term for real prices. */ search?: string };
+export type Item = { id: string; name: string; unit: "oz" | "count" | "lb" | "fl_oz"; typicalSize: number; aisle?: string; /** Store search term for real prices. */ search?: string; /** Regex a store product name must match to count as this item (e.g. "strawberr"). */ must?: string; /** Regex of product names that look similar but aren't this item (e.g. "macaroni|salad kit" for bacon). */ not?: string };
 /** qty = how many of the item's typicalSize the user needs. */
 export type ListEntry = { itemId: string; qty: number; bulkOk: boolean; brandLock?: string; productQuery?: string };
 export type PricingMode = "real" | "demo";

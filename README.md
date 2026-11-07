@@ -10,7 +10,7 @@ npm run dev     # http://localhost:3000
 npm test        # planner unit tests
 ```
 
-Copy `.env.example` to `.env.local` and add `SERPAPI_API_KEY` for Google Shopping discovery and `GEMINI_API_KEY` for product matching, receipt scanning and sentence planning. Configure the same server environment variables on Vercel. Keys never go in browser code. All AI features use Gemini through a shared server REST client; no Anthropic key is required. The default model is `gemini-3.1-flash-lite`; optionally set `GEMINI_MODEL` to another compatible model ID.
+Copy `.env.example` to `.env.local` and add `SERPAPI_API_KEY` for Google Shopping discovery and `GEMINI_API_KEY` for product matching, receipt scanning and sentence planning. Configure the same server environment variables on Vercel. Keys never go in browser code. All AI features use Gemini through a shared server REST client; no Anthropic key is required. The default model is `gemini-3.5-flash-lite`; optionally set `GEMINI_MODEL` to another compatible model ID.
 
 Gemini offers a [free tier](https://ai.google.dev/gemini-api/docs/pricing?hl=en) for this model, subject to your project's quotas and billing configuration. Free-tier content may be used to improve Google's products. Gemini quota errors do not trigger an automatic paid-provider fallback. Receipt photos are forwarded for processing and are never saved by BeeLow.
 

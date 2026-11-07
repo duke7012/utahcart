@@ -1,3 +1,5 @@
+import { haversineMiles } from "./geo";
+import { categoryConflict } from "./offers";
 import type { Item, PriceQuote } from "./types";
 
 /**
@@ -48,9 +50,15 @@ export function toItemSize(b: Base, unit: Item["unit"]): number | undefined {
   return b.unit === unit ? b.qty : undefined;
 }
 
-/** Cheapest price per unit among results that fit the item (same kind of unit, pack between 1/4 and 4x the usual size). */
-export function pickQuote(item: Item, products: KrogerProduct[], storeId: string, seenAt: string): PriceQuote | undefined {
-  const options = products.flatMap((p) =>
+// Processed products that share a word with fresh produce ("strawberry frosting", "tomato sauce").
+const NOT_FRESH = /frosting|frosted|icing|cereal|sauce|paste|soup|juice|jam|jelly|syrup|in sugar|candy|snack|chips|dried|bites|flavor|pie|salsa|dressing|seasoning|smoothie|crushed|diced|canned|baby food|gerber|2nd foods/i;
+
+/** Real products that fit the item: right word, right kind, right unit, pack between 1/4 and 4x the usual size; cheapest per unit first. */
+export function pickQuotes(item: Item, products: KrogerProduct[], storeId: string, seenAt: string, keep = 5): PriceQuote[] {
+  const fits = (desc: string) =>
+    (!item.must || new RegExp(item.must, "i").test(desc)) && !(item.not && new RegExp(item.not, "i").test(desc)) &&
+    !categoryConflict(item.id, desc) && !(item.aisle === "produce" && NOT_FRESH.test(desc));
+  const options = products.filter((p) => fits(p.description)).flatMap((p) =>
     (p.items ?? []).flatMap((it) => {
       const price = it.price?.promo && it.price.promo > 0 ? it.price.promo : it.price?.regular;
       const base = it.size ? parseSize(it.size) : null;
@@ -60,13 +68,28 @@ export function pickQuote(item: Item, products: KrogerProduct[], storeId: string
       return [{ p, price, size }];
     }),
   );
-  if (!options.length) return undefined;
-  const best = options.reduce((a, b) => (b.price / b.size < a.price / a.size ? b : a));
-  return {
-    itemId: item.id, storeId, channel: "in_person", price: best.price, size: best.size, unit: item.unit,
-    source: "seed", seenAt, product: best.p.description,
-    link: best.p.productPageURI ? `https://www.smithsfoodanddrug.com${best.p.productPageURI.split("?")[0]}` : undefined,
-  };
+  const seen = new Set<string>();
+  return options
+    .sort((a, b) => a.price / a.size - b.price / b.size)
+    .filter((o) => !seen.has(`${o.p.description}|${o.size}`) && !!seen.add(`${o.p.description}|${o.size}`))
+    .slice(0, keep)
+    .map((o) => ({
+      itemId: item.id, storeId, channel: "in_person" as const, price: o.price, size: o.size, unit: item.unit,
+      source: "seed" as const, seenAt, product: o.p.description,
+      link: o.p.productPageURI ? `https://www.smithsfoodanddrug.com${o.p.productPageURI.split("?")[0]}` : undefined,
+    }));
+}
+
+/** The single cheapest fitting product. */
+export const pickQuote = (item: Item, products: KrogerProduct[], storeId: string, seenAt: string): PriceQuote | undefined =>
+  pickQuotes(item, products, storeId, seenAt, 1)[0];
+
+/** Nearest full grocery store: Express and Fuel locations are gas-station shops. */
+export function nearestGrocery(stores: KrogerStore[], lat: number, lng: number): KrogerStore | undefined {
+  return stores
+    .filter((s) => !/express|fuel/i.test(s.name))
+    .sort((a, b) => haversineMiles({ lat, lng }, { lat: a.geolocation.latitude, lng: a.geolocation.longitude }) -
+      haversineMiles({ lat, lng }, { lat: b.geolocation.latitude, lng: b.geolocation.longitude }))[0];
 }
 
 let cached: { token: string; until: number } | null = null;
