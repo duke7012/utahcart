@@ -188,7 +188,7 @@ function Group({ title, sub, lines }: { title: string; sub: string; lines: LineI
   return (
     <details className="group mt-4 border-t border-varnish pt-2.5">
       <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-        <span className="block text-head font-semibold">{title}</span>
+        <span className="block text-head font-semibold text-balance">{title}</span>
         <span className="block text-small">
           {sub} · {money(total)}
           {lines.some((l) => l.quote.source === "demo") && " · demo prices"}
@@ -241,7 +241,7 @@ function Strata({ plan, trip, rim }: { plan: Plan; trip: Trip; rim: string }) {
   return (
     <figure aria-label={`About ${plan.minutes} of ${cap} minutes used; ${rim}`} className="w-[104px] shrink-0">
       <figcaption className="pb-1 text-small font-semibold leading-tight">{rim}</figcaption>
-      <div className="flex h-[min(56vh,450px)] flex-col-reverse overflow-hidden border border-t-2 border-varnish [border-top-style:dashed]">
+      <div className="flex h-[min(56vh,450px)] flex-col-reverse overflow-hidden border border-t-2 border-varnish bg-varnish [border-top-style:dashed]">
       {layers.map((l, i) => (
         <div key={i} style={{ flexGrow: l.min, animationDelay: `${i * 70}ms` }} title={`${l.label} · ${Math.round(l.min)} min`}
           className={`stratum flex min-h-0 items-center border-t border-varnish px-1.5 text-small font-semibold leading-tight ${
@@ -251,7 +251,7 @@ function Strata({ plan, trip, rim }: { plan: Plan; trip: Trip; rim: string }) {
         </div>
       ))}
       {spare > 0 && (
-        <div style={{ flexGrow: cap - used }} className="flex min-h-0 items-end px-1.5 pb-1 text-small leading-tight">
+        <div style={{ flexGrow: cap - used }} className="flex min-h-0 items-end bg-sky px-1.5 pb-1 text-small leading-tight">
           {spare} min to spare
         </div>
       )}
