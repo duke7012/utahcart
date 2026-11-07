@@ -12,6 +12,24 @@
         ],
         "createdAt": "2026-11-07T02:51:44.491Z",
         "reason": "Claude: spent decision-round sketch (gitignored, never shipped); the shipped strata column in app/plan/page.tsx is reviewed separately"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/model-pick.html"
+        ],
+        "createdAt": "2026-11-07T03:01:30.132Z",
+        "reason": "Claude: unchosen decision-round sketch (gitignored, never shipped); its font belongs to the alternate direction it depicts"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/challenger-gate-board.html"
+        ],
+        "createdAt": "2026-11-07T03:01:30.158Z",
+        "reason": "Claude: unchosen decision-round sketch (gitignored, never shipped); its font belongs to the alternate direction it depicts"
       }
     ]
   }
