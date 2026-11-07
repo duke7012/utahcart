@@ -3630,5 +3630,2405 @@
     "seenAt": "2026-11-06",
     "product": "XTRA Plus OxiClean Stain Fighters Crystal Clean Liquid Laundry Detergent",
     "link": "https://www.smithsfoodanddrug.com/p/xtra-plus-oxiclean-stain-fighters-crystal-clean-liquid-laundry-detergent/0009451400093"
+  },
+  {
+    "itemId": "lemons",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.83,
+    "size": 3,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lemons",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.86,
+    "size": 3,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lemons",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.2,
+    "size": 3,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lemons",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.16,
+    "size": 12,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "limes",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.17,
+    "size": 5,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "limes",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.95,
+    "size": 5,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "limes",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.55,
+    "size": 5,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "limes",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 3.58,
+    "size": 12,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "fresh_blueberries",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.23,
+    "size": 6,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "fresh_blueberries",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.15,
+    "size": 6,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "fresh_blueberries",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.44,
+    "size": 6,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "fresh_blueberries",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.91,
+    "size": 18,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "red_seedless_grapes",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.99,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "red_seedless_grapes",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 4.84,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "red_seedless_grapes",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.74,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "red_seedless_grapes",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.74,
+    "size": 3,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pineapple",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.2,
+    "size": 1,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pineapple",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.72,
+    "size": 1,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pineapple",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.74,
+    "size": 1,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pineapple",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 2.36,
+    "size": 1,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bell_peppers",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.59,
+    "size": 3,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bell_peppers",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.41,
+    "size": 3,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bell_peppers",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.15,
+    "size": 3,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bell_peppers",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.07,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "english_cucumbers",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.31,
+    "size": 1,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "english_cucumbers",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.05,
+    "size": 1,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "english_cucumbers",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 0.86,
+    "size": 1,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "english_cucumbers",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 2.71,
+    "size": 3,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "white_mushrooms",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.5,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "white_mushrooms",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.13,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "white_mushrooms",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.54,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "white_mushrooms",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 5.36,
+    "size": 24,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "whole_dairy_milk",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.23,
+    "size": 128,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "whole_dairy_milk",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.32,
+    "size": 128,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "whole_dairy_milk",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.7,
+    "size": 128,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "whole_dairy_milk",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 5.81,
+    "size": 256,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "unsweetened_almond_milk",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.49,
+    "size": 64,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "unsweetened_almond_milk",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.29,
+    "size": 64,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "unsweetened_almond_milk",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.62,
+    "size": 64,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "unsweetened_almond_milk",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.95,
+    "size": 192,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "sharp_cheddar_cheese_block",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.44,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "sharp_cheddar_cheese_block",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.64,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "sharp_cheddar_cheese_block",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.06,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "sharp_cheddar_cheese_block",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 7.27,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "boneless_skinless_chicken_thighs",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 5.13,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "boneless_skinless_chicken_thighs",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.49,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "boneless_skinless_chicken_thighs",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 6.23,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "boneless_skinless_chicken_thighs",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 13.45,
+    "size": 6,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "93_percent_lean_ground_turkey",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.07,
+    "size": 1,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "93_percent_lean_ground_turkey",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.75,
+    "size": 1,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "93_percent_lean_ground_turkey",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.47,
+    "size": 1,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "93_percent_lean_ground_turkey",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 14.68,
+    "size": 4,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_raw_peeled_shrimp",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 7.55,
+    "size": 1,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_raw_peeled_shrimp",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 5.17,
+    "size": 1,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_raw_peeled_shrimp",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 8.88,
+    "size": 1,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_raw_peeled_shrimp",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 11.6,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "fully_cooked_chicken_sausage",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.59,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "fully_cooked_chicken_sausage",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 4.2,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "fully_cooked_chicken_sausage",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.89,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "fully_cooked_chicken_sausage",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 10.94,
+    "size": 36,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "firm_tofu",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.47,
+    "size": 14,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "firm_tofu",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.29,
+    "size": 14,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "firm_tofu",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.96,
+    "size": 14,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "firm_tofu",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 7.37,
+    "size": 56,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "sliced_whole_wheat_sandwich_bread",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.44,
+    "size": 20,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "sliced_whole_wheat_sandwich_bread",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.67,
+    "size": 20,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "sliced_whole_wheat_sandwich_bread",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.21,
+    "size": 20,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "sliced_whole_wheat_sandwich_bread",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 3.78,
+    "size": 40,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "6_inch_corn_tortillas",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.38,
+    "size": 30,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "6_inch_corn_tortillas",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.2,
+    "size": 30,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "6_inch_corn_tortillas",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.77,
+    "size": 30,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "6_inch_corn_tortillas",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.95,
+    "size": 100,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "original_english_muffins",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.37,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "original_english_muffins",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.14,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "original_english_muffins",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.4,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "original_english_muffins",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 8.38,
+    "size": 18,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "hot_dog_buns",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.19,
+    "size": 8,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "hot_dog_buns",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.89,
+    "size": 8,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "hot_dog_buns",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.47,
+    "size": 8,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "hot_dog_buns",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 4.9,
+    "size": 24,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "butter_croissants",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.58,
+    "size": 4,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "butter_croissants",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 4.0,
+    "size": 4,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "butter_croissants",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 5.3,
+    "size": 4,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "butter_croissants",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 9.56,
+    "size": 12,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "white_pita_bread",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.26,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "white_pita_bread",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.99,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "white_pita_bread",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.68,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "white_pita_bread",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 5.02,
+    "size": 12,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "long_grain_brown_rice",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.47,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "long_grain_brown_rice",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.72,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "long_grain_brown_rice",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.52,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "long_grain_brown_rice",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 11.82,
+    "size": 12,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "dry_penne_pasta",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.06,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "dry_penne_pasta",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 0.92,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "dry_penne_pasta",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.19,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "dry_penne_pasta",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 5.23,
+    "size": 96,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "all_purpose_wheat_flour",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.81,
+    "size": 5,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "all_purpose_wheat_flour",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.73,
+    "size": 5,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "all_purpose_wheat_flour",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.63,
+    "size": 5,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "all_purpose_wheat_flour",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 12.55,
+    "size": 25,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "granulated_white_sugar",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.22,
+    "size": 4,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "granulated_white_sugar",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.24,
+    "size": 4,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "granulated_white_sugar",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.68,
+    "size": 4,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "granulated_white_sugar",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.5,
+    "size": 10,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "vegetable_cooking_oil",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.39,
+    "size": 48,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "vegetable_cooking_oil",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.46,
+    "size": 48,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "vegetable_cooking_oil",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.26,
+    "size": 48,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "vegetable_cooking_oil",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 11.31,
+    "size": 192,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_chickpeas",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 0.92,
+    "size": 15,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_chickpeas",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 0.64,
+    "size": 15,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_chickpeas",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.01,
+    "size": 15,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_chickpeas",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 5.13,
+    "size": 120,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_diced_tomatoes",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.09,
+    "size": 14.5,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_diced_tomatoes",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 0.89,
+    "size": 14.5,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_diced_tomatoes",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 0.74,
+    "size": 14.5,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_diced_tomatoes",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.73,
+    "size": 116,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_tomato_sauce",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 0.5,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_tomato_sauce",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 0.49,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_tomato_sauce",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 0.61,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_tomato_sauce",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 4.35,
+    "size": 96,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chunk_light_tuna_in_water",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.08,
+    "size": 5,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chunk_light_tuna_in_water",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 0.94,
+    "size": 5,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chunk_light_tuna_in_water",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.28,
+    "size": 5,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chunk_light_tuna_in_water",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 10.34,
+    "size": 60,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_sweet_corn",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 0.65,
+    "size": 15.25,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_sweet_corn",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 0.79,
+    "size": 15.25,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_sweet_corn",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 0.99,
+    "size": 15.25,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "canned_sweet_corn",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 8.12,
+    "size": 183,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "low_sodium_chicken_broth",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.61,
+    "size": 32,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "low_sodium_chicken_broth",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 0.97,
+    "size": 32,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "low_sodium_chicken_broth",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.73,
+    "size": 32,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "low_sodium_chicken_broth",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 7.96,
+    "size": 192,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "tomato_ketchup",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.59,
+    "size": 20,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "tomato_ketchup",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.31,
+    "size": 20,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "tomato_ketchup",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.88,
+    "size": 20,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "tomato_ketchup",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 5.97,
+    "size": 88,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "medium_chunky_salsa",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.97,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "medium_chunky_salsa",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.04,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "medium_chunky_salsa",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.15,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "medium_chunky_salsa",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 7.56,
+    "size": 76,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_green_peas",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 0.65,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_green_peas",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 0.92,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_green_peas",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.12,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_green_peas",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.14,
+    "size": 80,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_broccoli_florets",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.46,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_broccoli_florets",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.03,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_broccoli_florets",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.76,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_broccoli_florets",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.52,
+    "size": 64,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_whole_strawberries",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.71,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_whole_strawberries",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.57,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_whole_strawberries",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.57,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_whole_strawberries",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 9.37,
+    "size": 64,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_blueberries",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.63,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_blueberries",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.59,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_blueberries",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.84,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_blueberries",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 10.19,
+    "size": 64,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_breaded_chicken_nuggets",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.49,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_breaded_chicken_nuggets",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 4.84,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_breaded_chicken_nuggets",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 5.74,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_breaded_chicken_nuggets",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 10.73,
+    "size": 80,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_vegetable_dumplings",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.39,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_vegetable_dumplings",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 4.07,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_vegetable_dumplings",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.59,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_vegetable_dumplings",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 10.53,
+    "size": 48,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_straight_cut_french_fries",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.36,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_straight_cut_french_fries",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.16,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_straight_cut_french_fries",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.28,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "frozen_straight_cut_french_fries",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 7.6,
+    "size": 96,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "plain_salted_potato_chips",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.84,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "plain_salted_potato_chips",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.51,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "plain_salted_potato_chips",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.91,
+    "size": 8,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "plain_salted_potato_chips",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 3.93,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "restaurant_style_tortilla_chips",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.15,
+    "size": 13,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "restaurant_style_tortilla_chips",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.31,
+    "size": 13,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "restaurant_style_tortilla_chips",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.43,
+    "size": 13,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "restaurant_style_tortilla_chips",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 5.63,
+    "size": 40,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "salted_mini_pretzels",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.29,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "salted_mini_pretzels",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.04,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "salted_mini_pretzels",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.58,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "salted_mini_pretzels",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.49,
+    "size": 56,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chocolate_chip_granola_bars",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.66,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chocolate_chip_granola_bars",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.49,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chocolate_chip_granola_bars",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.71,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chocolate_chip_granola_bars",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 24.97,
+    "size": 64,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "whole_raw_almonds",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.94,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "whole_raw_almonds",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 4.69,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "whole_raw_almonds",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 5.69,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "whole_raw_almonds",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 12.43,
+    "size": 48,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "roasted_salted_cashews",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.35,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "roasted_salted_cashews",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 5.71,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "roasted_salted_cashews",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 7.72,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "roasted_salted_cashews",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 11.68,
+    "size": 40,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "seedless_raisins",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.22,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "seedless_raisins",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.3,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "seedless_raisins",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.08,
+    "size": 12,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "seedless_raisins",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 16.78,
+    "size": 72,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "70_percent_dark_chocolate",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.09,
+    "size": 3.5,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "70_percent_dark_chocolate",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.85,
+    "size": 3.5,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "70_percent_dark_chocolate",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.45,
+    "size": 3.5,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "70_percent_dark_chocolate",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 8.41,
+    "size": 20,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "unpopped_popcorn_kernels",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.42,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "unpopped_popcorn_kernels",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.59,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "unpopped_popcorn_kernels",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.76,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "unpopped_popcorn_kernels",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 8.67,
+    "size": 128,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "original_buttery_crackers",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.9,
+    "size": 13.7,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "original_buttery_crackers",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.73,
+    "size": 13.7,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "original_buttery_crackers",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.24,
+    "size": 13.7,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "original_buttery_crackers",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.19,
+    "size": 40,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "purified_bottled_water",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.19,
+    "size": 405.6,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "purified_bottled_water",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 4.13,
+    "size": 405.6,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "purified_bottled_water",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 5.43,
+    "size": 405.6,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "purified_bottled_water",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.66,
+    "size": 676,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lime_sparkling_water",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.62,
+    "size": 144,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lime_sparkling_water",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.32,
+    "size": 144,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lime_sparkling_water",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 5.66,
+    "size": 144,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lime_sparkling_water",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 10.21,
+    "size": 420,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "100_percent_apple_juice",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.03,
+    "size": 64,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "100_percent_apple_juice",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.81,
+    "size": 64,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "100_percent_apple_juice",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.25,
+    "size": 64,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "100_percent_apple_juice",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.37,
+    "size": 256,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "black_tea_bags",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.62,
+    "size": 100,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "black_tea_bags",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.35,
+    "size": 100,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "black_tea_bags",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.29,
+    "size": 100,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "black_tea_bags",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 11.45,
+    "size": 400,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "green_tea_bags",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.23,
+    "size": 40,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "green_tea_bags",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.0,
+    "size": 40,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "green_tea_bags",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.83,
+    "size": 40,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "green_tea_bags",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 5.31,
+    "size": 100,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "regular_cola_soda",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 6.99,
+    "size": 144,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "regular_cola_soda",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 7.06,
+    "size": 144,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "regular_cola_soda",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.89,
+    "size": 144,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "regular_cola_soda",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 17.13,
+    "size": 420,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lemon_lime_soda",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 7.48,
+    "size": 144,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lemon_lime_soda",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 6.64,
+    "size": 144,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lemon_lime_soda",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 8.04,
+    "size": 144,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lemon_lime_soda",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 14.88,
+    "size": 420,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lemon_lime_sports_drink",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 6.43,
+    "size": 160,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lemon_lime_sports_drink",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 5.78,
+    "size": 160,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lemon_lime_sports_drink",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 7.79,
+    "size": 160,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lemon_lime_sports_drink",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 19.53,
+    "size": 560,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
   }
 ]

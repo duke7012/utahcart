@@ -437,5 +437,485 @@
     "aisle": "household",
     "search": "liquid laundry detergent",
     "must": "detergent"
+  },
+  {
+    "id": "lemons",
+    "name": "Lemons",
+    "unit": "count",
+    "typicalSize": 3,
+    "aisle": "produce",
+    "search": "lemons"
+  },
+  {
+    "id": "limes",
+    "name": "Limes",
+    "unit": "count",
+    "typicalSize": 5,
+    "aisle": "produce",
+    "search": "limes"
+  },
+  {
+    "id": "fresh_blueberries",
+    "name": "Fresh blueberries",
+    "unit": "oz",
+    "typicalSize": 6,
+    "aisle": "produce",
+    "search": "fresh blueberries"
+  },
+  {
+    "id": "red_seedless_grapes",
+    "name": "Red seedless grapes",
+    "unit": "lb",
+    "typicalSize": 2,
+    "aisle": "produce",
+    "search": "red seedless grapes"
+  },
+  {
+    "id": "pineapple",
+    "name": "Pineapple",
+    "unit": "count",
+    "typicalSize": 1,
+    "aisle": "produce",
+    "search": "pineapple"
+  },
+  {
+    "id": "bell_peppers",
+    "name": "Bell peppers",
+    "unit": "count",
+    "typicalSize": 3,
+    "aisle": "produce",
+    "search": "bell peppers"
+  },
+  {
+    "id": "english_cucumbers",
+    "name": "English cucumbers",
+    "unit": "count",
+    "typicalSize": 1,
+    "aisle": "produce",
+    "search": "english cucumbers"
+  },
+  {
+    "id": "white_mushrooms",
+    "name": "White mushrooms",
+    "unit": "oz",
+    "typicalSize": 8,
+    "aisle": "produce",
+    "search": "white mushrooms"
+  },
+  {
+    "id": "whole_dairy_milk",
+    "name": "Whole dairy milk",
+    "unit": "fl_oz",
+    "typicalSize": 128,
+    "aisle": "dairy",
+    "search": "whole dairy milk"
+  },
+  {
+    "id": "unsweetened_almond_milk",
+    "name": "Unsweetened almond milk",
+    "unit": "fl_oz",
+    "typicalSize": 64,
+    "aisle": "dairy",
+    "search": "unsweetened almond milk"
+  },
+  {
+    "id": "sharp_cheddar_cheese_block",
+    "name": "Sharp cheddar cheese block",
+    "unit": "oz",
+    "typicalSize": 8,
+    "aisle": "dairy",
+    "search": "sharp cheddar cheese block"
+  },
+  {
+    "id": "boneless_skinless_chicken_thighs",
+    "name": "Boneless skinless chicken thighs",
+    "unit": "lb",
+    "typicalSize": 2,
+    "aisle": "meat",
+    "search": "boneless skinless chicken thighs"
+  },
+  {
+    "id": "93_percent_lean_ground_turkey",
+    "name": "93 percent lean ground turkey",
+    "unit": "lb",
+    "typicalSize": 1,
+    "aisle": "meat",
+    "search": "93 percent lean ground turkey"
+  },
+  {
+    "id": "frozen_raw_peeled_shrimp",
+    "name": "Frozen raw peeled shrimp",
+    "unit": "lb",
+    "typicalSize": 1,
+    "aisle": "meat",
+    "search": "frozen raw peeled shrimp"
+  },
+  {
+    "id": "fully_cooked_chicken_sausage",
+    "name": "Fully cooked chicken sausage",
+    "unit": "oz",
+    "typicalSize": 12,
+    "aisle": "meat",
+    "search": "fully cooked chicken sausage"
+  },
+  {
+    "id": "firm_tofu",
+    "name": "Firm tofu",
+    "unit": "oz",
+    "typicalSize": 14,
+    "aisle": "meat",
+    "search": "firm tofu"
+  },
+  {
+    "id": "sliced_whole_wheat_sandwich_bread",
+    "name": "Sliced whole wheat sandwich bread",
+    "unit": "oz",
+    "typicalSize": 20,
+    "aisle": "bakery",
+    "search": "sliced whole wheat sandwich bread"
+  },
+  {
+    "id": "6_inch_corn_tortillas",
+    "name": "6 inch corn tortillas",
+    "unit": "count",
+    "typicalSize": 30,
+    "aisle": "bakery",
+    "search": "6 inch corn tortillas"
+  },
+  {
+    "id": "original_english_muffins",
+    "name": "Original English muffins",
+    "unit": "count",
+    "typicalSize": 6,
+    "aisle": "bakery",
+    "search": "original english muffins"
+  },
+  {
+    "id": "hot_dog_buns",
+    "name": "Hot dog buns",
+    "unit": "count",
+    "typicalSize": 8,
+    "aisle": "bakery",
+    "search": "hot dog buns"
+  },
+  {
+    "id": "butter_croissants",
+    "name": "Butter croissants",
+    "unit": "count",
+    "typicalSize": 4,
+    "aisle": "bakery",
+    "search": "butter croissants"
+  },
+  {
+    "id": "white_pita_bread",
+    "name": "White pita bread",
+    "unit": "count",
+    "typicalSize": 6,
+    "aisle": "bakery",
+    "search": "white pita bread"
+  },
+  {
+    "id": "long_grain_brown_rice",
+    "name": "Long grain brown rice",
+    "unit": "lb",
+    "typicalSize": 2,
+    "aisle": "pantry",
+    "search": "long grain brown rice"
+  },
+  {
+    "id": "dry_penne_pasta",
+    "name": "Dry penne pasta",
+    "unit": "oz",
+    "typicalSize": 16,
+    "aisle": "pantry",
+    "search": "dry penne pasta"
+  },
+  {
+    "id": "all_purpose_wheat_flour",
+    "name": "All purpose wheat flour",
+    "unit": "lb",
+    "typicalSize": 5,
+    "aisle": "pantry",
+    "search": "all purpose wheat flour"
+  },
+  {
+    "id": "granulated_white_sugar",
+    "name": "Granulated white sugar",
+    "unit": "lb",
+    "typicalSize": 4,
+    "aisle": "pantry",
+    "search": "granulated white sugar"
+  },
+  {
+    "id": "vegetable_cooking_oil",
+    "name": "Vegetable cooking oil",
+    "unit": "fl_oz",
+    "typicalSize": 48,
+    "aisle": "pantry",
+    "search": "vegetable cooking oil"
+  },
+  {
+    "id": "canned_chickpeas",
+    "name": "Canned chickpeas",
+    "unit": "oz",
+    "typicalSize": 15,
+    "aisle": "pantry",
+    "search": "canned chickpeas"
+  },
+  {
+    "id": "canned_diced_tomatoes",
+    "name": "Canned diced tomatoes",
+    "unit": "oz",
+    "typicalSize": 14.5,
+    "aisle": "pantry",
+    "search": "canned diced tomatoes"
+  },
+  {
+    "id": "canned_tomato_sauce",
+    "name": "Canned tomato sauce",
+    "unit": "oz",
+    "typicalSize": 8,
+    "aisle": "pantry",
+    "search": "canned tomato sauce"
+  },
+  {
+    "id": "chunk_light_tuna_in_water",
+    "name": "Chunk light tuna in water",
+    "unit": "oz",
+    "typicalSize": 5,
+    "aisle": "pantry",
+    "search": "chunk light tuna in water"
+  },
+  {
+    "id": "canned_sweet_corn",
+    "name": "Canned sweet corn",
+    "unit": "oz",
+    "typicalSize": 15.25,
+    "aisle": "pantry",
+    "search": "canned sweet corn"
+  },
+  {
+    "id": "low_sodium_chicken_broth",
+    "name": "Low sodium chicken broth",
+    "unit": "fl_oz",
+    "typicalSize": 32,
+    "aisle": "pantry",
+    "search": "low sodium chicken broth"
+  },
+  {
+    "id": "tomato_ketchup",
+    "name": "Tomato ketchup",
+    "unit": "oz",
+    "typicalSize": 20,
+    "aisle": "pantry",
+    "search": "tomato ketchup"
+  },
+  {
+    "id": "medium_chunky_salsa",
+    "name": "Medium chunky salsa",
+    "unit": "oz",
+    "typicalSize": 16,
+    "aisle": "pantry",
+    "search": "medium chunky salsa"
+  },
+  {
+    "id": "frozen_green_peas",
+    "name": "Frozen green peas",
+    "unit": "oz",
+    "typicalSize": 12,
+    "aisle": "frozen",
+    "search": "frozen green peas"
+  },
+  {
+    "id": "frozen_broccoli_florets",
+    "name": "Frozen broccoli florets",
+    "unit": "oz",
+    "typicalSize": 12,
+    "aisle": "frozen",
+    "search": "frozen broccoli florets"
+  },
+  {
+    "id": "frozen_whole_strawberries",
+    "name": "Frozen whole strawberries",
+    "unit": "oz",
+    "typicalSize": 16,
+    "aisle": "frozen",
+    "search": "frozen whole strawberries"
+  },
+  {
+    "id": "frozen_blueberries",
+    "name": "Frozen blueberries",
+    "unit": "oz",
+    "typicalSize": 16,
+    "aisle": "frozen",
+    "search": "frozen blueberries"
+  },
+  {
+    "id": "frozen_breaded_chicken_nuggets",
+    "name": "Frozen breaded chicken nuggets",
+    "unit": "oz",
+    "typicalSize": 32,
+    "aisle": "frozen",
+    "search": "frozen breaded chicken nuggets"
+  },
+  {
+    "id": "frozen_vegetable_dumplings",
+    "name": "Frozen vegetable dumplings",
+    "unit": "oz",
+    "typicalSize": 16,
+    "aisle": "frozen",
+    "search": "frozen vegetable dumplings"
+  },
+  {
+    "id": "frozen_straight_cut_french_fries",
+    "name": "Frozen straight cut french fries",
+    "unit": "oz",
+    "typicalSize": 32,
+    "aisle": "frozen",
+    "search": "frozen straight cut french fries"
+  },
+  {
+    "id": "plain_salted_potato_chips",
+    "name": "Plain salted potato chips",
+    "unit": "oz",
+    "typicalSize": 8,
+    "aisle": "pantry",
+    "search": "plain salted potato chips"
+  },
+  {
+    "id": "restaurant_style_tortilla_chips",
+    "name": "Restaurant style tortilla chips",
+    "unit": "oz",
+    "typicalSize": 13,
+    "aisle": "pantry",
+    "search": "restaurant style tortilla chips"
+  },
+  {
+    "id": "salted_mini_pretzels",
+    "name": "Salted mini pretzels",
+    "unit": "oz",
+    "typicalSize": 16,
+    "aisle": "pantry",
+    "search": "salted mini pretzels"
+  },
+  {
+    "id": "chocolate_chip_granola_bars",
+    "name": "Chocolate chip granola bars",
+    "unit": "count",
+    "typicalSize": 6,
+    "aisle": "pantry",
+    "search": "chocolate chip granola bars"
+  },
+  {
+    "id": "whole_raw_almonds",
+    "name": "Whole raw almonds",
+    "unit": "oz",
+    "typicalSize": 16,
+    "aisle": "pantry",
+    "search": "whole raw almonds"
+  },
+  {
+    "id": "roasted_salted_cashews",
+    "name": "Roasted salted cashews",
+    "unit": "oz",
+    "typicalSize": 16,
+    "aisle": "pantry",
+    "search": "roasted salted cashews"
+  },
+  {
+    "id": "seedless_raisins",
+    "name": "Seedless raisins",
+    "unit": "oz",
+    "typicalSize": 12,
+    "aisle": "pantry",
+    "search": "seedless raisins"
+  },
+  {
+    "id": "70_percent_dark_chocolate",
+    "name": "70 percent dark chocolate",
+    "unit": "oz",
+    "typicalSize": 3.5,
+    "aisle": "pantry",
+    "search": "70 percent dark chocolate"
+  },
+  {
+    "id": "unpopped_popcorn_kernels",
+    "name": "Unpopped popcorn kernels",
+    "unit": "oz",
+    "typicalSize": 32,
+    "aisle": "pantry",
+    "search": "unpopped popcorn kernels"
+  },
+  {
+    "id": "original_buttery_crackers",
+    "name": "Original buttery crackers",
+    "unit": "oz",
+    "typicalSize": 13.7,
+    "aisle": "pantry",
+    "search": "original buttery crackers"
+  },
+  {
+    "id": "purified_bottled_water",
+    "name": "Purified bottled water",
+    "unit": "fl_oz",
+    "typicalSize": 405.6,
+    "aisle": "pantry",
+    "search": "purified bottled water"
+  },
+  {
+    "id": "lime_sparkling_water",
+    "name": "Lime sparkling water",
+    "unit": "fl_oz",
+    "typicalSize": 144,
+    "aisle": "pantry",
+    "search": "lime sparkling water"
+  },
+  {
+    "id": "100_percent_apple_juice",
+    "name": "100 percent apple juice",
+    "unit": "fl_oz",
+    "typicalSize": 64,
+    "aisle": "pantry",
+    "search": "100 percent apple juice"
+  },
+  {
+    "id": "black_tea_bags",
+    "name": "Black tea bags",
+    "unit": "count",
+    "typicalSize": 100,
+    "aisle": "pantry",
+    "search": "black tea bags"
+  },
+  {
+    "id": "green_tea_bags",
+    "name": "Green tea bags",
+    "unit": "count",
+    "typicalSize": 40,
+    "aisle": "pantry",
+    "search": "green tea bags"
+  },
+  {
+    "id": "regular_cola_soda",
+    "name": "Regular cola soda",
+    "unit": "fl_oz",
+    "typicalSize": 144,
+    "aisle": "pantry",
+    "search": "regular cola soda"
+  },
+  {
+    "id": "lemon_lime_soda",
+    "name": "Lemon lime soda",
+    "unit": "fl_oz",
+    "typicalSize": 144,
+    "aisle": "pantry",
+    "search": "lemon lime soda"
+  },
+  {
+    "id": "lemon_lime_sports_drink",
+    "name": "Lemon lime sports drink",
+    "unit": "fl_oz",
+    "typicalSize": 160,
+    "aisle": "pantry",
+    "search": "lemon lime sports drink"
   }
 ]
