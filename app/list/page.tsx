@@ -7,7 +7,6 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, Car, ChevronDown, CircleCheck, Cir
 import { DEMO_SENTENCE, type AskResult } from "@/lib/ask";
 import { itemById, places } from "@/lib/catalog";
 import { DEFAULT_SEARCH_LOCATION } from "@/lib/offers";
-import { ItemPrices, usePrices } from "./prices";
 import { addMinutes, ampm, minutesBetween, missingSteps, nowRounded, type Saved } from "@/lib/session";
 import type { Place } from "@/lib/types";
 import { GOALS, PriceNote, ProductImage, Qty, Screen, Intro, SectionHead, Toggle, card, fine, primaryBtn, useCart } from "../ui";
@@ -20,7 +19,6 @@ export default function ListPage() {
   const cart = useCart();
   const { s, update, setItem } = cart;
   const location = s.searchLocation ?? DEFAULT_SEARCH_LOCATION;
-  const prices = usePrices(location);
   const patchItem = (itemId: string, patch: { brandLock?: string; productQuery?: string }) =>
     update({ ...s, list: s.list.map((e) => e.itemId === itemId ? { ...e, ...patch } : e) });
   const [open, setOpen] = useState<string | null>(null);
@@ -55,7 +53,7 @@ export default function ListPage() {
       <AskCard current={s} onPlanned={update} />
 
       <section className={`${card} flex flex-col gap-3 p-[18px]`} aria-label="Price discovery">
-        <SectionHead title="Check published prices" />
+        <SectionHead title="Prices" />
         <label className="text-[12px]">Search location
           <input value={location} maxLength={200} onChange={(e) => update({ ...s, searchLocation: e.target.value })}
             className="mt-1 w-full rounded-[10px] border border-line p-3 text-[14px]" />
@@ -67,10 +65,7 @@ export default function ListPage() {
           </select>
         </label>
         {s.priceMode === "demo" && <p className="rounded-[10px] bg-amber-tint p-3 text-[12px]">Example mode includes invented demo prices and assumed delivery markups.</p>}
-        <button type="button" disabled={!count || prices.anyBusy || !location.trim()} onClick={() => prices.refresh(s.list)} className={primaryBtn}>
-          {prices.anyBusy ? "Checking your list…" : "Find / refresh list prices"}
-        </button>
-        <p className={fine}>One Google Shopping search per product query. Results are published offers, not guaranteed inventory or local branch prices. Unknown channels and delivery fees stay browse-only.</p>
+        <p className={fine}>BeeLow checks store prices when you plan your trip. Published offers, not guaranteed inventory or local branch prices.</p>
       </section>
 
       <section className="flex flex-col gap-[14px]">
@@ -116,7 +111,6 @@ export default function ListPage() {
                       <Toggle label="Larger package OK" hint="If a bigger package costs less per unit, BeeLow may pick it." on={e.bulkOk} onChange={(b) => setItem(e.itemId, e.qty, b)} />
                     </div>
                   )}
-                  <ItemPrices entry={e} result={prices.result(e)} busy={prices.busy(e)} onRefresh={() => prices.refresh([e])} />
                 </li>
               );
             })}

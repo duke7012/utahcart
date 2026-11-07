@@ -112,7 +112,7 @@ export default function WalletPage() {
         ) : checking || !costco ? (
           <p className="text-[15px] opacity-90">Checking your cart…</p>
         ) : costco.savingsPerTrip === null ? (
-          <p className="text-[15px] opacity-90">A complete priced plan is needed to compare this membership. Find prices or confirm a receipt first.</p>
+          <p className="text-[15px] opacity-90">A complete priced plan is needed to compare this membership. Plan your trip or scan a receipt first.</p>
         ) : trips ? (
           <>
             <p className="text-[24px] leading-[1.2]">It takes {trips} trips like this to cover the fee.</p>

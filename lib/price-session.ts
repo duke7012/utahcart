@@ -29,3 +29,20 @@ export function currentSnapshots(list: ListEntry[], location: string): OfferSnap
     return snapshot ? [snapshot] : [];
   });
 }
+
+/** Search published prices for one list item and keep the result in this browser. Never throws. */
+export async function fetchPrices(entry: ListEntry, location: string, timeoutMs = 55_000): Promise<PriceResult> {
+  let result: PriceResult;
+  try {
+    const response = await fetch("/api/prices", { method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ entry, location }), signal: AbortSignal.timeout(timeoutMs) });
+    const body = await response.json();
+    if (!Array.isArray(body.offers) || !["ok", "empty", "setup", "error"].includes(body.status)) throw new Error("response");
+    result = body as PriceResult;
+  } catch {
+    result = { status: "error", offers: [], matching: "unconfirmed", cached: false, message: "Refresh failed. Earlier prices are still shown with their original timestamps. Retry this item." };
+  }
+  savePriceResult(key(entry, location), result);
+  return result;
+}
+const key = requestKey;

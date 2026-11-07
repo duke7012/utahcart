@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { storeById } from "@/lib/catalog";
 import { load, missingSteps, planRequest, toTrip, tripReady, type ReadySaved } from "@/lib/session";
+import { DEFAULT_SEARCH_LOCATION, requestKey } from "@/lib/offers";
+import { concurrencyLimit } from "@/lib/price-cache";
+import { fetchPrices, loadPrices } from "@/lib/price-session";
 import type { Plan, Trip } from "@/lib/types";
 
 export type PlansState =
@@ -16,24 +19,42 @@ export const CHANNEL: Record<string, string> = { instacart: "Instacart", amazon:
 /** "Walmart Supercenter (South Salt Lake)" -> "Walmart" */
 export const brand = (id: string) => storeById(id)?.name.split(" ")[0] ?? id;
 
-/** Loads the saved cart and asks /api/plan for the three plans. */
+const slot = concurrencyLimit(3);
+
+/**
+ * Loads the saved cart and asks /api/plan for the three plans. Plans show right away with the prices BeeLow
+ * already has; then live prices are searched for list items not checked yet, and the plans update once.
+ */
 export function usePlans() {
   const [saved, setSaved] = useState<ReadySaved | null>(null);
   const [state, setState] = useState<PlansState>({ status: "loading" });
+  const [checking, setChecking] = useState(0);
   useEffect(() => {
     const s = load();
     if (!tripReady(s)) return setState({ status: "setup", missing: missingSteps(s) });
     setSaved(s);
-    fetch("/api/plan", { method: "POST", headers: { "content-type": "application/json" }, body: planRequest(s) })
+    const plan = () => fetch("/api/plan", { method: "POST", headers: { "content-type": "application/json" }, body: planRequest(s) })
       .then(async (r) => {
         const body = await r.json();
         if (!r.ok) throw body.error;
         setState({ status: "ok", plans: body.plans, coverage: body.coverage ?? [] });
+        return true;
       })
-      .catch((err) => setState({ status: "error", message: typeof err === "string" ? err : "Couldn't reach the planner. Check your connection and try again." }));
+      .catch((err) => { setState({ status: "error", message: typeof err === "string" ? err : "Couldn't reach the planner. Check your connection and try again." }); return false; });
+    plan().then(async (ok) => {
+      if (!ok || (s.priceMode ?? "real") !== "real") return;
+      const location = s.searchLocation ?? DEFAULT_SEARCH_LOCATION;
+      const stored = loadPrices();
+      const missing = s.list.filter((e) => !stored[requestKey(e, location)]);
+      if (!missing.length) return;
+      setChecking(missing.length);
+      await Promise.all(missing.map((e) => slot(() => fetchPrices(e, location, 25_000))));
+      setChecking(0);
+      await plan();
+    });
   }, []);
   const trip: Trip | null = saved && toTrip(saved.trip);
-  return { saved, trip, state };
+  return { saved, trip, state, checking };
 }
 
 /** Item cost, delivery fees and driving cost that add up to plan.money. */

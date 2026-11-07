@@ -12,7 +12,7 @@ const ICON: Record<Goal, typeof CircleDollarSign> = { savings: CircleDollarSign,
 const today = new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }).toUpperCase();
 
 export default function PlansPage() {
-  const { saved, trip, state } = usePlans();
+  const { saved, trip, state, checking } = usePlans();
 
   const ordered = state.status === "ok" && saved
     ? [...state.plans].sort((a, b) => Number(b.goal === saved.goal) - Number(a.goal === saved.goal))
@@ -36,6 +36,7 @@ export default function PlansPage() {
       {state.status === "setup" && <SetupCard missing={state.missing} />}
       {saved?.priceMode === "demo" && <p className="rounded-[10px] bg-amber-tint p-3 text-[12px]">EXAMPLE MODE · Includes demo prices and assumed delivery fees and markups. <Link href="/list">Switch to real prices</Link>.</p>}
       {state.status === "loading" && <p className="text-[14px] text-muted">Fitting your list into your day…</p>}
+      {checking > 0 && <p role="status" className="rounded-[10px] bg-honey-tint p-3 text-[13px]">Checking live store prices for {checking} {checking === 1 ? "item" : "items"}… your plans update when it’s done.</p>}
       {state.status === "error" && (
         <div role="alert" className={`${card} p-[18px]`}>
           <p className="text-[14px] font-semibold">{state.message}</p>
@@ -45,7 +46,7 @@ export default function PlansPage() {
       {state.status === "ok" && state.plans.length === 0 && saved && (
         <div className={`${card} flex flex-col gap-3 p-[18px]`}>
           <p className="text-[20px] font-bold">{missingPrices.length ? "Your basket is missing usable prices." : saved.trip.homeBy ? `No plan fits by ${ampm(saved.trip.homeBy)}.` : "No store mix covers your list."}</p>
-          <p className="text-[14px] text-muted">{missingPrices.length ? `No matching price found for: ${missingPrices.map((c) => itemById(c.itemId)?.name ?? c.itemId).join(", ")}. Find prices or confirm a receipt. Unconfirmed offers remain available for browsing; no incomplete basket total is shown.` : "No store mix covers your whole list in that time. Try a longer time limit or switch to Car."}</p>
+          <p className="text-[14px] text-muted">{missingPrices.length ? `No matching price found for: ${missingPrices.map((c) => itemById(c.itemId)?.name ?? c.itemId).join(", ")}. Remove it from your list, scan a receipt that has it, or switch to example mode on the List page. No partial total is shown.` : "No store mix covers your whole list in that time. Try a longer time limit or switch to Car."}</p>
           <Link href="/list" className={primaryBtn}>Change the trip <ArrowRight size={18} aria-hidden /></Link>
         </div>
       )}
