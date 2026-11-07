@@ -114,7 +114,7 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
             );
           })}
           <p className="flex items-center gap-2 rounded-[10px] bg-canvas px-3 py-2.5 text-[12px] text-muted">
-            <House size={15} aria-hidden /> Then home · ~{Math.round(travelMinutes(stopPts.at(-1)!, trip.end, trip.mode))} min. The last leg unlocks after your last stop.
+            <House size={15} aria-hidden /> Then back to {trip.end.label} · ~{Math.round(travelMinutes(stopPts.at(-1)!, trip.end, trip.mode))} min. The last leg unlocks after your last stop.
           </p>
         </section>
       )}

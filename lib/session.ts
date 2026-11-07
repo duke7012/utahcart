@@ -1,11 +1,11 @@
 import { places } from "./catalog";
 import type { Goal, ListEntry, Memberships, Mode, Place, PriceQuote, Trip } from "./types";
 
-/** Nothing is chosen for a new visitor: places, mode and goal start as null, times as "". */
+/** Nothing is chosen for a new visitor: places, mode and goal start as null, times as "". `to: null` = back to the start. */
 export type TripForm = { from: Place | null; to: Place | null; mode: Mode | null; leave: string; homeBy: string };
 export type Saved = { list: ListEntry[]; trip: TripForm; goal: Goal | null };
 /** A Saved whose trip and goal are all chosen. */
-export type ReadySaved = Saved & { trip: TripForm & { from: Place; to: Place; mode: Mode }; goal: Goal };
+export type ReadySaved = Saved & { trip: TripForm & { from: Place; mode: Mode }; goal: Goal };
 
 const e = (itemId: string, qty: number, bulkOk = false): ListEntry => ({ itemId, qty, bulkOk });
 
@@ -40,7 +40,6 @@ export function missingSteps(s: Saved): string[] {
   return [
     !s.list.length && "Add at least one item",
     !s.trip.from && "Choose where you start",
-    !s.trip.to && "Choose where you end",
     !s.trip.mode && "Choose car or no car",
     !s.goal && "Choose what matters most",
   ].filter((x): x is string => !!x);
@@ -63,7 +62,7 @@ export function minutesBetween(leave: string, homeBy: string): number | undefine
 
 export const toTrip = (f: ReadySaved["trip"]): Trip => ({
   start: f.from,
-  end: f.to,
+  end: f.to ?? f.from, // grocery runs usually end where they start
   mode: f.mode,
   timeLimitMin: minutesBetween(f.leave, f.homeBy),
   costPerMile: 0.3, // ponytail: flat car cost; make editable in the wallet/settings page (Tier 2)

@@ -22,7 +22,7 @@ export default function PlansPage() {
   return (
     <Screen>
       <Intro eyebrow={`PLANS · ${today}`} title={<>A little planning.<br />More left over.</>}
-        sub={saved && trip && `${saved.list.length} ${saved.list.length === 1 ? "item" : "items"} · ${trip.start.label} → ${trip.end.label} · ${trip.mode === "car" ? "Car" : "No car"}${trip.timeLimitMin ? ` · ${trip.timeLimitMin} min` : ""}`} />
+        sub={saved && trip && `${saved.list.length} ${saved.list.length === 1 ? "item" : "items"} · ${trip.start.lat === trip.end.lat && trip.start.lng === trip.end.lng ? `${trip.start.label} · round trip` : `${trip.start.label} → ${trip.end.label}`} · ${trip.mode === "car" ? "Car" : "No car"}${trip.timeLimitMin ? ` · ${trip.timeLimitMin} min` : ""}`} />
       {saved && (
         <div className="-mt-2 flex flex-wrap gap-2 text-[12px]">
           {saved.trip.leave && <span className="rounded-[8px] px-2.5 py-1.5">Leave {ampm(saved.trip.leave)}</span>}

@@ -22,14 +22,15 @@ export default function ListPage() {
   const count = s.list.length;
   const limit = minutesBetween(s.trip.leave, s.trip.homeBy);
   const { from, to } = s.trip;
-  const roundTrip = !!from && !!to && from.lat === to.lat && from.lng === to.lng;
-  const [differentEnd, setDifferentEnd] = useState<boolean | null>(null);
-  const showEnd = differentEnd ?? (!!to && !roundTrip);
+  // Round trip unless the user asks for a different end: `to: null` means back to the start.
+  const sameAsStart = !to || (!!from && from.lat === to.lat && from.lng === to.lng);
+  const [differentEnd, setDifferentEnd] = useState(false);
+  const showEnd = differentEnd || !sameAsStart;
   const missing = missingSteps(s);
 
   const placeId = (p: Place | null) => (p ? places.find((x) => x.lat === p.lat && x.lng === p.lng)?.id ?? HERE : "");
   const setPlace = (key: "from" | "to", id: string) => {
-    const apply = (p: Place) => update({ ...s, trip: { ...s.trip, [key]: p, ...(key === "from" && !showEnd ? { to: p } : {}) } });
+    const apply = (p: Place) => update({ ...s, trip: { ...s.trip, [key]: p } });
     if (!id) return;
     if (id !== HERE) return apply(places.find((p) => p.id === id)!);
     setGeoError("");
@@ -102,7 +103,13 @@ export default function ListPage() {
           {geoError && <p role="alert" className="text-[12px] text-carrot">{geoError}</p>}
           <div className="h-px bg-line" />
           {showEnd ? (
-            <PlacePicker label="END" placeholder="Choose where you end" value={placeId(to)} onChange={(id) => setPlace("to", id)} />
+            <>
+              <PlacePicker label="END" placeholder="Same as start" value={sameAsStart ? "" : placeId(to)} onChange={(id) => setPlace("to", id)} />
+              <button type="button" onClick={() => { setDifferentEnd(false); update({ ...s, trip: { ...s.trip, to: null } }); }}
+                className="self-start text-[12px] font-semibold text-bee">
+                End where I start instead
+              </button>
+            </>
           ) : (
             <button type="button" onClick={() => setDifferentEnd(true)} className="flex h-[52px] items-center gap-3 rounded-[12px] bg-canvas px-4 text-[14px] font-semibold">
               <ArrowRight size={16} aria-hidden /> Different end location
