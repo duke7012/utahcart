@@ -32,7 +32,7 @@ export default function HomePage() {
       <img src="/figma/kitchen.jpg" alt="Fresh groceries on a kitchen counter" className="h-[202px] w-full rounded-[18px] object-cover" />
       <div className="flex flex-col gap-3">
         <Link href="/list" className={primaryBtn}>Start my list <ArrowRight size={18} aria-hidden /></Link>
-        <p className={`${fine} text-center`}>No account needed. Your list stays on this device.</p>
+        <p className={`${fine} text-center`}>No account needed. Your list stays on this device. <Link href="/login" className="font-semibold text-bee">Log in</Link> to keep trips on any phone.</p>
         <button type="button" onClick={tryExample} className="flex items-center justify-center gap-2 text-[13px] font-semibold text-bee">
           Just exploring? Try an example list <ArrowRight size={15} aria-hidden />
         </button>

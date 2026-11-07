@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ListChecks, Minus, Plus, Route, ScanLine, Wallet, type LucideIcon } from "lucide-react";
+import { History, ListChecks, Minus, Plus, Route, ScanLine, Wallet, type LucideIcon } from "lucide-react";
+import { useAccount } from "./account";
 import { EMPTY, load, save, type Saved } from "@/lib/session";
 import { priceNote } from "@/lib/catalog";
 import type { Goal, Item } from "@/lib/types";
@@ -26,17 +27,35 @@ export function AppHeader() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/beelow-logo.png" alt="BeeLow" width={112} height={48} className="h-12 w-auto" />
       </Link>
-      <span className="flex items-center gap-[5px] text-[11px] text-muted">
-        <span className="size-[6px] rounded-full bg-honey" aria-hidden />
-        SALT LAKE CITY
-      </span>
+      <div className="flex items-center gap-3">
+        <span className="flex items-center gap-[5px] text-[11px] text-muted">
+          <span className="size-[6px] rounded-full bg-honey" aria-hidden />
+          SALT LAKE CITY
+        </span>
+        <AccountLink />
+      </div>
     </header>
   );
+}
+
+/** Header account link: your initial (to Trip history) when logged in, "Log in" for guests, nothing if accounts are off. */
+function AccountLink() {
+  const a = useAccount();
+  if (!a?.configured) return null;
+  if (a.user) {
+    return (
+      <Link href="/trips" aria-label={`Your account, ${a.user.email}`} className="grid size-8 place-items-center rounded-full bg-honey-tint text-[13px] font-bold text-bee no-underline">
+        {a.user.email[0].toUpperCase()}
+      </Link>
+    );
+  }
+  return <Link href="/login" className="text-[12px] font-semibold text-bee no-underline">Log in</Link>;
 }
 
 const TABS: { href: string; label: string; icon: LucideIcon; match: string[] }[] = [
   { href: "/list", label: "List", icon: ListChecks, match: ["/list", "/add"] },
   { href: "/plan", label: "Plans", icon: Route, match: ["/plan"] },
+  { href: "/trips", label: "History", icon: History, match: ["/trips"] },
   { href: "/scan", label: "Scan", icon: ScanLine, match: ["/scan"] },
   { href: "/wallet", label: "Wallet", icon: Wallet, match: ["/wallet"] },
 ];
@@ -45,7 +64,7 @@ export function BottomNav() {
   const path = usePathname();
   return (
     <nav aria-label="BeeLow" className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white">
-      <div className="mx-auto flex h-[86px] max-w-[480px] gap-2 px-4 pb-[14px] pt-3">
+      <div className="mx-auto flex h-[86px] max-w-[480px] gap-1 px-3 pb-[14px] pt-3">
         {TABS.map((t) => {
           const on = t.match.some((m) => path.startsWith(m));
           return (

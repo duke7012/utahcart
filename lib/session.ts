@@ -1,7 +1,7 @@
 import { places } from "./catalog";
 import { DEFAULT_SEARCH_LOCATION } from "./offers";
 import { currentSnapshots } from "./price-session";
-import type { Goal, ListEntry, Memberships, Mode, Place, PriceQuote, PricingMode, Trip } from "./types";
+import type { Goal, ListEntry, Memberships, Mode, Place, Plan, PriceQuote, PricingMode, Trip } from "./types";
 
 /** Nothing is chosen for a new visitor: places, mode and goal start as null, times as "". `to: null` = back to the start. */
 export type TripForm = { from: Place | null; to: Place | null; mode: Mode | null; leave: string; homeBy: string };
@@ -144,3 +144,24 @@ export function addMinutes(t: string, mins: number): string {
 }
 
 export const ampm = (t: string) => (t ? `${clock(t)} ${Number(t.slice(0, 2)) < 12 ? "AM" : "PM"}` : "");
+
+/** Trips saved from plan details (logged-in users; synced to the account). Newest first, at most 20. */
+export type SavedTrip = { id: string; savedAt: string; goal: Goal; list: ListEntry[]; trip: TripForm; plan: Plan };
+export const TRIPS = "beelow:trips";
+export function loadTrips(): SavedTrip[] {
+  try {
+    return JSON.parse(localStorage.getItem(TRIPS) ?? "[]");
+  } catch {
+    return [];
+  }
+}
+export function addTrip(t: Omit<SavedTrip, "id" | "savedAt">): SavedTrip {
+  const trip = { ...t, id: Math.random().toString(36).slice(2, 10), savedAt: new Date().toISOString() };
+  try {
+    localStorage.setItem(TRIPS, JSON.stringify([trip, ...loadTrips()].slice(0, 20)));
+  } catch {}
+  return trip;
+}
+
+/** Browser keys that follow a logged-in user to other devices. */
+export const SYNC_KEYS = [KEY, RECEIPTS, MEMBERSHIPS, TRIPS];

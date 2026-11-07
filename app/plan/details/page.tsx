@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
-import { ArrowLeft, Check, ExternalLink, House, Store, TriangleAlert } from "lucide-react";
+import { ArrowLeft, Bookmark, Check, ExternalLink, House, Store, TriangleAlert } from "lucide-react";
 import { itemById, storeById } from "@/lib/catalog";
 import { travelMinutes } from "@/lib/geo";
 import { appleMapsUrl, googleMapsUrl, legs, orderUrl } from "@/lib/handoff";
-import { addMinutes, ampm } from "@/lib/session";
+import { addMinutes, addTrip, ampm, type Saved } from "@/lib/session";
+import { useAccount } from "../../account";
 import type { Goal, LineItem, Plan, Trip } from "@/lib/types";
 import { GOALS, Screen, UNIT_LABEL, card, fine, money, primaryBtn } from "../../ui";
 import { CHANNEL, SetupCard, brand, breakdown, usePlans } from "../use-plans";
@@ -35,12 +36,13 @@ function Details() {
       {state.status === "loading" && <p className="text-[14px] text-muted">Loading your plan…</p>}
       {state.status === "error" && <p role="alert" className="text-[14px] font-semibold">{state.message}</p>}
       {state.status === "ok" && !plan && <p className="text-[14px]">No plan fits this trip. <Link href="/list" className="font-semibold text-bee">Change the trip</Link></p>}
-      {plan && trip && saved && <PlanDetail plan={plan} trip={trip} label={label} leave={saved.trip.leave} />}
+      {plan && trip && saved && <PlanDetail plan={plan} trip={trip} label={label} saved={saved} />}
     </Screen>
   );
 }
 
-function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; label: string; leave: string }) {
+function PlanDetail({ plan, trip, label, saved }: { plan: Plan; trip: Trip; label: string; saved: Saved }) {
+  const leave = saved.trip.leave;
   const [leg, setLeg] = useState(0);
   const [got, setGot] = useState<Record<string, boolean>>({});
   const b = breakdown(plan);
@@ -71,6 +73,8 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
         <p className={fine}>{plan.estimated ? "Estimated total and savings." : "Total before tax and tips."} Taxes and tips excluded.</p>
         <p className={fine}>{leave ? `Leave ${ampm(leave)} → home about ${ampm(addMinutes(leave, plan.minutes))}. ` : ""}Estimates, not live timing.</p>
       </div>
+
+      <SaveTrip plan={plan} saved={saved} />
 
       {stops > 0 && (
         <section className="flex flex-col gap-3">
@@ -159,6 +163,25 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
       </div>
       <p className={fine}>Every item shows its price source. No live inventory or arrival times. BeeLow doesn’t provide navigation, checkout or payment.</p>
     </>
+  );
+}
+
+/** Save to Trip history (logged in), or a nudge to log in. */
+function SaveTrip({ plan, saved }: { plan: Plan; saved: Saved }) {
+  const account = useAccount();
+  const [done, setDone] = useState(false);
+  if (!account?.configured) return null;
+  if (!account.user) {
+    return <p className="text-center text-[13px] text-muted"><Link href="/login" className="font-semibold text-bee">Log in</Link> to save this trip to your history.</p>;
+  }
+  if (done) {
+    return <p role="status" className="text-center text-[13px] font-semibold text-leaf">Saved. <Link href="/trips" className="text-bee">See Trip history</Link></p>;
+  }
+  return (
+    <button type="button" onClick={() => { addTrip({ goal: plan.goal, list: saved.list, trip: saved.trip, plan }); setDone(true); }}
+      className="flex h-11 items-center justify-center gap-2 rounded-[10px] border border-line bg-white text-[13px] font-semibold text-bee hover:bg-canvas">
+      <Bookmark size={15} aria-hidden /> Save this trip
+    </button>
   );
 }
 

@@ -111,3 +111,12 @@ Decisions and assumptions made while building. Newest at the bottom.
 - **Upstash Redis** (free, via Vercel → Storage) holds one hash `beelow:quotes:v1` of prices everyone shares (`lib/shared-store.ts`, tested). `/api/plan` merges them into every plan (15-second per-instance cache). Without the database the app still works from the bundled data.
 - **Team page `/team`** (passcode `TEAM_PASSCODE`): add a store price (store, item, price, pack size, product name, link) and it's live for everyone at once, as source `"shop"`; the list shows every shared price with Remove, for typos or bad receipt lines.
 - **Receipt scans** (not the example receipt) are also posted to `/api/shared` as source `"receipt"` after the user confirms them; only item lines, store, date and prices, never the photo. The scan screen says whether sharing worked.
+
+## Accounts (log in, trip history, sync)
+
+- Email + password, stored in the same Upstash Redis as shared prices (`lib/auth.ts`). Passwords are scrypt-hashed with a random salt; never stored or logged in plain text.
+- Sessions: a random token in an httpOnly, SameSite=Lax cookie (`beelow_session`, 30 days). Redis keeps only the token's sha256.
+- 10 wrong passwords lock that email for 15 minutes.
+- Synced per account: the list + trip + goal, wallet memberships, receipt prices, and saved trips (`SYNC_KEYS` in `lib/session.ts`). Logging in loads the account's copy; changes upload within ~3 seconds; logging out clears this browser.
+- Guests keep everything working without an account. Accounts switch on automatically once Upstash is set up in Vercel.
+- Not built: password reset by email (needs an email service).

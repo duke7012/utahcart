@@ -6,7 +6,7 @@ import type { PriceQuote } from "./types";
  * Server only. Works with the env names the Vercel Upstash integration sets (UPSTASH_REDIS_REST_* or KV_REST_API_*).
  * Without them, reads return nothing and the app still works from the bundled data.
  */
-type Env = Record<string, string | undefined>;
+export type Env = Record<string, string | undefined>;
 const KEY = "beelow:quotes:v1";
 const MAX_FIELDS = 5000;
 
@@ -16,7 +16,8 @@ const creds = (env: Env) => ({
 });
 export const sharedConfigured = (env: Env = process.env) => !!(creds(env).url && creds(env).token);
 
-async function redis(cmd: (string | number)[], env: Env, fetcher: typeof fetch): Promise<unknown> {
+/** One Upstash REST command, e.g. ["SET", key, value, "EX", 60]. Shared by accounts and shared prices. */
+export async function redis(cmd: (string | number)[], env: Env = process.env, fetcher: typeof fetch = fetch): Promise<unknown> {
   const { url, token } = creds(env);
   if (!url || !token) throw new Error("The shared price database isn't set up yet: add Upstash Redis in Vercel → Storage.");
   const r = await fetcher(url, { method: "POST", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify(cmd), cache: "no-store" });
