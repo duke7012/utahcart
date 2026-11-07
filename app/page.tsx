@@ -1,13 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
-import { AISLES, catalog, fromPrice } from "@/lib/catalog";
+import { DEMO_SENTENCE, type AskResult } from "@/lib/ask";
+import { AISLES, catalog, fromPrice, places } from "@/lib/catalog";
+import type { Saved } from "@/lib/session";
 import type { Item } from "@/lib/types";
 import { ARROW, CART, Icon, PLUS, ProductImage, SEARCH, Stepper, TopBar, UNIT_LABEL, money, useCart } from "./ui";
 
 export default function ShopPage() {
   const cart = useCart();
+  const router = useRouter();
   const [query, setQuery] = useState("");
   const [aisle, setAisle] = useState("all");
 
@@ -45,6 +49,7 @@ export default function ShopPage() {
       </TopBar>
 
       <main className="mx-auto max-w-5xl px-4 pb-32 pt-4">
+        {!q && aisle === "all" && <AskBox onPlanned={(next) => { cart.update(next); router.push("/plan"); }} current={cart.s} />}
         {groups.length === 0 && (
           <div className="pt-8">
             <p className="text-head font-semibold">No groceries match “{query}”.</p>
@@ -79,6 +84,49 @@ export default function ShopPage() {
         </div>
       )}
     </>
+  );
+}
+
+/** One sentence in, a filled cart and trip out, then straight to the plan. */
+function AskBox({ current, onPlanned }: { current: Saved; onPlanned: (s: Saved) => void }) {
+  const [sentence, setSentence] = useState(DEMO_SENTENCE);
+  const [state, setState] = useState<{ busy: boolean; error?: string }>({ busy: false });
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setState({ busy: true });
+    try {
+      const r = await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ sentence }) });
+      const j = (await r.json()) as AskResult & { error?: string };
+      if (!r.ok) return setState({ busy: false, error: j.error ?? "Couldn't plan that. Try again." });
+      const place = (id: string, fallback: Saved["trip"]["from"]) => places.find((p) => p.id === id) ?? fallback;
+      onPlanned({
+        list: j.list,
+        goal: j.goal,
+        trip: {
+          from: place(j.from, current.trip.from), to: place(j.to, current.trip.to), mode: j.mode,
+          leave: j.leave || current.trip.leave, homeBy: j.homeBy || current.trip.homeBy,
+        },
+      });
+    } catch {
+      setState({ busy: false, error: "Couldn't reach the planner. Check your connection and try again." });
+    }
+  };
+
+  return (
+    <form onSubmit={submit} className="mb-7 rounded-lg border border-varnish bg-white p-3">
+      <label htmlFor="ask" className="text-head font-bold">Or just tell UtahCart</label>
+      <textarea id="ask" rows={3} value={sentence} onChange={(e) => setSentence(e.target.value)}
+        className="mt-2 block w-full resize-none rounded-lg border border-varnish/40 bg-sky px-3 py-2 text-body" />
+      <div className="mt-2 flex items-center gap-3">
+        <p className="flex-1 text-small text-varnish-soft">Fills your cart and trip, then finds the best plan.</p>
+        <button type="submit" disabled={state.busy || !sentence.trim()}
+          className="flex shrink-0 items-center gap-2 rounded-lg bg-wingate px-4 py-2.5 text-body font-semibold text-white hover:bg-varnish disabled:bg-varnish/40">
+          {state.busy ? "Planning…" : <>Plan it <Icon d={ARROW} /></>}
+        </button>
+      </div>
+      {state.error && <p role="alert" className="mt-2 text-small font-semibold text-wingate">{state.error}</p>}
+    </form>
   );
 }
 

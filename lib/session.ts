@@ -1,5 +1,5 @@
 import { places } from "./catalog";
-import type { Goal, ListEntry, Mode, Place, PriceQuote, Trip } from "./types";
+import type { Goal, ListEntry, Memberships, Mode, Place, PriceQuote, Trip } from "./types";
 
 export type TripForm = { from: Place; to: Place; mode: Mode; leave: string; homeBy: string };
 export type Saved = { list: ListEntry[]; trip: TripForm; goal: Goal };
@@ -77,6 +77,26 @@ export function addReceipts(quotes: PriceQuote[]): PriceQuote[] {
   } catch {}
   return all;
 }
+
+const MEMBERSHIPS = "utahcart:memberships";
+
+export function loadMemberships(): Memberships {
+  try {
+    return JSON.parse(localStorage.getItem(MEMBERSHIPS) ?? "{}");
+  } catch {
+    return {};
+  }
+}
+
+export function saveMemberships(m: Memberships) {
+  try {
+    localStorage.setItem(MEMBERSHIPS, JSON.stringify(m));
+  } catch {}
+}
+
+/** Everything /api/plan needs, from this browser's saved cart, memberships and receipt prices. */
+export const planRequest = (s: Saved, worth: (keyof Memberships)[] = []) =>
+  JSON.stringify({ list: s.list, trip: toTrip(s.trip), memberships: loadMemberships(), quotes: loadReceipts(), worth, goal: s.goal });
 
 export function clearReceipts() {
   try {

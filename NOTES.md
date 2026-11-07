@@ -47,3 +47,13 @@ Decisions and assumptions made while building. Newest at the bottom.
 - **Search is a plain substring match** on item names (no fuzzy matching, per the spec).
 - **"from $X" on a tile** = cheapest in-store price for one typical pack at a store anyone can walk into (Costco excluded without a membership); the cart bar's "about $X" adds those up. The real total comes from the planner.
 - **Product pictures are generated illustrations** (ElevenLabs, model gpt-image-2): three 4x4 sheets cut into 48 JPEG tiles in `public/products/`, each with its prompt embedded. Labeled "Pictures are illustrations" on the shop page. A missing picture falls back to a tan panel with the item name.
+
+## Phase 3
+
+- **Membership wallet** (`/wallet`, saved in `localStorage` `utahcart:memberships`) is sent with every plan request; `/api/plan` keeps only known membership keys set to `true`.
+- **"Is it worth it?"** (`lib/worth.ts`, tested) = the plan for the user's chosen goal without the membership minus with it, for the current cart. Shown for Costco and Instacart+ only (the other memberships have no store or delivery option in the demo data and say so). "Worth it if you shop weekly" when one trip saves more than the fee / 52; otherwise "pays off after N trips like this a year".
+- **Membership fees** in `data/memberships.json`: Sam's Club, Instacart+, DashPass, Uber One and Restaurant Depot come from the spec's verified facts. **Costco ($65) and Amazon Prime ($139) are not verified** and show "(unverified)" in the wallet. Team to confirm.
+- On the demo cart, Costco saves nothing (no car, 90 minutes, small quantities); Instacart+ saves the $7.99 delivery fee on the Fewest stops plan.
+- **Sentence planner** (`/api/ask`, `lib/ask.ts` tested): one sentence → cart, goal, car/no car, leave/home-by times, from/to presets, via `claude-opus-5-5` structured output with `fallbacks: "default"`. The demo sentence always returns the saved demo cart without calling the API, and with no key (or an API error) every sentence returns the demo cart. The model may only pick catalog item ids; quantities are 1-20; bad goals/modes/times fall back to defaults.
+- "Plan it" on the shop fills the cart and trip and goes straight to `/plan`; "Edit cart" there shows what it picked.
+- **Not verified yet:** a real Claude call for `/api/ask` (no API key on the dev machine).

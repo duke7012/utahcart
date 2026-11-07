@@ -1,0 +1,10 @@
+[
+  { "id": "costco", "name": "Costco", "feePerYear": 65, "verified": false, "does": "Shop in the Costco warehouse. With Instacart+, Costco delivery costs less too." },
+  { "id": "instacartPlus", "name": "Instacart+", "feePerYear": 99, "verified": true, "does": "$0 delivery on Instacart orders of $10 or more ($35 at Costco)." },
+  { "id": "samsClub", "name": "Sam's Club", "feePerYear": 60, "verified": true, "does": "No Sam's Club in the demo stores yet." },
+  { "id": "restaurantDepot", "name": "Restaurant Depot", "feePerYear": 0, "verified": true, "does": "Free for businesses with a resale permit or tax-exempt certificate. Not in the demo stores yet." },
+  { "id": "smithsRewards", "name": "Smith's Rewards", "feePerYear": 0, "verified": false, "does": "Free. Digital coupons aren't counted yet." },
+  { "id": "dashPass", "name": "DashPass", "feePerYear": 96, "verified": true, "does": "DoorDash isn't one of the demo stores' delivery options yet." },
+  { "id": "uberOne", "name": "Uber One", "feePerYear": 96, "verified": true, "does": "Uber Eats isn't one of the demo stores' delivery options yet." },
+  { "id": "prime", "name": "Amazon Prime", "feePerYear": 139, "verified": false, "does": "Amazon isn't one of the demo stores' delivery options yet." }
+]

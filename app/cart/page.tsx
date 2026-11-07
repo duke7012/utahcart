@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import memberships from "@/data/memberships.json";
 import { catalog, fromPrice, itemById, places } from "@/lib/catalog";
-import { clock, DEMO, minutesBetween } from "@/lib/session";
+import { clock, DEMO, loadMemberships, minutesBetween } from "@/lib/session";
 import type { Place } from "@/lib/types";
 import { ARROW, GOALS, Icon, ProductImage, Segments, Stepper, TopBar, UNIT_LABEL, money, useCart } from "../ui";
 
@@ -13,6 +14,11 @@ const field = "mt-1 block w-full rounded-lg border border-varnish bg-white px-3 
 export default function CartPage() {
   const { s, update, setItem } = useCart();
   const [geoError, setGeoError] = useState("");
+  const [activeMemberships, setActive] = useState<string[]>([]);
+  useEffect(() => {
+    const m = loadMemberships();
+    setActive(memberships.filter((ms) => m[ms.id as keyof typeof m]).map((ms) => ms.name));
+  }, []);
 
   const setPlace = (key: "from" | "to", id: string) => {
     if (id !== HERE) return update({ ...s, trip: { ...s.trip, [key]: places.find((p) => p.id === id)! } });
@@ -104,6 +110,16 @@ export default function CartPage() {
           </div>
           <p className="mt-3 text-small text-varnish-soft">
             UtahCart checks {catalog.stores.length} stores, in person and delivered, and picks the best mix for your goal.
+          </p>
+        </section>
+
+        <section aria-labelledby="memberships" className="pt-6">
+          <div className="flex items-baseline justify-between">
+            <h2 id="memberships" className="text-head font-bold">Memberships</h2>
+            <Link href="/wallet" className="text-small font-semibold underline">Edit</Link>
+          </div>
+          <p className="mt-1 text-body">
+            {activeMemberships.length ? activeMemberships.join(", ") : "None. Add Costco or Instacart+ to see if they're worth it."}
           </p>
         </section>
       </main>

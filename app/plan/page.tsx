@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { itemById, storeById } from "@/lib/catalog";
 import { travelMinutes } from "@/lib/geo";
 import { appleMapsUrl, googleMapsUrl, legs, orderUrl } from "@/lib/handoff";
-import { clock, load, loadReceipts, save, toTrip, type Saved } from "@/lib/session";
+import { clock, load, planRequest, save, toTrip, type Saved } from "@/lib/session";
 import type { Goal, LineItem, Plan, Trip } from "@/lib/types";
 import { CHEVRON, GOALS, Icon, Segments, TopBar } from "../ui";
 
@@ -28,7 +28,7 @@ export default function PlanPage() {
     fetch("/api/plan", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ list: s.list, trip: toTrip(s.trip), memberships: {}, quotes: loadReceipts() }),
+      body: planRequest(s),
     })
       .then(async (r) => (r.ok ? setState({ status: "ok", plans: (await r.json()).plans }) : Promise.reject((await r.json()).error)))
       .catch((err) => setState({ status: "error", message: typeof err === "string" ? err : "Couldn't reach the planner. Check your connection and try again." }));
