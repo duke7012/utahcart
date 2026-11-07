@@ -1,6 +1,6 @@
-# UtahCart
+# BeeLow
 
-Fit your groceries into your day. UtahCart plans the best mix of in-person stops and online orders for your list, your route, your time limit, and the memberships you actually have. Built at Crimson Hacks 2026.
+Fit your groceries into your day. BeeLow plans the best mix of in-person stops and online orders for your list, your route, your time limit, and the memberships you actually have. Built at Crimson Hacks 2026.
 
 ## Run
 

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ListChecks, Minus, Plus, Route, ScanLine, ShoppingBasket, Wallet, type LucideIcon } from "lucide-react";
+import { ListChecks, Minus, Plus, Route, ScanLine, Wallet, type LucideIcon } from "lucide-react";
 import { DEMO, load, save, type Saved } from "@/lib/session";
 import type { Goal, Item } from "@/lib/types";
 
@@ -17,18 +17,16 @@ export const UNIT_LABEL: Record<string, string> = { oz: "oz", fl_oz: "fl oz", lb
 export const money = (n: number) => `$${n.toFixed(2)}`;
 export const packLabel = (item: Item, qty: number) => `${qty} × ${item.typicalSize} ${UNIT_LABEL[item.unit]}`;
 
-/** Brand row: basket mark + wordmark, and the Salt Lake City tag. */
+/** Brand row: the BeeLow logo, and the Salt Lake City tag. */
 export function AppHeader() {
   return (
     <header className="mx-auto flex h-[78px] w-full max-w-[480px] items-center justify-between px-6">
-      <Link href="/" className="flex items-center gap-[9px] no-underline">
-        <span className="grid h-[34px] w-8 place-items-center rounded-[10px] bg-forest text-white">
-          <ShoppingBasket size={21} strokeWidth={1.75} aria-hidden />
-        </span>
-        <span className="text-[22px] tracking-[-0.8px] text-ink">UtahCart</span>
+      <Link href="/" className="no-underline" aria-label="BeeLow home">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/beelow-logo.png" alt="BeeLow" width={112} height={48} className="h-12 w-auto" />
       </Link>
       <span className="flex items-center gap-[5px] text-[11px] text-muted">
-        <span className="size-[5px] rounded-[2px] bg-brick" aria-hidden />
+        <span className="size-[6px] rounded-full bg-honey" aria-hidden />
         SALT LAKE CITY
       </span>
     </header>
@@ -45,14 +43,14 @@ const TABS: { href: string; label: string; icon: LucideIcon; match: string[] }[]
 export function BottomNav() {
   const path = usePathname();
   return (
-    <nav aria-label="UtahCart" className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white">
+    <nav aria-label="BeeLow" className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white">
       <div className="mx-auto flex h-[86px] max-w-[480px] gap-2 px-4 pb-[14px] pt-3">
         {TABS.map((t) => {
           const on = t.match.some((m) => path.startsWith(m));
           return (
             <Link key={t.href} href={t.href} aria-current={on ? "page" : undefined}
               className={`flex flex-1 flex-col items-center justify-center gap-[5px] rounded-[12px] text-[11px] no-underline ${
-                on ? "bg-mint font-bold text-forest" : "font-medium text-muted hover:bg-canvas"
+                on ? "bg-honey-tint font-bold text-bee" : "font-medium text-muted hover:bg-canvas"
               }`}>
               <t.icon size={21} strokeWidth={1.75} aria-hidden />
               {t.label}
@@ -78,7 +76,7 @@ export function Screen({ children, nav = true }: { children: React.ReactNode; na
 export function Intro({ eyebrow, title, sub }: { eyebrow?: string; title: React.ReactNode; sub?: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-[9px]">
-      {eyebrow && <p className="text-[11px] font-bold tracking-[1.2px] text-forest">{eyebrow}</p>}
+      {eyebrow && <p className="text-[11px] font-bold tracking-[1.2px] text-bee">{eyebrow}</p>}
       <h1 className="text-[32px] font-bold leading-[1.12] tracking-[-1.1px] text-ink">{title}</h1>
       {sub && <p className="text-[14px] leading-[1.45] text-muted">{sub}</p>}
     </div>
@@ -96,7 +94,7 @@ export function SectionHead({ title, right }: { title: string; right?: React.Rea
 
 export const card = "rounded-[18px] border border-line bg-white";
 export const primaryBtn =
-  "flex h-[52px] w-full items-center justify-center gap-3 rounded-[12px] bg-forest px-4 text-[14px] text-white no-underline hover:bg-forest-dark disabled:opacity-50";
+  "flex h-[52px] w-full items-center justify-center gap-3 rounded-[12px] bg-bee px-4 text-[14px] text-white no-underline hover:bg-bee-dark disabled:opacity-50";
 export const secondaryBtn =
   "flex h-[52px] w-full items-center justify-center gap-3 rounded-[12px] border border-line bg-white px-4 text-[14px] text-ink no-underline hover:bg-canvas";
 export const fine = "text-[11px] leading-[1.45] text-muted";
@@ -119,11 +117,11 @@ export function useCart() {
   return { s, update, qty: (id: string) => entry(id)?.qty ?? 0, bulkOk: (id: string) => entry(id)?.bulkOk ?? false, setItem };
 }
 
-/** Product picture; falls back to a mint panel with the name when the picture is missing. */
+/** Product picture; falls back to a honey panel with the name when the picture is missing. */
 export function ProductImage({ id, name, className = "" }: { id: string; name: string; className?: string }) {
   const [missing, setMissing] = useState(false);
   if (missing) {
-    return <div aria-hidden className={`grid place-items-center bg-mint p-1 text-center text-[10px] text-forest ${className}`}>{name}</div>;
+    return <div aria-hidden className={`grid place-items-center bg-honey-tint p-1 text-center text-[10px] text-bee ${className}`}>{name}</div>;
   }
   // eslint-disable-next-line @next/next/no-img-element
   return <img src={`/products/${id}.jpg`} alt="" loading="lazy" onError={() => setMissing(true)} className={`bg-canvas object-contain ${className}`} />;
@@ -151,7 +149,7 @@ export function Toggle({ label, hint, on, onChange }: { label: string; hint?: st
         <span className="text-[13px] font-semibold">{label}</span>
         {hint && <span className="text-[11px] text-muted">{hint}</span>}
       </span>
-      <span className={`relative h-[26px] w-[46px] shrink-0 rounded-full transition-colors ${on ? "bg-forest" : "bg-line"}`}>
+      <span className={`relative h-[26px] w-[46px] shrink-0 rounded-full transition-colors ${on ? "bg-bee" : "bg-line"}`}>
         <span className={`absolute top-[3px] size-5 rounded-full bg-white transition-[left] ${on ? "left-[23px]" : "left-[3px]"}`} />
       </span>
     </button>

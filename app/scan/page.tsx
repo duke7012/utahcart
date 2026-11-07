@@ -30,7 +30,7 @@ async function shrink(file: File): Promise<Blob> {
 const guessStore = (name: string) =>
   catalog.stores.find((s) => name.toLowerCase().includes(s.name.split(/[ ']/)[0].toLowerCase()))?.id ?? "";
 
-/** Current unit price UtahCart uses for this item at this store (latest receipt, else demo). */
+/** Current unit price BeeLow uses for this item at this store (latest receipt, else demo). */
 function currentUnit(storeId: string, itemId: string): number | undefined {
   const q = [...loadReceipts(), ...catalog.prices].find((p) => p.storeId === storeId && p.itemId === itemId && p.channel === "in_person");
   return q && q.price / q.size;
@@ -121,7 +121,7 @@ export default function ScanPage() {
   return (
     <Screen>
       <div className="flex flex-col gap-[9px]">
-        <p className="text-[11px] font-bold tracking-[1.2px] text-forest">{eyebrow}</p>
+        <p className="text-[11px] font-bold tracking-[1.2px] text-bee">{eyebrow}</p>
         <h1 className="text-[32px] font-bold leading-[1.12] tracking-[-1.1px]">
           {step === "saved" ? <>A fresher price.<br />A better plan.</> : step === "review" ? "Check before we save." : "Your receipt can help."}
         </h1>
@@ -135,7 +135,7 @@ export default function ScanPage() {
       <ol className="grid grid-cols-3 gap-2 text-[13px]">
         {steps.map((s, i) => (
           <li key={s} aria-current={i === at ? "step" : undefined}
-            className={`rounded-[10px] py-2.5 text-center ${i === at ? "bg-mint font-semibold text-forest" : "text-muted"}`}>
+            className={`rounded-[10px] py-2.5 text-center ${i === at ? "bg-honey-tint font-semibold text-bee" : "text-muted"}`}>
             {i < at ? "✓ " : `${i + 1} `}{s}
           </li>
         ))}
@@ -146,7 +146,7 @@ export default function ScanPage() {
           <div role="radiogroup" aria-label="Photo type" className="grid grid-cols-2 rounded-[12px] bg-line/60 p-1">
             {(["receipt", "shelf"] as const).map((k) => (
               <button key={k} type="button" role="radio" aria-checked={kind === k} onClick={() => setKind(k)}
-                className={`rounded-[10px] py-2.5 text-[15px] ${kind === k ? "bg-white font-semibold text-forest" : "text-muted"}`}>
+                className={`rounded-[10px] py-2.5 text-[15px] ${kind === k ? "bg-white font-semibold text-bee" : "text-muted"}`}>
                 {k === "receipt" ? "Receipt" : "Shelf photo"}
               </button>
             ))}
@@ -155,12 +155,12 @@ export default function ScanPage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={preview ?? "/figma/receipt.jpg"} alt={preview ? "Your photo" : "Example: a grocery receipt on a counter"} className="h-[224px] w-full rounded-[10px] object-cover" />
             <div className="flex items-center gap-3 px-1 pb-1">
-              <FileImage size={21} className="shrink-0 text-forest" aria-hidden />
+              <FileImage size={21} className="shrink-0 text-bee" aria-hidden />
               <div className="min-w-0 flex-1 leading-[1.45]">
                 <p className="truncate text-[15px]">{file ? file.name : "No photo yet"}</p>
                 <p className="text-[12px] text-muted">{file ? `1 photo · ${(file.size / 1048576).toFixed(1)} MB · Ready to scan` : "Take or choose a photo below"}</p>
               </div>
-              {file && <CircleCheck size={20} className="text-forest" aria-hidden />}
+              {file && <CircleCheck size={20} className="text-bee" aria-hidden />}
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -176,15 +176,15 @@ export default function ScanPage() {
           <p className="text-[13px] leading-[1.45] text-muted">
             {kind === "receipt" ? "Include the store, date and item lines in good light." : "Include the product and its price tag in good light."}
           </p>
-          <div className="flex flex-col gap-2 rounded-[18px] bg-mint p-[18px]">
-            <p className="flex items-center gap-2 text-[15px] font-semibold text-forest"><ShieldCheck size={18} aria-hidden /> Prices, not your personal details.</p>
+          <div className="flex flex-col gap-2 rounded-[18px] bg-honey-tint p-[18px]">
+            <p className="flex items-center gap-2 text-[15px] font-semibold text-bee"><ShieldCheck size={18} aria-hidden /> Prices, not your personal details.</p>
             <p className="text-[13px] leading-[1.5]">AI reads store, date, items and prices. You review and edit before anything is saved. We keep only the item lines you choose—not the photo or card details.</p>
           </div>
-          {error && <p role="alert" className="text-[13px] font-semibold text-brick">{error}</p>}
+          {error && <p role="alert" className="text-[13px] font-semibold text-carrot">{error}</p>}
           <button type="button" disabled={!file || step === "reading"} onClick={() => read(false)} className={primaryBtn}>
             {step === "reading" ? "Reading your photo…" : <>Scan & review prices <ScanLine size={18} aria-hidden /></>}
           </button>
-          <button type="button" disabled={step === "reading"} onClick={() => read(true)} className="text-[13px] font-semibold text-forest">
+          <button type="button" disabled={step === "reading"} onClick={() => read(true)} className="text-[13px] font-semibold text-bee">
             No receipt handy? Use the example receipt
           </button>
           <p className={`${fine} text-center`}>AI can misread a receipt. Nothing updates until you confirm.</p>
@@ -212,21 +212,21 @@ export default function ScanPage() {
 
           <div className="flex items-center justify-between">
             <h2 className="text-[18px]">Review item lines</h2>
-            <span className="text-[12px] font-semibold text-forest">{review.keep.filter(Boolean).length} of {review.lines.length} selected</span>
+            <span className="text-[12px] font-semibold text-bee">{review.keep.filter(Boolean).length} of {review.lines.length} selected</span>
           </div>
           {review.lines.map((l, i) => {
             const keep = review.keep[i];
             const before = l.itemId && storeId ? currentUnit(storeId, l.itemId) : undefined;
             const unit = l.price / l.size;
             return (
-              <div key={i} className={`flex flex-col gap-3 rounded-[18px] p-[18px] ${keep ? "border-2 border-forest bg-mint" : "border border-line bg-white"}`}>
+              <div key={i} className={`flex flex-col gap-3 rounded-[18px] p-[18px] ${keep ? "border-2 border-bee bg-honey-tint" : "border border-line bg-white"}`}>
                 <label className="flex items-start gap-3">
                   <input type="checkbox" checked={keep} disabled={!l.itemId} onChange={(e) => setKeep(i, e.target.checked)} className="mt-1 size-4" />
                   <span className="flex-1 leading-[1.45]">
                     <span className="block text-[14px]">{l.itemId ? itemById(l.itemId)?.name : l.rawName}</span>
                     <span className="block text-[11px] text-muted">{l.itemId ? "Matched to the catalog" : "Not on the catalog · Not selected"}</span>
                   </span>
-                  <span className="text-[11px] font-semibold tracking-[0.6px] text-forest">{keep ? "KEEP" : ""}</span>
+                  <span className="text-[11px] font-semibold tracking-[0.6px] text-bee">{keep ? "KEEP" : ""}</span>
                 </label>
                 {keep && (
                   <>
@@ -249,10 +249,10 @@ export default function ScanPage() {
                         <input type="number" inputMode="decimal" step="0.01" min="0" value={l.price} onChange={(e) => setLine(i, { price: Number(e.target.value) })} className={`${input} mt-1 font-semibold text-ink`} />
                       </label>
                     </div>
-                    <div className="flex items-end justify-between border-t border-forest/20 pt-3">
+                    <div className="flex items-end justify-between border-t border-bee/20 pt-3">
                       <span className="text-[11px] text-muted">BEFORE · DEMO<br /><span className="text-[15px] text-muted line-through">{before !== undefined ? `${money(before)}/${UNIT_LABEL[l.unit]}` : "—"}</span></span>
                       <ArrowRight size={16} className="mb-1" aria-hidden />
-                      <span className="text-right text-[11px] text-forest">RECEIPT<br /><span className="text-[20px] font-bold">{money(unit)}/{UNIT_LABEL[l.unit]}</span></span>
+                      <span className="text-right text-[11px] text-bee">RECEIPT<br /><span className="text-[20px] font-bold">{money(unit)}/{UNIT_LABEL[l.unit]}</span></span>
                     </div>
                   </>
                 )}
@@ -279,7 +279,7 @@ export default function ScanPage() {
 
       {step === "saved" && saved && (
         <>
-          <div className="flex flex-col items-center gap-2 rounded-[18px] bg-forest p-6 text-center text-white">
+          <div className="flex flex-col items-center gap-2 rounded-[18px] bg-bee p-6 text-center text-white">
             <CircleCheck size={32} strokeWidth={1.5} aria-hidden />
             <p className="text-[20px] font-bold">{saved.count} {saved.count === 1 ? "price" : "prices"} saved. Photo discarded.</p>
             <p className="text-[12px] leading-[1.5] opacity-90">{saved.store}{saved.date && ` · Receipt dated ${saved.date}`} · Confirmed today</p>
@@ -291,15 +291,15 @@ export default function ScanPage() {
                 <span>{c.name}</span>
                 <span>
                   {c.before !== undefined && <span className="mr-2 text-muted line-through">{money(c.before)}/{c.unit}</span>}
-                  <span className="font-semibold text-forest">{money(c.after)}/{c.unit}</span>
+                  <span className="font-semibold text-bee">{money(c.after)}/{c.unit}</span>
                 </span>
               </div>
             ))}
             <p className={fine}>Receipt prices, not a live shelf guarantee.</p>
           </div>
           {saved.before !== undefined && saved.after !== undefined && (
-            <div className="flex flex-col gap-1 rounded-[18px] bg-mint p-[18px]">
-              <div className="flex justify-between text-[11px] tracking-[0.6px] text-forest"><span>YOUR PLAN</span><span>UPDATED</span></div>
+            <div className="flex flex-col gap-1 rounded-[18px] bg-honey-tint p-[18px]">
+              <div className="flex justify-between text-[11px] tracking-[0.6px] text-bee"><span>YOUR PLAN</span><span>UPDATED</span></div>
               <p className="text-[34px] font-bold tracking-[-1px]">{money(saved.after)} <span className="text-[16px] font-normal text-muted line-through">{money(saved.before)}</span></p>
             </div>
           )}
@@ -311,7 +311,7 @@ export default function ScanPage() {
       {stored > 0 && step !== "review" && (
         <p className={fine}>
           {stored} scanned prices saved in this browser.{" "}
-          <button type="button" onClick={() => { clearReceipts(); setStored(0); }} className="font-semibold text-forest underline">Clear them</button>
+          <button type="button" onClick={() => { clearReceipts(); setStored(0); }} className="font-semibold text-bee underline">Clear them</button>
         </p>
       )}
     </Screen>

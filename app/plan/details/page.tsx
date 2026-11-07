@@ -30,10 +30,10 @@ function Details() {
 
   return (
     <Screen>
-      <Link href="/plan" className="flex items-center gap-2 text-[13px] font-semibold text-forest no-underline"><ArrowLeft size={16} aria-hidden /> All plans</Link>
+      <Link href="/plan" className="flex items-center gap-2 text-[13px] font-semibold text-bee no-underline"><ArrowLeft size={16} aria-hidden /> All plans</Link>
       {state.status === "loading" && <p className="text-[14px] text-muted">Loading your plan…</p>}
       {state.status === "error" && <p role="alert" className="text-[14px] font-semibold">{state.message}</p>}
-      {state.status === "ok" && !plan && <p className="text-[14px]">No plan fits this trip. <Link href="/list" className="font-semibold text-forest">Change the trip</Link></p>}
+      {state.status === "ok" && !plan && <p className="text-[14px]">No plan fits this trip. <Link href="/list" className="font-semibold text-bee">Change the trip</Link></p>}
       {plan && trip && saved && <PlanDetail plan={plan} trip={trip} label={label} leave={saved.trip.leave} />}
     </Screen>
   );
@@ -54,17 +54,17 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
   return (
     <>
       <div className="flex flex-col gap-[9px]">
-        <p className="text-[11px] font-bold tracking-[1.2px] text-forest">{label.toUpperCase()} · PLAN DETAILS</p>
+        <p className="text-[11px] font-bold tracking-[1.2px] text-bee">{label.toUpperCase()} · PLAN DETAILS</p>
         <h1 className="text-[32px] font-bold leading-[1.12] tracking-[-1.1px]">{title}</h1>
         <p className="text-[14px] text-muted">
           {stops ? "Fresh food on your route" : "Everything delivered"}{plan.onlineOrders.length && stops ? ", the rest sent home." : "."}
         </p>
       </div>
 
-      <div className="flex flex-col gap-2 rounded-[18px] bg-mint p-[18px]">
+      <div className="flex flex-col gap-2 rounded-[18px] bg-honey-tint p-[18px]">
         <div className="flex items-start justify-between">
           <p className="text-[34px] font-bold leading-none tracking-[-1px]">{money(plan.money)}</p>
-          {plan.savingsVsOneStore >= 0.5 && <span className="text-[11px] font-semibold text-forest">SAVE {money(plan.savingsVsOneStore)}</span>}
+          {plan.savingsVsOneStore >= 0.5 && <span className="text-[11px] font-semibold text-leaf">SAVE {money(plan.savingsVsOneStore)}</span>}
         </div>
         <p className="text-[13px]">{stops} in-person {stops === 1 ? "stop" : "stops"} · ~{plan.minutes} min to home</p>
         <p className={fine}>Leave {ampm(leave)} → home about {ampm(addMinutes(leave, plan.minutes))}. Estimates, not live timing.</p>
@@ -77,7 +77,7 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
             <p className="flex items-center gap-2 text-[14px]"><Store size={16} aria-hidden /> {current[0].label} → {current[1].label}</p>
             <p className="text-[12px] text-muted">~{Math.round(travelMinutes(current[0], current[1], trip.mode))} min {trip.mode === "car" ? "drive" : "transit + walk"} · leg {Math.min(leg, allLegs.length - 1) + 1} of {allLegs.length}</p>
             <div className="flex gap-2 text-[11px]">
-              <a href={googleMapsUrl(current[0], current[1], [], mode)} target="_blank" rel="noopener noreferrer" className="rounded-[8px] bg-mint px-2.5 py-1.5 font-semibold text-forest no-underline">✓ Google Maps</a>
+              <a href={googleMapsUrl(current[0], current[1], [], mode)} target="_blank" rel="noopener noreferrer" className="rounded-[8px] bg-honey-tint px-2.5 py-1.5 font-semibold text-bee no-underline">✓ Google Maps</a>
               <a href={appleMapsUrl(current[0], current[1], [], mode)} target="_blank" rel="noopener noreferrer" className="rounded-[8px] bg-canvas px-2.5 py-1.5 font-semibold text-ink no-underline">Apple Maps</a>
             </div>
             <a href={googleMapsUrl(current[0], current[1], [], mode)} target="_blank" rel="noopener noreferrer" className={primaryBtn}>
@@ -99,14 +99,14 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
               <div key={s.storeId} className={`${card} flex flex-col gap-3 p-[18px] ${done ? "opacity-60" : ""}`}>
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-[10px] font-semibold tracking-[0.6px] text-forest">{i === 0 ? "FIRST STOP" : "THEN"} · ~{mins} MIN {trip.mode === "car" ? "DRIVE" : "TRANSIT"}, ~{trip.minutesPerStop} MIN SHOP</p>
+                    <p className="text-[10px] font-semibold tracking-[0.6px] text-bee">{i === 0 ? "FIRST STOP" : "THEN"} · ~{mins} MIN {trip.mode === "car" ? "DRIVE" : "TRANSIT"}, ~{trip.minutesPerStop} MIN SHOP</p>
                     <p className="text-[16px] font-semibold">{storeById(s.storeId)?.name}</p>
                   </div>
                   <p className="text-[16px] font-semibold">{money(s.items.reduce((t, l) => t + l.cost, 0))}</p>
                 </div>
                 <Lines lines={s.items} got={got} prefix={s.storeId} onToggle={toggle} />
                 <button type="button" onClick={() => setLeg(i + 1)} disabled={done}
-                  className="flex h-11 items-center justify-center gap-2 rounded-[10px] border border-line text-[13px] font-semibold text-forest disabled:text-muted">
+                  className="flex h-11 items-center justify-center gap-2 rounded-[10px] border border-line text-[13px] font-semibold text-bee disabled:text-muted">
                   {done ? "Done" : `Mark ${brand(s.storeId)} done`} <Check size={15} aria-hidden />
                 </button>
               </div>
@@ -127,7 +127,7 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
               <div key={o.storeId + o.channel} className={`${card} flex flex-col gap-3 p-[18px]`}>
                 <div className="flex items-center justify-between">
                   <p className="text-[16px] font-semibold">{brand(o.storeId)} via {CHANNEL[o.channel]}</p>
-                  <span className="rounded-[6px] bg-mint px-2 py-1 text-[10px] font-semibold text-forest">DELIVERY</span>
+                  <span className="rounded-[6px] bg-honey-tint px-2 py-1 text-[10px] font-semibold text-bee">DELIVERY</span>
                 </div>
                 <Lines lines={o.items} got={got} prefix={o.storeId + o.channel} onToggle={toggle} />
                 <p className="text-[12px] text-muted">Delivery fee {money(o.fee)}{o.fee === 0 ? " (membership)" : ""}</p>
@@ -153,7 +153,7 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
         <div className="h-px bg-line" />
         <Row k="Estimated total" v={money(plan.money)} strong />
       </div>
-      <p className={fine}>Demo prices · Nov 2026 unless marked from a receipt. No live inventory or arrival times. UtahCart doesn’t provide navigation, checkout or payment.</p>
+      <p className={fine}>Demo prices · Nov 2026 unless marked from a receipt. No live inventory or arrival times. BeeLow doesn’t provide navigation, checkout or payment.</p>
     </>
   );
 }

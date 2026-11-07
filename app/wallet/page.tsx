@@ -55,13 +55,13 @@ export default function WalletPage() {
         return (
           <li key={id} className={`py-3.5 ${i ? "border-t border-line" : ""}`}>
             <div className="flex items-center gap-3">
-              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-canvas text-[13px] font-semibold text-brick">{ms.name[0]}</span>
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-canvas text-[13px] font-semibold text-carrot">{ms.name[0]}</span>
               <Toggle label={ms.name} on={!!m[id]} onChange={() => toggle(id)} hint={SUB[id](!!m[id])} />
             </div>
             {PRICED.includes(id) && (
               <p className="ml-11 mt-1.5 text-[12px] text-muted">
                 {checking || !w ? "Checking your cart…" : w.savingsPerTrip === null ? "No plan fits your trip to compare."
-                  : w.savingsPerTrip < 0.5 ? "Saves nothing on your current cart." : <span className="font-semibold text-forest">Saves {money(w.savingsPerTrip)} on this cart</span>}
+                  : w.savingsPerTrip < 0.5 ? "Saves nothing on your current cart." : <span className="font-semibold text-leaf">Saves {money(w.savingsPerTrip)} on this cart</span>}
               </p>
             )}
           </li>
@@ -78,8 +78,8 @@ export default function WalletPage() {
   return (
     <Screen>
       <Intro eyebrow="YOUR WALLET · ON THIS DEVICE" title="Bring your benefits." sub="Tell us what you have. We’ll use eligible savings without assuming access." />
-      <p className="flex gap-3 rounded-[12px] bg-mint p-[14px] text-[12px] leading-[1.45]">
-        <Smartphone size={18} className="shrink-0 text-forest" aria-hidden /> Saved on this device. No account or sign-in. Membership numbers aren’t needed.
+      <p className="flex gap-3 rounded-[12px] bg-honey-tint p-[14px] text-[12px] leading-[1.45]">
+        <Smartphone size={18} className="shrink-0 text-bee" aria-hidden /> Saved on this device. No account or sign-in. Membership numbers aren’t needed.
       </p>
 
       <section className="flex flex-col gap-3">
@@ -99,7 +99,7 @@ export default function WalletPage() {
         <p className={fine}>Benefits vary by retailer, minimum order and area. We only remove a fee when it applies; the retailer confirms your final charges.</p>
       </section>
 
-      <div className="flex flex-col gap-3 rounded-[18px] bg-forest p-[22px] text-white">
+      <div className="flex flex-col gap-3 rounded-[18px] bg-bee p-[22px] text-white">
         <div className="flex items-center justify-between text-[11px] tracking-[0.8px] opacity-90">
           <span>IS COSTCO WORTH IT?</span><CalendarCheck size={18} aria-hidden />
         </div>
@@ -140,7 +140,7 @@ export default function WalletPage() {
       <button type="button" onClick={() => {
         try { ["utahcart:v1", "utahcart:receipts", "utahcart:memberships"].forEach((k) => localStorage.removeItem(k)); } catch {}
         setM({}); setCleared(true);
-      }} className="flex items-center justify-between text-[13px] font-semibold text-brick">
+      }} className="flex items-center justify-between text-[13px] font-semibold text-carrot">
         {cleared ? "Saved data cleared" : "Clear saved data on this device"} <Trash2 size={16} aria-hidden />
       </button>
     </Screen>

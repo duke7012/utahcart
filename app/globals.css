@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
-/* UtahCart design (from the team's Figma file): warm canvas, forest green, Inter. */
+/* BeeLow palette, sampled from the logo: chocolate brown, honey, carrot, leaf, on warm cream. */
 @theme {
-  --color-canvas: #f6f5ef;
-  --color-ink: #202e27;
-  --color-muted: #626d64; /* Figma #68736a, darkened to reach 4.5:1 on mint */
-  --color-forest: #245c42;
-  --color-forest-dark: #1b4733;
-  --color-mint: #e7efe5;
-  --color-line: #dce1d7;
-  --color-brick: #af493b;
-  --color-amber-tint: #f7efd9;
+  --color-canvas: #fffaf0;
+  --color-ink: #33200f;
+  --color-muted: #75604d; /* 5.3:1 on honey-tint, 5.9:1 on canvas */
+  --color-bee: #5c2d0c; /* logo brown: primary actions, selection, focus */
+  --color-bee-dark: #3f1f07;
+  --color-honey: #fbb424; /* logo yellow: highlights, never text on light */
+  --color-honey-tint: #fff1cc;
+  --color-line: #eee2cc;
+  --color-carrot: #b5410f; /* costs, removal, errors */
+  --color-leaf: #4f7a14; /* savings */
+  --color-amber-tint: #fde6d2;
   --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
@@ -18,8 +20,8 @@ html {
   color-scheme: light;
   background: var(--color-canvas);
   color: var(--color-ink);
-  accent-color: var(--color-forest);
-  caret-color: var(--color-forest);
+  accent-color: var(--color-bee);
+  caret-color: var(--color-bee);
 }
 
 body {
@@ -29,12 +31,12 @@ body {
 }
 
 ::selection {
-  background: var(--color-mint);
+  background: var(--color-honey-tint);
   color: var(--color-ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-forest);
+  outline: 2px solid var(--color-bee);
   outline-offset: 2px;
 }
 

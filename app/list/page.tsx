@@ -43,10 +43,10 @@ export default function ListPage() {
       <AskCard current={s} onPlanned={update} />
 
       <section className="flex flex-col gap-[14px]">
-        <SectionHead title="Your list" right={<Link href="/add" className="text-[12px] font-semibold text-forest no-underline">+ Add item</Link>} />
+        <SectionHead title="Your list" right={<Link href="/add" className="text-[12px] font-semibold text-bee no-underline">+ Add item</Link>} />
         {count === 0 ? (
           <div className={`${card} p-[18px] text-[14px]`}>
-            Your list is empty. <Link href="/add" className="font-semibold text-forest">Add items</Link> to start.
+            Your list is empty. <Link href="/add" className="font-semibold text-bee">Add items</Link> to start.
           </div>
         ) : (
           <ul className={`${card} px-4`}>
@@ -63,7 +63,7 @@ export default function ListPage() {
                       <span className="flex min-w-0 flex-col gap-[3px] leading-[1.45]">
                         <span className="truncate text-[14px]">{item.name}</span>
                         <span className="text-[11px] text-muted">Any brand</span>
-                        {e.bulkOk && <span className="text-[10px] font-semibold text-forest">✓ Bulk OK</span>}
+                        {e.bulkOk && <span className="text-[10px] font-semibold text-bee">✓ Bulk OK</span>}
                       </span>
                     </button>
                     <Qty item={item} qty={e.qty} onChange={(n) => setItem(e.itemId, n)} />
@@ -71,7 +71,7 @@ export default function ListPage() {
                   {expanded && (
                     <div className="mb-3 flex items-center justify-between gap-3 rounded-[12px] bg-canvas px-3 py-2.5">
                       <Toggle label="Bulk OK" hint="Allow a larger pack for this item." on={e.bulkOk} onChange={(b) => setItem(e.itemId, e.qty, b)} />
-                      <button type="button" onClick={() => setItem(e.itemId, 0)} className="flex items-center gap-1 text-[12px] font-semibold text-brick">
+                      <button type="button" onClick={() => setItem(e.itemId, 0)} className="flex items-center gap-1 text-[12px] font-semibold text-carrot">
                         <Trash2 size={14} aria-hidden /> Remove
                       </button>
                     </div>
@@ -92,10 +92,10 @@ export default function ListPage() {
             <p className="text-[14px]">{showEnd ? "Start in one place, end in another." : "Start and end at the same location."}</p>
           </div>
           <PlacePicker icon label={showEnd ? "START" : "START & END"} value={placeId(s.trip.from)} onChange={(id) => setPlace("from", id)} />
-          <button type="button" onClick={() => setPlace("from", HERE)} className="self-start text-[12px] font-semibold text-forest">
+          <button type="button" onClick={() => setPlace("from", HERE)} className="self-start text-[12px] font-semibold text-bee">
             Use my browser location instead
           </button>
-          {geoError && <p role="alert" className="text-[12px] text-brick">{geoError}</p>}
+          {geoError && <p role="alert" className="text-[12px] text-carrot">{geoError}</p>}
           <div className="h-px bg-line" />
           {showEnd ? (
             <PlacePicker label="END" value={placeId(s.trip.to)} onChange={(id) => setPlace("to", id)} />
@@ -124,7 +124,7 @@ export default function ListPage() {
               const on = s.trip.mode === id;
               return (
                 <button key={id} type="button" role="radio" aria-checked={on} onClick={() => update({ ...s, trip: { ...s.trip, mode: id } })}
-                  className={`flex h-11 flex-1 items-center justify-center gap-2 rounded-[10px] text-[13px] font-semibold ${on ? "bg-forest text-white" : "bg-canvas text-muted"}`}>
+                  className={`flex h-11 flex-1 items-center justify-center gap-2 rounded-[10px] text-[13px] font-semibold ${on ? "bg-bee text-white" : "bg-canvas text-muted"}`}>
                   <Icon size={17} aria-hidden /> {label}
                 </button>
               );
@@ -141,8 +141,8 @@ export default function ListPage() {
             const on = s.goal === g.id;
             return (
               <button key={g.id} type="button" role="radio" aria-checked={on} onClick={() => update({ ...s, goal: g.id })}
-                className={`flex h-[52px] items-center gap-3 rounded-[12px] border px-4 text-[14px] font-semibold ${on ? "border-forest bg-mint" : "border-line bg-white"}`}>
-                {on ? <CircleCheck size={19} className="text-forest" aria-hidden /> : <Circle size={19} className="text-muted" aria-hidden />}
+                className={`flex h-[52px] items-center gap-3 rounded-[12px] border px-4 text-[14px] font-semibold ${on ? "border-bee bg-honey-tint" : "border-line bg-white"}`}>
+                {on ? <CircleCheck size={19} className="text-bee" aria-hidden /> : <Circle size={19} className="text-muted" aria-hidden />}
                 {g.label}
               </button>
             );
@@ -204,8 +204,8 @@ function AskCard({ current, onPlanned }: { current: Saved; onPlanned: (s: Saved)
 
   if (!open) {
     return (
-      <button type="button" onClick={() => setOpen(true)} className="flex items-center gap-3 rounded-[12px] bg-mint p-[14px] text-left">
-        <Sparkles size={20} className="shrink-0 text-forest" aria-hidden />
+      <button type="button" onClick={() => setOpen(true)} className="flex items-center gap-3 rounded-[12px] bg-honey-tint p-[14px] text-left">
+        <Sparkles size={20} className="shrink-0 text-bee" aria-hidden />
         <span className="flex flex-1 flex-col gap-1 text-[12px] leading-[1.45]">
           <span>Set up with AI · optional</span>
           <span>“{DEMO_SENTENCE.replace(/\.$/, "")}.”</span>
@@ -215,11 +215,11 @@ function AskCard({ current, onPlanned }: { current: Saved; onPlanned: (s: Saved)
     );
   }
   return (
-    <form onSubmit={submit} className="flex flex-col gap-3 rounded-[12px] bg-mint p-[14px]">
-      <label htmlFor="ask" className="flex items-center gap-2 text-[12px]"><Sparkles size={18} className="text-forest" aria-hidden /> Set up with AI · optional</label>
+    <form onSubmit={submit} className="flex flex-col gap-3 rounded-[12px] bg-honey-tint p-[14px]">
+      <label htmlFor="ask" className="flex items-center gap-2 text-[12px]"><Sparkles size={18} className="text-bee" aria-hidden /> Set up with AI · optional</label>
       <textarea id="ask" rows={3} value={sentence} onChange={(e) => setSentence(e.target.value)}
         className="w-full resize-none rounded-[10px] border border-line bg-white px-3 py-2 text-[14px] leading-[1.45]" />
-      {state.error && <p role="alert" className="text-[12px] font-semibold text-brick">{state.error}</p>}
+      {state.error && <p role="alert" className="text-[12px] font-semibold text-carrot">{state.error}</p>}
       <button type="submit" disabled={state.busy || !sentence.trim()} className={primaryBtn}>
         {state.busy ? "Planning…" : <>Fill my list and plan <ArrowRight size={18} aria-hidden /></>}
       </button>

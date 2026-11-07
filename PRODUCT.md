@@ -18,21 +18,21 @@ The demo persona is one slice of this audience, not the whole of it: "Groceries 
 
 ## Product Purpose
 
-UtahCart fits groceries into the user's day. The user enters a shopping list, where they are, where they're going, a time limit, and whether they have a car. UtahCart returns the best mix of in-person stops and online orders for the chosen goal (**Most savings**, **Fewest stops**, or **Most time saved**), using only the stores and channels the user's memberships allow. It then hands off: routes open in Google Maps, Apple Maps, or Transit, and online orders open in the delivery app or store site.
+BeeLow fits groceries into the user's day. The user enters a shopping list, where they are, where they're going, a time limit, and whether they have a car. BeeLow returns the best mix of in-person stops and online orders for the chosen goal (**Most savings**, **Fewest stops**, or **Most time saved**), using only the stores and channels the user's memberships allow. It then hands off: routes open in Google Maps, Apple Maps, or Transit, and online orders open in the delivery app or store site.
 
 Success: the user leaves with a plan they trust, opens it in their maps or delivery app in one tap, and gets home on time having spent less or stopped less than they would have at one store.
 
 ## Positioning
 
-Pitch line: "Grocery Routes finds the cheapest store. UtahCart fits your groceries into your day: on your way, in your time limit, with or without a car, in person or delivered."
+Pitch line: "Grocery Routes finds the cheapest store. BeeLow fits your groceries into your day: on your way, in your time limit, with or without a car, in person or delivered."
 
-What a neighboring product cannot truthfully copy: UtahCart plans across **in-person and online channels together**, respects the user's **actual memberships** (including non-member access such as Costco via Instacart at a markup), works **with or without a car**, and fits the plan **between a start and an end point inside a time limit**. Grocery Routes (iOS, launched Mar 2026) compares whole lists in store only, 1 to 3 stores, cheapest goal only.
+What a neighboring product cannot truthfully copy: BeeLow plans across **in-person and online channels together**, respects the user's **actual memberships** (including non-member access such as Costco via Instacart at a markup), works **with or without a car**, and fits the plan **between a start and an end point inside a time limit**. Grocery Routes (iOS, launched Mar 2026) compares whole lists in store only, 1 to 3 stores, cheapest goal only.
 
 ## Operating Context
 
 - Used on a phone, mobile-first. Judges may open it on their own phones.
 - Demoed live at a team table during Crimson Hacks 2026 (University of Utah, theme "State of Utah"). Judging: it works, it's useful to someone in Utah, it's well built, it's clear in 3 minutes.
-- The user hands off to apps they already use (Google Maps, Apple Maps, Transit, Instacart, store sites) for navigation, checkout, and delivery. UtahCart plans; it never navigates or takes payment.
+- The user hands off to apps they already use (Google Maps, Apple Maps, Transit, Instacart, store sites) for navigation, checkout, and delivery. BeeLow plans; it never navigates or takes payment.
 - No-car trips proceed one leg at a time ("Go to next stop").
 
 ## Capabilities and Constraints
@@ -51,7 +51,7 @@ What a neighboring product cannot truthfully copy: UtahCart plans across **in-pe
 
 ## Brand Commitments
 
-- Name: **UtahCart**.
+- Name: **BeeLow** (renamed from UtahCart on 2026-11-06). Logo: `public/beelow-logo.png` (bee flying a dotted route to a map pin over the wordmark, a grocery basket as the "o"). Palette comes from the logo: chocolate brown, honey yellow, carrot orange, leaf green.
 - Pitch line as quoted under Positioning.
 - Demo scenario wording is fixed: "Groceries for 3 roommates this week, leaving the U at 5, no car, home by 6:30, cheapest." Never use a "tacos" example.
 - Nothing else (logo, mascot, voice, colors) is decided yet.

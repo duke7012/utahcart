@@ -27,7 +27,7 @@ export default function PlansPage() {
         <div className="-mt-2 flex flex-wrap gap-2 text-[12px]">
           <span className="rounded-[8px] px-2.5 py-1.5">Leave {ampm(saved.trip.leave)}</span>
           <span className="rounded-[8px] px-2.5 py-1.5">Home by {ampm(saved.trip.homeBy)}</span>
-          <Link href="/list" className="rounded-[8px] bg-mint px-2.5 py-1.5 font-semibold text-forest no-underline">Edit trip</Link>
+          <Link href="/list" className="rounded-[8px] bg-honey-tint px-2.5 py-1.5 font-semibold text-bee no-underline">Edit trip</Link>
         </div>
       )}
 
@@ -35,7 +35,7 @@ export default function PlansPage() {
       {state.status === "error" && (
         <div role="alert" className={`${card} p-[18px]`}>
           <p className="text-[14px] font-semibold">{state.message}</p>
-          <Link href="/list" className="mt-2 inline-block text-[13px] font-semibold text-forest">Back to your list</Link>
+          <Link href="/list" className="mt-2 inline-block text-[13px] font-semibold text-bee">Back to your list</Link>
         </div>
       )}
       {state.status === "ok" && state.plans.length === 0 && saved && (
@@ -75,10 +75,10 @@ function PlanCard({ plan, chosen, sameAs }: { plan: Plan; chosen: boolean; sameA
   const href = `/plan/details?goal=${plan.goal}`;
   const groups = [...plan.stops.map((s) => ({ id: s.storeId, items: s.items })), ...plan.onlineOrders.map((o) => ({ id: o.storeId, items: o.items }))];
   return (
-    <section aria-label={label} className={`flex flex-col gap-3 rounded-[18px] p-[18px] ${chosen ? "border-2 border-forest bg-mint" : "border border-line bg-white"}`}>
+    <section aria-label={label} className={`flex flex-col gap-3 rounded-[18px] p-[18px] ${chosen ? "border-2 border-bee bg-honey-tint" : "border border-line bg-white"}`}>
       <div className="flex items-center justify-between">
-        <h2 className="flex items-center gap-2 text-[16px] font-semibold text-forest"><Icon size={18} aria-hidden /> {label}</h2>
-        {chosen && <span className="text-[11px] tracking-[0.6px] text-forest">YOUR GOAL</span>}
+        <h2 className="flex items-center gap-2 text-[16px] font-semibold text-bee"><Icon size={18} aria-hidden /> {label}</h2>
+        {chosen && <span className="text-[11px] tracking-[0.6px] text-bee">YOUR GOAL</span>}
       </div>
       <div className="flex items-start justify-between gap-3">
         <p className="text-[34px] font-bold leading-none tracking-[-1px]">{money(plan.money)}</p>
@@ -97,11 +97,11 @@ function PlanCard({ plan, chosen, sameAs }: { plan: Plan; chosen: boolean; sameA
       </p>
       <div className="flex items-center justify-between">
         {plan.savingsVsOneStore >= 0.5 ? (
-          <p className="text-[14px] font-semibold text-forest">Save {money(plan.savingsVsOneStore)}</p>
+          <p className="text-[14px] font-semibold text-leaf">Save {money(plan.savingsVsOneStore)}</p>
         ) : plan.savingsVsOneStore <= -0.5 ? (
-          <p className="text-[14px] font-semibold text-brick">{money(-plan.savingsVsOneStore)} more</p>
+          <p className="text-[14px] font-semibold text-carrot">{money(-plan.savingsVsOneStore)} more</p>
         ) : (
-          <p className="text-[14px] font-semibold text-forest">Cheapest single store</p>
+          <p className="text-[14px] font-semibold text-bee">Cheapest single store</p>
         )}
         <span className="text-[12px] text-muted">vs. one-store shop</span>
       </div>

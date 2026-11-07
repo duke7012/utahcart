@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-11-07T04:10:06+00:00",
-  "title": "Design System: UtahCart",
+  "title": "Design System: BeeLow",
   "extensions": {
     "colorMeta": {
-      "forest": {
+      "bee": {
         "role": "primary",
-        "displayName": "Forest",
+        "displayName": "Bee brown",
         "tonalRamp": [
           "#040e08",
           "#152c21",
@@ -18,9 +18,9 @@
           "#e4f3ea"
         ]
       },
-      "forest-dark": {
+      "bee-dark": {
         "role": "primary",
-        "displayName": "Deep Forest",
+        "displayName": "Deep Bee brown",
         "tonalRamp": [
           "#050d09",
           "#192b22",
@@ -32,9 +32,9 @@
           "#e5f2eb"
         ]
       },
-      "mint": {
+      "honey-tint": {
         "role": "primary",
-        "displayName": "Mint Leaf",
+        "displayName": "Honey tint Leaf",
         "tonalRamp": [
           "#080d07",
           "#232821",
@@ -46,9 +46,9 @@
           "#e9f1e7"
         ]
       },
-      "brick": {
+      "carrot": {
         "role": "secondary",
-        "displayName": "Brick",
+        "displayName": "Carrot",
         "tonalRamp": [
           "#180503",
           "#411711",
@@ -188,12 +188,12 @@
       },
       "wordmark": {
         "displayName": "Wordmark",
-        "purpose": "The UtahCart wordmark in the header only."
+        "purpose": "The BeeLow wordmark in the header only."
       }
     },
     "shadows": [],
     "focus": {
-      "value": "outline: 2px solid var(--color-forest); outline-offset: 2px",
+      "value": "outline: 2px solid var(--color-bee); outline-offset: 2px",
       "purpose": "Global :focus-visible ring."
     },
     "motion": [
@@ -218,9 +218,9 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Full-width forest action, one per view.",
+      "description": "Full-width bee action, one per view.",
       "html": "<button class=\"ds-btn-primary\">Find my grocery plans <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
-      "css": ".ds-btn-primary { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; width:100%; height:52px; align-items:center; justify-content:center; gap:12px; padding:0 16px; border:none; border-radius:12px; background:var(--color-forest,#245c42); color:#fff; font-size:14px; cursor:pointer; } .ds-btn-primary:hover { background:var(--color-forest-dark,#1b4733); } .ds-btn-primary:focus-visible { outline:2px solid var(--color-forest,#245c42); outline-offset:2px; } .ds-btn-primary:disabled { opacity:.5; }"
+      "css": ".ds-btn-primary { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; width:100%; height:52px; align-items:center; justify-content:center; gap:12px; padding:0 16px; border:none; border-radius:12px; background:var(--color-bee,#5c2d0c); color:#fff; font-size:14px; cursor:pointer; } .ds-btn-primary:hover { background:var(--color-bee-dark,#3f1f07); } .ds-btn-primary:focus-visible { outline:2px solid var(--color-bee,#5c2d0c); outline-offset:2px; } .ds-btn-primary:disabled { opacity:.5; }"
     },
     {
       "name": "Secondary Button",
@@ -228,15 +228,15 @@
       "refersTo": "button-secondary",
       "description": "White outlined companion action.",
       "html": "<button class=\"ds-btn-secondary\">Explore this example list <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
-      "css": ".ds-btn-secondary { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; width:100%; height:52px; align-items:center; justify-content:center; gap:12px; padding:0 16px; border:1px solid var(--color-line,#dce1d7); border-radius:12px; background:#fff; color:var(--color-ink,#202e27); font-size:14px; cursor:pointer; } .ds-btn-secondary:hover { background:var(--color-canvas,#f6f5ef); } .ds-btn-secondary:focus-visible { outline:2px solid var(--color-forest,#245c42); outline-offset:2px; }"
+      "css": ".ds-btn-secondary { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; width:100%; height:52px; align-items:center; justify-content:center; gap:12px; padding:0 16px; border:1px solid var(--color-line,#eee2cc); border-radius:12px; background:#fff; color:var(--color-ink,#33200f); font-size:14px; cursor:pointer; } .ds-btn-secondary:hover { background:var(--color-canvas,#fffaf0); } .ds-btn-secondary:focus-visible { outline:2px solid var(--color-bee,#5c2d0c); outline-offset:2px; }"
     },
     {
       "name": "Search Field",
       "kind": "input",
       "refersTo": "search-field",
-      "description": "56px search with 2px forest border.",
+      "description": "56px search with 2px bee border.",
       "html": "<label class=\"ds-search\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input type=\"search\" placeholder=\"Search groceries\"></label>",
-      "css": ".ds-search { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; height:56px; align-items:center; gap:12px; padding:0 16px; border:2px solid var(--color-forest,#245c42); border-radius:12px; background:#fff; color:var(--color-muted,#626d64); } .ds-search input { flex:1; border:none; outline:none; background:transparent; font:inherit; font-size:16px; color:var(--color-ink,#202e27); } .ds-search input::placeholder { color:var(--color-muted,#626d64); } .ds-search:focus-within { outline:2px solid var(--color-forest,#245c42); outline-offset:2px; }"
+      "css": ".ds-search { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; height:56px; align-items:center; gap:12px; padding:0 16px; border:2px solid var(--color-bee,#5c2d0c); border-radius:12px; background:#fff; color:var(--color-muted,#75604d); } .ds-search input { flex:1; border:none; outline:none; background:transparent; font:inherit; font-size:16px; color:var(--color-ink,#33200f); } .ds-search input::placeholder { color:var(--color-muted,#75604d); } .ds-search:focus-within { outline:2px solid var(--color-bee,#5c2d0c); outline-offset:2px; }"
     },
     {
       "name": "Text Input",
@@ -244,63 +244,63 @@
       "refersTo": "input",
       "description": "Hairline field with small muted label.",
       "html": "<label class=\"ds-field\"><span>STORE</span><input value=\"Smith’s\"></label>",
-      "css": ".ds-field { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; flex-direction:column; gap:4px; } .ds-field span { font-size:11px; color:var(--color-muted,#626d64); } .ds-field input { font:inherit; font-size:14px; font-weight:600; padding:10px 12px; border:1px solid var(--color-line,#dce1d7); border-radius:10px; background:#fff; color:var(--color-ink,#202e27); } .ds-field input:focus-visible { outline:2px solid var(--color-forest,#245c42); outline-offset:2px; }"
+      "css": ".ds-field { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; flex-direction:column; gap:4px; } .ds-field span { font-size:11px; color:var(--color-muted,#75604d); } .ds-field input { font:inherit; font-size:14px; font-weight:600; padding:10px 12px; border:1px solid var(--color-line,#eee2cc); border-radius:10px; background:#fff; color:var(--color-ink,#33200f); } .ds-field input:focus-visible { outline:2px solid var(--color-bee,#5c2d0c); outline-offset:2px; }"
     },
     {
       "name": "Choice Row",
       "kind": "custom",
       "refersTo": "choice-row",
-      "description": "Radio row; selected is forest border on mint.",
+      "description": "Radio row; selected is bee border on honey-tint.",
       "html": "<div class=\"ds-choices\"><button class=\"ds-choice\" aria-checked=\"true\" role=\"radio\"><svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m9 12 2 2 4-4\"/></svg>Most savings</button><button class=\"ds-choice\" role=\"radio\" aria-checked=\"false\"><svg width=\"19\" height=\"19\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>Fewest stops</button></div>",
-      "css": ".ds-choices { display:flex; flex-direction:column; gap:12px; } .ds-choice { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; height:52px; align-items:center; gap:12px; padding:0 16px; border:1px solid var(--color-line,#dce1d7); border-radius:12px; background:#fff; color:var(--color-ink,#202e27); font-size:14px; font-weight:600; cursor:pointer; text-align:left; } .ds-choice svg { color:var(--color-muted,#626d64); } .ds-choice[aria-checked=true] { border-color:var(--color-forest,#245c42); background:var(--color-mint,#e7efe5); } .ds-choice[aria-checked=true] svg { color:var(--color-forest,#245c42); } .ds-choice:focus-visible { outline:2px solid var(--color-forest,#245c42); outline-offset:2px; }"
+      "css": ".ds-choices { display:flex; flex-direction:column; gap:12px; } .ds-choice { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; height:52px; align-items:center; gap:12px; padding:0 16px; border:1px solid var(--color-line,#eee2cc); border-radius:12px; background:#fff; color:var(--color-ink,#33200f); font-size:14px; font-weight:600; cursor:pointer; text-align:left; } .ds-choice svg { color:var(--color-muted,#75604d); } .ds-choice[aria-checked=true] { border-color:var(--color-bee,#5c2d0c); background:var(--color-honey-tint,#fff1cc); } .ds-choice[aria-checked=true] svg { color:var(--color-bee,#5c2d0c); } .ds-choice:focus-visible { outline:2px solid var(--color-bee,#5c2d0c); outline-offset:2px; }"
     },
     {
       "name": "Plan Card",
       "kind": "card",
       "refersTo": "card-selected",
-      "description": "Flat white card; chosen plan goes mint with 2px forest border.",
+      "description": "Flat white card; chosen plan goes honey-tint with 2px bee border.",
       "html": "<section class=\"ds-card ds-card-on\"><span class=\"ds-status\">YOUR GOAL</span><p class=\"ds-card-title\">Most savings</p><p class=\"ds-money\">$41.86</p><p class=\"ds-note\">Costco items arrive tomorrow.</p></section>",
-      "css": ".ds-card { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; flex-direction:column; gap:12px; padding:18px; border:1px solid var(--color-line,#dce1d7); border-radius:18px; background:#fff; color:var(--color-ink,#202e27); font-variant-numeric:tabular-nums; } .ds-card-on { border:2px solid var(--color-forest,#245c42); background:var(--color-mint,#e7efe5); } .ds-status { font-size:11px; letter-spacing:.6px; color:var(--color-forest,#245c42); } .ds-card-title { margin:0; font-size:15px; font-weight:600; } .ds-money { margin:0; font-size:34px; font-weight:700; line-height:1; letter-spacing:-1px; } .ds-note { margin:0; padding:8px 12px; border-radius:10px; background:var(--color-amber-tint,#f7efd9); font-size:12px; line-height:1.45; }"
+      "css": ".ds-card { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; flex-direction:column; gap:12px; padding:18px; border:1px solid var(--color-line,#eee2cc); border-radius:18px; background:#fff; color:var(--color-ink,#33200f); font-variant-numeric:tabular-nums; } .ds-card-on { border:2px solid var(--color-bee,#5c2d0c); background:var(--color-honey-tint,#fff1cc); } .ds-status { font-size:11px; letter-spacing:.6px; color:var(--color-bee,#5c2d0c); } .ds-card-title { margin:0; font-size:15px; font-weight:600; } .ds-money { margin:0; font-size:34px; font-weight:700; line-height:1; letter-spacing:-1px; } .ds-note { margin:0; padding:8px 12px; border-radius:10px; background:var(--color-amber-tint,#fde6d2); font-size:12px; line-height:1.45; }"
     },
     {
       "name": "Goal Chip",
       "kind": "chip",
       "refersTo": "chip",
-      "description": "Static mint label for goal names.",
+      "description": "Static honey-tint label for goal names.",
       "html": "<div class=\"ds-chips\"><span class=\"ds-chip\">Most savings</span><span class=\"ds-chip\">Fewest stops</span><span class=\"ds-chip\">Most time saved</span></div>",
-      "css": ".ds-chips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; } .ds-chip { font-family: var(--font-sans, Inter, system-ui, sans-serif); padding:8px 0; border-radius:8px; background:var(--color-mint,#e7efe5); color:var(--color-forest,#245c42); font-size:11px; font-weight:600; text-align:center; }"
+      "css": ".ds-chips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; } .ds-chip { font-family: var(--font-sans, Inter, system-ui, sans-serif); padding:8px 0; border-radius:8px; background:var(--color-honey-tint,#fff1cc); color:var(--color-bee,#5c2d0c); font-size:11px; font-weight:600; text-align:center; }"
     },
     {
       "name": "Bottom Tab Bar",
       "kind": "nav",
       "refersTo": "nav-tab-active",
-      "description": "Fixed white tab bar; active tab mint and forest bold.",
+      "description": "Fixed white tab bar; active tab honey-tint and bee bold.",
       "html": "<nav class=\"ds-tabs\"><a class=\"ds-tab\" aria-current=\"page\" href=\"#\"><svg width=\"21\" height=\"21\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m3 17 2 2 4-4\"/><path d=\"m3 7 2 2 4-4\"/><path d=\"M13 6h8\"/><path d=\"M13 12h8\"/><path d=\"M13 18h8\"/></svg>List</a><a class=\"ds-tab\" href=\"#\"><svg width=\"21\" height=\"21\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"6\" cy=\"19\" r=\"3\"/><path d=\"M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15\"/><circle cx=\"18\" cy=\"5\" r=\"3\"/></svg>Plans</a><a class=\"ds-tab\" href=\"#\"><svg width=\"21\" height=\"21\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M3 7V5a2 2 0 0 1 2-2h2\"/><path d=\"M17 3h2a2 2 0 0 1 2 2v2\"/><path d=\"M21 17v2a2 2 0 0 1-2 2h-2\"/><path d=\"M7 21H5a2 2 0 0 1-2-2v-2\"/><path d=\"M7 12h10\"/></svg>Scan</a><a class=\"ds-tab\" href=\"#\"><svg width=\"21\" height=\"21\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1\"/><path d=\"M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4\"/></svg>Wallet</a></nav>",
-      "css": ".ds-tabs { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; gap:8px; height:86px; padding:12px 16px 14px; border-top:1px solid var(--color-line,#dce1d7); background:#fff; box-sizing:border-box; } .ds-tab { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; border-radius:12px; font-size:11px; font-weight:500; color:var(--color-muted,#626d64); text-decoration:none; } .ds-tab:hover { background:var(--color-canvas,#f6f5ef); } .ds-tab[aria-current=page] { background:var(--color-mint,#e7efe5); color:var(--color-forest,#245c42); font-weight:700; } .ds-tab:focus-visible { outline:2px solid var(--color-forest,#245c42); outline-offset:2px; }"
+      "css": ".ds-tabs { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; gap:8px; height:86px; padding:12px 16px 14px; border-top:1px solid var(--color-line,#eee2cc); background:#fff; box-sizing:border-box; } .ds-tab { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; border-radius:12px; font-size:11px; font-weight:500; color:var(--color-muted,#75604d); text-decoration:none; } .ds-tab:hover { background:var(--color-canvas,#fffaf0); } .ds-tab[aria-current=page] { background:var(--color-honey-tint,#fff1cc); color:var(--color-bee,#5c2d0c); font-weight:700; } .ds-tab:focus-visible { outline:2px solid var(--color-bee,#5c2d0c); outline-offset:2px; }"
     },
     {
       "name": "Toggle",
       "kind": "custom",
       "refersTo": "toggle",
-      "description": "46x26 switch, forest when on.",
+      "description": "46x26 switch, bee when on.",
       "html": "<button class=\"ds-toggle\" role=\"switch\" aria-checked=\"true\"><span class=\"ds-toggle-text\"><span>Bulk OK</span><small>Bigger packs if cheaper</small></span><span class=\"ds-track\"><span class=\"ds-knob\"></span></span></button>",
-      "css": ".ds-toggle { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; width:100%; align-items:center; justify-content:space-between; gap:12px; border:none; background:none; padding:0; text-align:left; color:var(--color-ink,#202e27); cursor:pointer; } .ds-toggle-text { display:flex; flex-direction:column; line-height:1.45; } .ds-toggle-text span { font-size:13px; font-weight:600; } .ds-toggle-text small { font-size:11px; color:var(--color-muted,#626d64); } .ds-track { position:relative; width:46px; height:26px; flex-shrink:0; border-radius:9999px; background:var(--color-line,#dce1d7); transition:background-color .15s; } .ds-knob { position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:9999px; background:#fff; transition:left .15s; } .ds-toggle[aria-checked=true] .ds-track { background:var(--color-forest,#245c42); } .ds-toggle[aria-checked=true] .ds-knob { left:23px; } .ds-toggle:focus-visible { outline:2px solid var(--color-forest,#245c42); outline-offset:2px; }"
+      "css": ".ds-toggle { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; width:100%; align-items:center; justify-content:space-between; gap:12px; border:none; background:none; padding:0; text-align:left; color:var(--color-ink,#33200f); cursor:pointer; } .ds-toggle-text { display:flex; flex-direction:column; line-height:1.45; } .ds-toggle-text span { font-size:13px; font-weight:600; } .ds-toggle-text small { font-size:11px; color:var(--color-muted,#75604d); } .ds-track { position:relative; width:46px; height:26px; flex-shrink:0; border-radius:9999px; background:var(--color-line,#eee2cc); transition:background-color .15s; } .ds-knob { position:absolute; top:3px; left:3px; width:20px; height:20px; border-radius:9999px; background:#fff; transition:left .15s; } .ds-toggle[aria-checked=true] .ds-track { background:var(--color-bee,#5c2d0c); } .ds-toggle[aria-checked=true] .ds-knob { left:23px; } .ds-toggle:focus-visible { outline:2px solid var(--color-bee,#5c2d0c); outline-offset:2px; }"
     },
     {
       "name": "Feature Panel",
       "kind": "card",
       "refersTo": "feature-panel",
-      "description": "Solid forest verdict panel, one per screen at most.",
+      "description": "Solid bee verdict panel, one per screen at most.",
       "html": "<div class=\"ds-panel\"><span class=\"ds-panel-label\">IS COSTCO WORTH IT?</span><p class=\"ds-panel-big\">It takes 4 trips like this to cover the fee.</p><p class=\"ds-panel-small\">$65.00 annual fee ÷ $17.20 saved on this cart = 3.8, rounded up to 4.</p></div>",
-      "css": ".ds-panel { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; flex-direction:column; gap:12px; padding:22px; border-radius:18px; background:var(--color-forest,#245c42); color:#fff; font-variant-numeric:tabular-nums; } .ds-panel-label { font-size:11px; letter-spacing:.8px; opacity:.9; } .ds-panel-big { margin:0; font-size:24px; line-height:1.2; } .ds-panel-small { margin:0; font-size:12px; line-height:1.5; opacity:.9; }"
+      "css": ".ds-panel { font-family: var(--font-sans, Inter, system-ui, sans-serif); display:flex; flex-direction:column; gap:12px; padding:22px; border-radius:18px; background:var(--color-bee,#5c2d0c); color:#fff; font-variant-numeric:tabular-nums; } .ds-panel-label { font-size:11px; letter-spacing:.8px; opacity:.9; } .ds-panel-big { margin:0; font-size:24px; line-height:1.2; } .ds-panel-small { margin:0; font-size:12px; line-height:1.5; opacity:.9; }"
     }
   ],
   "narrative": {
     "northStar": "The Kitchen Counter Notebook",
-    "overview": "UtahCart reads like a well-kept grocery list on a sunlit counter: a warm off-white paper canvas, white cards laid flat on it with hairline edges, one forest green that does all the deciding, and real photographs of food. The world was set by the team's Figma file and rebuilt from it; the build is the record. It is a single phone column, calm and dense with useful numbers, never decorated for its own sake.\n\nHierarchy comes from size and weight in one family (Inter), not from color or ornament. Green means \"act\" or \"chosen\"; mint means \"selected\" or \"highlighted\"; brick means \"costs you\" or \"went wrong\"; amber means \"caveat\". Everything else is ink, muted gray-green, white and canvas.",
+    "overview": "BeeLow reads like a well-kept grocery list on a sunlit counter: a warm off-white paper canvas, white cards laid flat on it with hairline edges, one logo brown that does all the deciding, and real photographs of food. The world was set by the team's Figma file and rebuilt from it; the build is the record. It is a single phone column, calm and dense with useful numbers, never decorated for its own sake.\n\nHierarchy comes from size and weight in one family (Inter), not from color or ornament. Green means \"act\" or \"chosen\"; honey-tint means \"selected\" or \"highlighted\"; carrot means \"costs you\" or \"went wrong\"; amber means \"caveat\". Everything else is ink, muted gray-green, white and canvas.",
     "keyCharacteristics": [
       "Warm paper canvas with flat white cards and 1px pale-sage hairlines; no shadows anywhere.",
-      "One forest green for primary action and selection, softened to mint for selected fills.",
+      "One logo brown for primary action and selection, softened to honey-tint for selected fills.",
       "Inter throughout, tight negative tracking on large headings, tabular figures everywhere.",
       "Generous 18px card radius, 12px control radius, 52px-tall touch targets.",
       "Real food photography and product shots, cropped into rounded frames.",
@@ -308,18 +308,18 @@
     ],
     "rules": [
       {
-        "name": "The Selected-Is-Mint Rule",
-        "body": "A chosen option is shown by a forest border plus a mint fill (2px border on cards, 1px on rows), never by a shadow, a lift, or a different hue.",
+        "name": "The Selected-Is-Honey tint Rule",
+        "body": "A chosen option is shown by a bee border plus a honey-tint fill (2px border on cards, 1px on rows), never by a shadow, a lift, or a different hue.",
         "section": "colors"
       },
       {
-        "name": "The Brick Means Cost Rule",
-        "body": "Brick appears only where the user loses money, loses an item, or hits an error (the header location dot is the one brand use). It is never a decorative accent.",
+        "name": "The Carrot Means Cost Rule",
+        "body": "Carrot appears only where the user loses money, loses an item, or hits an error (the header location dot is the one brand use). It is never a decorative accent.",
         "section": "colors"
       },
       {
         "name": "The Amber Caveat Rule",
-        "body": "Warnings and limits sit in amber-tint notes with ink text; they are never set in brick or in alert red.",
+        "body": "Warnings and limits sit in amber-tint notes with ink text; they are never set in carrot or in alert red.",
         "section": "colors"
       },
       {
@@ -339,13 +339,13 @@
       },
       {
         "name": "The Flat Paper Rule",
-        "body": "Surfaces sit flat on the canvas. Emphasis comes from fill (white, mint, forest) and border weight, never from shadow or lift.",
+        "body": "Surfaces sit flat on the canvas. Emphasis comes from fill (white, honey-tint, bee) and border weight, never from shadow or lift.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "Do use forest for exactly one primary action per view and for selection borders.",
-      "Do mark selection with a forest border plus mint fill (The Selected-Is-Mint Rule).",
+      "Do use bee for exactly one primary action per view and for selection borders.",
+      "Do mark selection with a bee border plus honey-tint fill (The Selected-Is-Honey tint Rule).",
       "Do keep every surface flat: white on canvas with 1px hairlines (The Flat Paper Rule).",
       "Do set money in the 34px bold display style and keep tabular figures on.",
       "Do keep buttons and choice rows at 52px tall with 12px radius.",
@@ -354,8 +354,8 @@
     ],
     "donts": [
       "Don't add box-shadows, blurs or gradients.",
-      "Don't use brick for decoration; it means cost, removal or error.",
-      "Don't set muted text on mint; it falls below 4.5:1 there. Use ink on mint.",
+      "Don't use carrot for decoration; it means cost, removal or error.",
+      "Don't set muted text on honey-tint; it falls below 4.5:1 there. Use ink on honey-tint.",
       "Don't introduce a second typeface or a non-Inter display face.",
       "Don't put uppercase tracked kicker lines above page or section headings.",
       "Don't use typed characters as control icons; use Lucide icons."

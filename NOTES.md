@@ -67,3 +67,9 @@ Decisions and assumptions made while building. Newest at the bottom.
 - **Time limit:** the Figma asks for "Leave at" + "Time limit"; the app stores home-by = leave + limit.
 - **Photos** (kitchen, basket, pantry, receipt, and 7 product photos) are exported from the Figma file; the other 41 products keep the generated illustrations, so product pictures are mixed until the team adds photos.
 - **Icons** are `lucide-react`, the same icon set the Figma uses.
+
+## BeeLow rebrand
+
+- **Name is now BeeLow** (was UtahCart) in every screen, the page title, the AI prompts, README and PRODUCT.md. Code identifiers, the repo name and `localStorage` keys (`utahcart:*`) stay, so saved carts keep working. `CLAUDE.md` (the build spec) still says UtahCart.
+- **Logo** `public/beelow-logo.png` (600px PNG with transparency, from the team's `beelow_logo.png`) replaces the basket mark and wordmark in the header.
+- **Palette sampled from the logo:** bee brown `#5c2d0c` (primary, selection, focus), honey `#fbb424` (highlights only, never text on light), honey tint `#fff1cc` (selected fills), carrot `#b5410f` (costs, errors), leaf `#4f7a14` (savings), cream canvas `#fffaf0`, brown-black ink `#33200f`, muted `#75604d` (5.3:1 on honey tint).

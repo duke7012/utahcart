@@ -5,11 +5,11 @@ import "./globals.css";
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "UtahCart",
+  title: "BeeLow",
   description: "Your groceries, fitted to your day: store stops, online orders, or a little of both.",
 };
 
-export const viewport: Viewport = { themeColor: "#f6f5ef" };
+export const viewport: Viewport = { themeColor: "#fffaf0" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

@@ -36,7 +36,7 @@ const SCHEMA = {
   additionalProperties: false,
 };
 
-const SYSTEM = `You turn one sentence about a grocery run in Salt Lake City into a shopping cart and trip for UtahCart.
+const SYSTEM = `You turn one sentence about a grocery run in Salt Lake City into a shopping cart and trip for BeeLow.
 Catalog (choose itemId only from here; qty counts packs of the listed size):
 ${catalog.items.map((i) => `- ${i.id}: ${i.name}, ${i.typicalSize} ${i.unit}`).join("\n")}
 Places: campus = the University of Utah ("the U"), home = the user's home.
@@ -53,7 +53,7 @@ const fail = (status: number, error: string) => Response.json({ error }, { statu
 export async function POST(req: Request) {
   const body = (await req.json().catch(() => null)) as { sentence?: unknown } | null;
   const sentence = typeof body?.sentence === "string" ? body.sentence.trim().slice(0, 500) : "";
-  if (!sentence) return fail(400, "Tell UtahCart what you need, like the example.");
+  if (!sentence) return fail(400, "Tell BeeLow what you need, like the example.");
 
   // The demo never depends on the network; without a key every sentence gets the saved demo result.
   if (isDemoSentence(sentence)) return Response.json({ ...DEMO_RESULT, example: true });
@@ -69,7 +69,7 @@ export async function POST(req: Request) {
       output_config: { effort: "low", format: { type: "json_schema", schema: SCHEMA } },
       messages: [{ role: "user", content: sentence }],
     });
-    if (res.stop_reason === "refusal") return fail(422, "UtahCart can't plan that one. Try describing a grocery run.");
+    if (res.stop_reason === "refusal") return fail(422, "BeeLow can't plan that one. Try describing a grocery run.");
     const text = res.content.flatMap((b) => (b.type === "text" ? [b.text] : [])).join("");
     const parsed = parseAsk(text, ids, placeIds);
     if (!parsed) return fail(422, "Couldn't find groceries in that. Try naming a few items or a meal.");
