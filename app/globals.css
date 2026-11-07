@@ -1,67 +1,43 @@
 @import "tailwindcss";
 
-/* Red Rock Strata: one fixed sandstone ramp over a sky-pale ground. These are the only colour tokens. */
+/* UtahCart design (from the team's Figma file): warm canvas, forest green, Inter. */
 @theme {
-  --color-sky: #e7eef2;
-  --color-sky-deep: #d3dee5;
-  --color-varnish: #2a1a14;
-  --color-varnish-soft: #5a4238;
-  --color-wingate: #b8462a;
-  --color-navajo: #e08b5b;
-  --color-tan: #f0c9a0;
-  --color-sage: #5e6e54;
-  --font-sans: var(--font-barlow), system-ui, sans-serif;
-  /* Strict size ladder: four steps carry all hierarchy. */
-  --text-small: 13px;
-  --text-small--line-height: 1.4;
-  --text-body: 15px;
-  --text-body--line-height: 1.45;
-  --text-head: 18px;
-  --text-head--line-height: 1.25;
-  --text-total: 44px;
-  --text-total--line-height: 1;
+  --color-canvas: #f6f5ef;
+  --color-ink: #202e27;
+  --color-muted: #68736a;
+  --color-forest: #245c42;
+  --color-forest-dark: #1b4733;
+  --color-mint: #e7efe5;
+  --color-line: #dce1d7;
+  --color-brick: #af493b;
+  --color-amber-tint: #f7efd9;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
 html {
   color-scheme: light;
-  background: var(--color-sky);
-  color: var(--color-varnish);
-  accent-color: var(--color-wingate);
-  caret-color: var(--color-wingate);
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  accent-color: var(--color-forest);
+  caret-color: var(--color-forest);
 }
 
 body {
-  background: var(--color-sky);
+  background: var(--color-canvas);
   font-variant-numeric: tabular-nums;
   -webkit-tap-highlight-color: transparent;
 }
 
 ::selection {
-  background: var(--color-tan);
-  color: var(--color-varnish);
+  background: var(--color-mint);
+  color: var(--color-ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-wingate);
+  outline: 2px solid var(--color-forest);
   outline-offset: 2px;
 }
 
 a {
   text-underline-offset: 3px;
-}
-
-/* Signature motion: strata settle upward from the base, once, when a plan appears. */
-@keyframes settle {
-  from {
-    transform: scaleY(0.82);
-  }
-}
-.stratum {
-  transform-origin: bottom;
-  animation: settle 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-@media (prefers-reduced-motion: reduce) {
-  .stratum {
-    animation: none;
-  }
 }

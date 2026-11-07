@@ -1,0 +1,229 @@
+"use client";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { ArrowRight, ArrowUpRight, Car, ChevronDown, CircleCheck, Circle, Footprints, MapPin, Sparkles, Trash2 } from "lucide-react";
+import { DEMO_SENTENCE, type AskResult } from "@/lib/ask";
+import { itemById, places } from "@/lib/catalog";
+import { addMinutes, ampm, minutesBetween, type Saved } from "@/lib/session";
+import type { Place } from "@/lib/types";
+import { GOALS, ProductImage, Qty, Screen, Intro, SectionHead, Toggle, card, fine, primaryBtn, useCart } from "../ui";
+
+const HERE = "here";
+const LIMITS = [30, 45, 60, 75, 90, 105, 120, 150, 180];
+const field = "w-full rounded-[10px] bg-canvas p-3 text-left";
+
+export default function ListPage() {
+  const cart = useCart();
+  const { s, update, setItem } = cart;
+  const [open, setOpen] = useState<string | null>(null);
+  const [geoError, setGeoError] = useState("");
+  const count = s.list.length;
+  const limit = minutesBetween(s.trip.leave, s.trip.homeBy) ?? 90;
+  const roundTrip = s.trip.from.lat === s.trip.to.lat && s.trip.from.lng === s.trip.to.lng;
+  const [differentEnd, setDifferentEnd] = useState<boolean | null>(null);
+  const showEnd = differentEnd ?? !roundTrip;
+
+  const placeId = (p: Place) => places.find((x) => x.lat === p.lat && x.lng === p.lng)?.id ?? HERE;
+  const setPlace = (key: "from" | "to", id: string) => {
+    const apply = (p: Place) => update({ ...s, trip: { ...s.trip, [key]: p, ...(key === "from" && !showEnd ? { to: p } : {}) } });
+    if (id !== HERE) return apply(places.find((p) => p.id === id)!);
+    setGeoError("");
+    navigator.geolocation?.getCurrentPosition(
+      ({ coords }) => apply({ lat: coords.latitude, lng: coords.longitude, label: "Current location" }),
+      () => setGeoError("Location is off. Pick a preset or allow location in your browser."),
+    );
+  };
+
+  return (
+    <Screen>
+      <Intro eyebrow="YOUR NEXT GROCERY RUN" title="A week of staples." sub={`${count} items. Built around your day.`} />
+
+      <AskCard current={s} onPlanned={update} />
+
+      <section className="flex flex-col gap-[14px]">
+        <SectionHead title="Your list" right={<Link href="/add" className="text-[12px] font-semibold text-forest no-underline">+ Add item</Link>} />
+        {count === 0 ? (
+          <div className={`${card} p-[18px] text-[14px]`}>
+            Your list is empty. <Link href="/add" className="font-semibold text-forest">Add items</Link> to start.
+          </div>
+        ) : (
+          <ul className={`${card} px-4`}>
+            {s.list.map((e, i) => {
+              const item = itemById(e.itemId);
+              if (!item) return null;
+              const expanded = open === e.itemId;
+              return (
+                <li key={e.itemId} className={i ? "border-t border-line" : ""}>
+                  <div className="flex items-center gap-[10px] py-3">
+                    <button type="button" onClick={() => setOpen(expanded ? null : e.itemId)} aria-expanded={expanded}
+                      className="flex min-w-0 flex-1 items-center gap-[10px] text-left">
+                      <ProductImage id={item.id} name={item.name} className="size-[60px] shrink-0 rounded-[10px]" />
+                      <span className="flex min-w-0 flex-col gap-[3px] leading-[1.45]">
+                        <span className="truncate text-[14px]">{item.name}</span>
+                        <span className="text-[11px] text-muted">Any brand</span>
+                        {e.bulkOk && <span className="text-[10px] font-semibold text-forest">✓ Bulk OK</span>}
+                      </span>
+                    </button>
+                    <Qty item={item} qty={e.qty} onChange={(n) => setItem(e.itemId, n)} />
+                  </div>
+                  {expanded && (
+                    <div className="mb-3 flex items-center justify-between gap-3 rounded-[12px] bg-canvas px-3 py-2.5">
+                      <Toggle label="Bulk OK" hint="Allow a larger pack for this item." on={e.bulkOk} onChange={(b) => setItem(e.itemId, e.qty, b)} />
+                      <button type="button" onClick={() => setItem(e.itemId, 0)} className="flex items-center gap-1 text-[12px] font-semibold text-brick">
+                        <Trash2 size={14} aria-hidden /> Remove
+                      </button>
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+        <p className={fine}>Tap an item for Bulk OK. We won’t suggest a larger pack unless you allow it.</p>
+      </section>
+
+      <section className="flex flex-col gap-[14px]">
+        <SectionHead title="Fit it into your day" />
+        <div className={`${card} flex flex-col gap-[14px] p-[18px]`}>
+          <div className="flex flex-col gap-1 leading-[1.45]">
+            <p className="text-[11px] text-muted">{showEnd ? "ONE WAY · DIFFERENT END" : "ROUND TRIP · RETURN TO START"}</p>
+            <p className="text-[14px]">{showEnd ? "Start in one place, end in another." : "Start and end at the same location."}</p>
+          </div>
+          <PlacePicker icon label={showEnd ? "START" : "START & END"} value={placeId(s.trip.from)} onChange={(id) => setPlace("from", id)} />
+          <button type="button" onClick={() => setPlace("from", HERE)} className="self-start text-[12px] font-semibold text-forest">
+            Use my browser location instead
+          </button>
+          {geoError && <p role="alert" className="text-[12px] text-brick">{geoError}</p>}
+          <div className="h-px bg-line" />
+          {showEnd ? (
+            <PlacePicker label="END" value={placeId(s.trip.to)} onChange={(id) => setPlace("to", id)} />
+          ) : (
+            <button type="button" onClick={() => setDifferentEnd(true)} className="flex h-[52px] items-center gap-3 rounded-[12px] bg-canvas px-4 text-[14px] font-semibold">
+              <ArrowRight size={16} aria-hidden /> Different end location
+            </button>
+          )}
+          <div className="flex gap-3 leading-[1.45]">
+            <label className={field}>
+              <span className="block text-[10px] text-muted">LEAVE AT</span>
+              <input type="time" value={s.trip.leave} aria-label="Leave at"
+                onChange={(e) => update({ ...s, trip: { ...s.trip, leave: e.target.value, homeBy: addMinutes(e.target.value, limit) } })}
+                className="w-full bg-transparent text-[14px]" />
+            </label>
+            <label className={field}>
+              <span className="block text-[10px] text-muted">TIME LIMIT</span>
+              <select value={limit} aria-label="Time limit" onChange={(e) => update({ ...s, trip: { ...s.trip, homeBy: addMinutes(s.trip.leave, Number(e.target.value)) } })}
+                className="w-full bg-transparent text-[14px]">
+                {[...new Set([...LIMITS, limit])].sort((a, b) => a - b).map((m) => <option key={m} value={m}>{m} min</option>)}
+              </select>
+            </label>
+          </div>
+          <div role="radiogroup" aria-label="Getting around" className="flex gap-2">
+            {([["car", "Car", Car], ["no_car", "No car", Footprints]] as const).map(([id, label, Icon]) => {
+              const on = s.trip.mode === id;
+              return (
+                <button key={id} type="button" role="radio" aria-checked={on} onClick={() => update({ ...s, trip: { ...s.trip, mode: id } })}
+                  className={`flex h-11 flex-1 items-center justify-center gap-2 rounded-[10px] text-[13px] font-semibold ${on ? "bg-forest text-white" : "bg-canvas text-muted"}`}>
+                  <Icon size={17} aria-hidden /> {label}
+                </button>
+              );
+            })}
+          </div>
+          <p className={fine}>Home by {ampm(s.trip.homeBy)}.</p>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <SectionHead title="What matters most?" />
+        <div role="radiogroup" aria-label="Goal" className="flex flex-col gap-3">
+          {GOALS.map((g) => {
+            const on = s.goal === g.id;
+            return (
+              <button key={g.id} type="button" role="radio" aria-checked={on} onClick={() => update({ ...s, goal: g.id })}
+                className={`flex h-[52px] items-center gap-3 rounded-[12px] border px-4 text-[14px] font-semibold ${on ? "border-forest bg-mint" : "border-line bg-white"}`}>
+                {on ? <CircleCheck size={19} className="text-forest" aria-hidden /> : <Circle size={19} className="text-muted" aria-hidden />}
+                {g.label}
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <div className="flex flex-col gap-3">
+        <Link href="/plan" aria-disabled={!count} className={`${primaryBtn} ${count ? "" : "pointer-events-none opacity-50"}`}>
+          Find my grocery plans <ArrowRight size={18} aria-hidden />
+        </Link>
+        <p className={fine}>Demo prices · Nov 2026. No account needed. Your list and preferences stay on this device.</p>
+      </div>
+    </Screen>
+  );
+}
+
+function PlacePicker({ label, value, onChange, icon }: { label: string; value: string; onChange: (id: string) => void; icon?: boolean }) {
+  return (
+    <label className="relative flex items-center gap-3">
+      {icon ? <MapPin size={20} className="shrink-0" aria-hidden /> : <ArrowRight size={20} className="shrink-0" aria-hidden />}
+      <span className="flex min-w-0 flex-1 flex-col gap-0.5 leading-[1.45]">
+        <span className="text-[11px] text-muted">{label} · PRESET</span>
+        <select value={value} onChange={(e) => onChange(e.target.value)} className="appearance-none bg-transparent pr-6 text-[14px]">
+          {places.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+          <option value={HERE}>Current location</option>
+        </select>
+      </span>
+      <ChevronDown size={16} className="pointer-events-none absolute right-0" aria-hidden />
+    </label>
+  );
+}
+
+/** "Set up with AI · optional": one sentence fills the list and trip, then shows the plans. */
+function AskCard({ current, onPlanned }: { current: Saved; onPlanned: (s: Saved) => void }) {
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [sentence, setSentence] = useState(DEMO_SENTENCE);
+  const [state, setState] = useState<{ busy: boolean; error?: string }>({ busy: false });
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setState({ busy: true });
+    try {
+      const r = await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ sentence }) });
+      const j = (await r.json()) as AskResult & { error?: string };
+      if (!r.ok) return setState({ busy: false, error: j.error ?? "Couldn't plan that. Try again." });
+      const place = (id: string, fallback: Place) => places.find((p) => p.id === id) ?? fallback;
+      onPlanned({
+        list: j.list, goal: j.goal,
+        trip: { from: place(j.from, current.trip.from), to: place(j.to, current.trip.to), mode: j.mode,
+          leave: j.leave || current.trip.leave, homeBy: j.homeBy || current.trip.homeBy },
+      });
+      router.push("/plan");
+    } catch {
+      setState({ busy: false, error: "Couldn't reach the planner. Check your connection and try again." });
+    }
+  };
+
+  if (!open) {
+    return (
+      <button type="button" onClick={() => setOpen(true)} className="flex items-center gap-3 rounded-[12px] bg-mint p-[14px] text-left">
+        <Sparkles size={20} className="shrink-0 text-forest" aria-hidden />
+        <span className="flex flex-1 flex-col gap-1 text-[12px] leading-[1.45]">
+          <span>Set up with AI · optional</span>
+          <span>“{DEMO_SENTENCE.replace(/\.$/, "")}.”</span>
+        </span>
+        <ArrowUpRight size={16} className="shrink-0" aria-hidden />
+      </button>
+    );
+  }
+  return (
+    <form onSubmit={submit} className="flex flex-col gap-3 rounded-[12px] bg-mint p-[14px]">
+      <label htmlFor="ask" className="flex items-center gap-2 text-[12px]"><Sparkles size={18} className="text-forest" aria-hidden /> Set up with AI · optional</label>
+      <textarea id="ask" rows={3} value={sentence} onChange={(e) => setSentence(e.target.value)}
+        className="w-full resize-none rounded-[10px] border border-line bg-white px-3 py-2 text-[14px] leading-[1.45]" />
+      {state.error && <p role="alert" className="text-[12px] font-semibold text-brick">{state.error}</p>}
+      <button type="submit" disabled={state.busy || !sentence.trim()} className={primaryBtn}>
+        {state.busy ? "Planning…" : <>Fill my list and plan <ArrowRight size={18} aria-hidden /></>}
+      </button>
+      <p className={fine}>Replaces your list and trip with what the sentence describes.</p>
+    </form>
+  );
+}

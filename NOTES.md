@@ -57,3 +57,13 @@ Decisions and assumptions made while building. Newest at the bottom.
 - **Sentence planner** (`/api/ask`, `lib/ask.ts` tested): one sentence → cart, goal, car/no car, leave/home-by times, from/to presets, via `claude-opus-5-5` structured output with `fallbacks: "default"`. The demo sentence always returns the saved demo cart without calling the API, and with no key (or an API error) every sentence returns the demo cart. The model may only pick catalog item ids; quantities are 1-20; bad goals/modes/times fall back to defaults.
 - "Plan it" on the shop fills the cart and trip and goes straight to `/plan`; "Edit cart" there shows what it picked.
 - **Not verified yet:** a real Claude call for `/api/ask` (no API key on the dev machine).
+
+## Figma redesign
+
+- **UI rebuilt from the team's Figma file** (`KhLGKIfX5VptkGQABSubdk`): warm canvas `#f6f5ef`, forest green `#245c42`, mint `#e7efe5`, Inter, 18px cards, 12px buttons, a bottom tab bar (List / Plans / Scan / Wallet). Replaces the Red Rock Strata look, including the strata column.
+- **Routes now follow the Figma screens:** `/` first-visit homepage, `/list` list and trip setup (was `/cart`, which redirects), `/add` add items with browse and search (was the shop grid at `/`), `/plan` three plans, `/plan/details?goal=` plan details with leg-by-leg directions and per-store checklists, `/scan` upload → review → saved, `/wallet`.
+- **Not built from the Figma:** Log in, Create account, Trip history and Saved trip detail. The spec says no login or account linking; history could come back later stored on the device.
+- **Figma copy changed where it would claim something untrue:** no "brand locked" (not modeled), no tip line (the planner has no tips), Instacart instead of "Walmart online" (Walmart has no delivery option in the data), and real plan numbers instead of the Figma's sample figures.
+- **Time limit:** the Figma asks for "Leave at" + "Time limit"; the app stores home-by = leave + limit.
+- **Photos** (kitchen, basket, pantry, receipt, and 7 product photos) are exported from the Figma file; the other 41 products keep the generated illustrations, so product pictures are mixed until the team adds photos.
+- **Icons** are `lucide-react`, the same icon set the Figma uses.

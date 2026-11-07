@@ -1,71 +1,105 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ListChecks, Route, ScanLine, ShoppingBasket, Wallet, type LucideIcon } from "lucide-react";
 import { DEMO, load, save, type Saved } from "@/lib/session";
-import type { Goal } from "@/lib/types";
+import type { Goal, Item } from "@/lib/types";
 
 export const GOALS: { id: Goal; label: string }[] = [
   { id: "savings", label: "Most savings" },
   { id: "fewest_stops", label: "Fewest stops" },
-  { id: "time", label: "Most time" },
+  { id: "time", label: "Most time saved" },
 ];
 
-/** Sticky top bar; `children` (e.g. the shop's search) stick with it on a sky band. */
-export function TopBar({ right, children, width = "max-w-xl" }: { right?: React.ReactNode; children?: React.ReactNode; width?: string }) {
+export const UNIT_LABEL: Record<string, string> = { oz: "oz", fl_oz: "fl oz", lb: "lb", count: "ct" };
+export const money = (n: number) => `$${n.toFixed(2)}`;
+export const packLabel = (item: Item, qty: number) => `${qty} × ${item.typicalSize} ${UNIT_LABEL[item.unit]}`;
+
+/** Brand row: basket mark + wordmark, and the Salt Lake City tag. */
+export function AppHeader() {
   return (
-    <header className="sticky top-0 z-10 bg-varnish text-tan">
-      <div className={`mx-auto flex ${width} items-center justify-between px-4 py-3`}>
-        <Link href="/" className="text-head font-bold tracking-tight text-white no-underline">
-          UtahCart
-        </Link>
-        <div className="text-small">{right}</div>
-      </div>
-      {children && <div className="border-b border-varnish/25 bg-sky text-varnish">{children}</div>}
+    <header className="mx-auto flex h-[78px] w-full max-w-[480px] items-center justify-between px-6">
+      <Link href="/" className="flex items-center gap-[9px] no-underline">
+        <span className="grid h-[34px] w-8 place-items-center rounded-[10px] bg-forest text-white">
+          <ShoppingBasket size={21} strokeWidth={1.75} aria-hidden />
+        </span>
+        <span className="text-[22px] tracking-[-0.8px] text-ink">UtahCart</span>
+      </Link>
+      <span className="flex items-center gap-[5px] text-[11px] text-muted">
+        <span className="size-[5px] rounded-[2px] bg-brick" aria-hidden />
+        SALT LAKE CITY
+      </span>
     </header>
   );
 }
 
-/** Segmented control; the active segment is Wingate red. */
-export function Segments<T extends string>({
-  options, value, onChange, label,
-}: { options: { id: T; label: string }[]; value: T; onChange: (v: T) => void; label: string }) {
+const TABS: { href: string; label: string; icon: LucideIcon; match: string[] }[] = [
+  { href: "/list", label: "List", icon: ListChecks, match: ["/list", "/add"] },
+  { href: "/plan", label: "Plans", icon: Route, match: ["/plan"] },
+  { href: "/scan", label: "Scan", icon: ScanLine, match: ["/scan"] },
+  { href: "/wallet", label: "Wallet", icon: Wallet, match: ["/wallet"] },
+];
+
+export function BottomNav() {
+  const path = usePathname();
   return (
-    <div role="radiogroup" aria-label={label} className="flex overflow-hidden rounded-lg border border-varnish">
-      {options.map((o) => (
-        <button
-          key={o.id}
-          type="button"
-          role="radio"
-          aria-checked={value === o.id}
-          onClick={() => onChange(o.id)}
-          className={`flex-1 border-l border-varnish py-2.5 text-body font-semibold first:border-l-0 ${
-            value === o.id ? "bg-wingate text-white" : "bg-transparent text-varnish hover:bg-sky-deep"
-          }`}
-        >
-          {o.label}
-        </button>
-      ))}
+    <nav aria-label="UtahCart" className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white">
+      <div className="mx-auto flex h-[86px] max-w-[480px] gap-2 px-4 pb-[14px] pt-3">
+        {TABS.map((t) => {
+          const on = t.match.some((m) => path.startsWith(m));
+          return (
+            <Link key={t.href} href={t.href} aria-current={on ? "page" : undefined}
+              className={`flex flex-1 flex-col items-center justify-center gap-[5px] rounded-[12px] text-[11px] no-underline ${
+                on ? "bg-mint font-bold text-forest" : "font-medium text-muted hover:bg-canvas"
+              }`}>
+              <t.icon size={21} strokeWidth={1.75} aria-hidden />
+              {t.label}
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
+/** Page frame: header, a 24px-gutter column, room for the tab bar. */
+export function Screen({ children, nav = true }: { children: React.ReactNode; nav?: boolean }) {
+  return (
+    <>
+      <AppHeader />
+      <main className={`mx-auto flex w-full max-w-[480px] flex-col gap-6 px-6 pt-3 ${nav ? "pb-[118px]" : "pb-10"}`}>{children}</main>
+      {nav && <BottomNav />}
+    </>
+  );
+}
+
+export function Intro({ eyebrow, title, sub }: { eyebrow?: string; title: React.ReactNode; sub?: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-[9px]">
+      {eyebrow && <p className="text-[11px] font-bold tracking-[1.2px] text-forest">{eyebrow}</p>}
+      <h1 className="text-[32px] font-bold leading-[1.12] tracking-[-1.1px] text-ink">{title}</h1>
+      {sub && <p className="text-[14px] leading-[1.45] text-muted">{sub}</p>}
     </div>
   );
 }
 
-export function Icon({ d, className = "size-5" }: { d: string; className?: string }) {
+export function SectionHead({ title, right }: { title: string; right?: React.ReactNode }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className={className} aria-hidden>
-      <path d={d} />
-    </svg>
+    <div className="flex items-center justify-between">
+      <h2 className="text-[18px] text-ink">{title}</h2>
+      {right}
+    </div>
   );
 }
-export const PLUS = "M12 5v14M5 12h14";
-export const MINUS = "M5 12h14";
-export const ARROW = "M5 12h14M13 6l6 6-6 6";
-export const CHEVRON = "M6 9l6 6 6-6";
-export const SEARCH = "M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-4-4";
-export const CART = "M3 4h2l2.4 11h11.2L21 7H6.3M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM18 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z";
 
-export const UNIT_LABEL: Record<string, string> = { oz: "oz", fl_oz: "fl oz", lb: "lb", count: "ct" };
-export const money = (n: number) => `$${n.toFixed(2)}`;
+export const card = "rounded-[18px] border border-line bg-white";
+export const primaryBtn =
+  "flex h-[52px] w-full items-center justify-center gap-3 rounded-[12px] bg-forest px-4 text-[14px] text-white no-underline hover:bg-forest-dark disabled:opacity-50";
+export const secondaryBtn =
+  "flex h-[52px] w-full items-center justify-center gap-3 rounded-[12px] border border-line bg-white px-4 text-[14px] text-ink no-underline hover:bg-canvas";
+export const fine = "text-[11px] leading-[1.45] text-muted";
 
 /** The cart (list + trip + goal), saved in this browser. */
 export function useCart() {
@@ -85,30 +119,37 @@ export function useCart() {
   return { s, update, qty: (id: string) => entry(id)?.qty ?? 0, bulkOk: (id: string) => entry(id)?.bulkOk ?? false, setItem };
 }
 
-/** Product illustration; falls back to a sandstone panel with the name when the picture is missing. */
+/** Product picture; falls back to a mint panel with the name when the picture is missing. */
 export function ProductImage({ id, name, className = "" }: { id: string; name: string; className?: string }) {
   const [missing, setMissing] = useState(false);
   if (missing) {
-    return (
-      <div aria-hidden className={`grid place-items-center bg-tan p-2 text-center text-small font-semibold leading-tight ${className}`}>
-        {name}
-      </div>
-    );
+    return <div aria-hidden className={`grid place-items-center bg-mint p-1 text-center text-[10px] text-forest ${className}`}>{name}</div>;
   }
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src={`/products/${id}.jpg`} alt="" loading="lazy" onError={() => setMissing(true)} className={`object-contain ${className}`} />;
+  return <img src={`/products/${id}.jpg`} alt="" loading="lazy" onError={() => setMissing(true)} className={`bg-canvas object-contain ${className}`} />;
 }
 
-export function Stepper({ name, qty, onChange }: { name: string; qty: number; onChange: (q: number) => void }) {
+/** "− 2 × 15 oz +" quantity control. */
+export function Qty({ item, qty, onChange }: { item: Item; qty: number; onChange: (q: number) => void }) {
   return (
-    <div className="flex items-center justify-between rounded-lg border border-varnish bg-white">
-      <button type="button" aria-label={`Fewer ${name}`} onClick={() => onChange(qty - 1)} className="grid size-10 place-items-center">
-        <Icon d={MINUS} />
-      </button>
-      <span className="min-w-6 text-center text-body font-semibold" aria-live="polite">{qty}</span>
-      <button type="button" aria-label={`More ${name}`} onClick={() => onChange(qty + 1)} className="grid size-10 place-items-center">
-        <Icon d={PLUS} />
-      </button>
+    <div className="flex h-9 shrink-0 items-center rounded-[8px] bg-canvas">
+      <button type="button" aria-label={`Fewer ${item.name}`} onClick={() => onChange(qty - 1)} className="grid h-9 w-8 place-items-center text-[16px]">−</button>
+      <span className="min-w-[4.5rem] text-center text-[12px] font-semibold" aria-live="polite">{packLabel(item, qty)}</span>
+      <button type="button" aria-label={`More ${item.name}`} onClick={() => onChange(qty + 1)} className="grid h-9 w-8 place-items-center text-[16px]">+</button>
     </div>
+  );
+}
+
+export function Toggle({ label, hint, on, onChange }: { label: string; hint?: string; on: boolean; onChange: (b: boolean) => void }) {
+  return (
+    <button type="button" role="switch" aria-checked={on} onClick={() => onChange(!on)} className="flex flex-1 items-center justify-between gap-3 text-left">
+      <span className="flex flex-col leading-[1.45]">
+        <span className="text-[13px] font-semibold">{label}</span>
+        {hint && <span className="text-[11px] text-muted">{hint}</span>}
+      </span>
+      <span className={`relative h-[26px] w-[46px] shrink-0 rounded-full transition-colors ${on ? "bg-forest" : "bg-line"}`}>
+        <span className={`absolute top-[3px] size-5 rounded-full bg-white transition-[left] ${on ? "left-[23px]" : "left-[3px]"}`} />
+      </span>
+    </button>
   );
 }

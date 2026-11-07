@@ -103,3 +103,11 @@ export function clearReceipts() {
     localStorage.removeItem(RECEIPTS);
   } catch {}
 }
+
+/** "17:00" + 90 -> "18:30" (wraps past midnight). */
+export function addMinutes(t: string, mins: number): string {
+  const total = (Number(t.slice(0, 2)) * 60 + Number(t.slice(3, 5)) + mins + 1440) % 1440;
+  return `${String(Math.floor(total / 60)).padStart(2, "0")}:${String(total % 60).padStart(2, "0")}`;
+}
+
+export const ampm = (t: string) => (t ? `${clock(t)} ${Number(t.slice(0, 2)) < 12 ? "AM" : "PM"}` : "");

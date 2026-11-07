@@ -2,154 +2,131 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
-import { DEMO_SENTENCE, type AskResult } from "@/lib/ask";
-import { AISLES, catalog, fromPrice, places } from "@/lib/catalog";
-import type { Saved } from "@/lib/session";
-import type { Item } from "@/lib/types";
-import { ARROW, CART, Icon, PLUS, ProductImage, SEARCH, Stepper, TopBar, UNIT_LABEL, money, useCart } from "./ui";
+import { ArrowRight, Footprints, WalletCards } from "lucide-react";
+import { DEMO, save } from "@/lib/session";
+import { ProductImage, Screen, card, fine, primaryBtn, secondaryBtn } from "./ui";
 
-export default function ShopPage() {
-  const cart = useCart();
+const STEPS = [
+  ["Add what you need", "Pick your groceries, quantities and Bulk OK."],
+  ["Tell us about your day", "Set your start, end, time limit and car or no car."],
+  ["Choose what matters most", "Compare store stops and online orders together."],
+];
+
+export default function HomePage() {
   const router = useRouter();
-  const [query, setQuery] = useState("");
-  const [aisle, setAisle] = useState("all");
-
-  const q = query.trim().toLowerCase();
-  const shown = catalog.items.filter((i) => (aisle === "all" || i.aisle === aisle) && (!q || i.name.toLowerCase().includes(q)));
-  const groups = useMemo(
-    () => AISLES.map((a) => ({ ...a, items: shown.filter((i) => i.aisle === a.id) })).filter((g) => g.items.length),
-    [shown],
-  );
-
-  const count = cart.s.list.reduce((n, e) => n + e.qty, 0);
-  const estimate = cart.s.list.reduce((t, e) => t + (fromPrice(e.itemId) ?? 0) * e.qty, 0);
-
-  return (
-    <>
-      <TopBar width="max-w-5xl" right={<Link href="/scan" className="text-tan underline">Scan receipt</Link>}>
-        <div className="mx-auto max-w-5xl px-4 pt-3">
-          <label className="flex items-center gap-2 rounded-lg border border-varnish bg-white px-3">
-            <Icon d={SEARCH} className="size-5 shrink-0 text-varnish-soft" />
-            <span className="sr-only">Search groceries</span>
-            <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder={`Search ${catalog.items.length} groceries`}
-              className="w-full bg-transparent py-2.5 text-body outline-none placeholder:text-varnish-soft" />
-          </label>
-          <nav aria-label="Aisles" className="-mx-4 flex gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none]">
-            {[{ id: "all", label: "All" }, ...AISLES].map((a) => (
-              <button key={a.id} type="button" onClick={() => setAisle(a.id)} aria-pressed={aisle === a.id}
-                className={`shrink-0 rounded-lg border border-varnish px-3.5 py-1.5 text-small font-semibold ${
-                  aisle === a.id ? "bg-varnish text-white" : "bg-white text-varnish hover:bg-sky-deep"
-                }`}>
-                {a.label}
-              </button>
-            ))}
-          </nav>
-        </div>
-      </TopBar>
-
-      <main className="mx-auto max-w-5xl px-4 pb-32 pt-4">
-        {!q && aisle === "all" && <AskBox onPlanned={(next) => { cart.update(next); router.push("/plan"); }} current={cart.s} />}
-        {groups.length === 0 && (
-          <div className="pt-8">
-            <p className="text-head font-semibold">No groceries match “{query}”.</p>
-            <button type="button" onClick={() => { setQuery(""); setAisle("all"); }} className="mt-2 text-body underline">Show everything</button>
-          </div>
-        )}
-        {groups.map((g) => (
-          <section key={g.id} aria-labelledby={`aisle-${g.id}`} className="mb-7">
-            <h2 id={`aisle-${g.id}`} className="mb-3 text-head font-bold">{g.label}</h2>
-            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-              {g.items.map((item) => <Tile key={item.id} item={item} qty={cart.qty(item.id)} onQty={(n) => cart.setItem(item.id, n)} />)}
-            </ul>
-          </section>
-        ))}
-        <p className="text-small text-varnish-soft">
-          Prices are demo prices until you <Link href="/scan" className="font-semibold text-varnish underline">scan a receipt</Link>. Pictures are illustrations.
-        </p>
-      </main>
-
-      {count > 0 && (
-        <div className="fixed inset-x-0 bottom-0 z-10 px-4 pb-4">
-          <Link href="/cart"
-            className="mx-auto flex max-w-xl items-center gap-3 rounded-lg border border-varnish bg-wingate px-4 py-3 text-white no-underline hover:bg-varnish">
-            <span className="relative">
-              <Icon d={CART} className="size-6" />
-              <span className="absolute -right-2 -top-2 grid min-w-5 place-items-center rounded-full bg-white px-1 text-small font-bold text-wingate">{count}</span>
-            </span>
-            <span className="flex-1 text-body font-semibold">View cart</span>
-            <span className="text-body">about {money(estimate)}</span>
-            <Icon d={ARROW} />
-          </Link>
-        </div>
-      )}
-    </>
-  );
-}
-
-/** One sentence in, a filled cart and trip out, then straight to the plan. */
-function AskBox({ current, onPlanned }: { current: Saved; onPlanned: (s: Saved) => void }) {
-  const [sentence, setSentence] = useState(DEMO_SENTENCE);
-  const [state, setState] = useState<{ busy: boolean; error?: string }>({ busy: false });
-
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setState({ busy: true });
-    try {
-      const r = await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ sentence }) });
-      const j = (await r.json()) as AskResult & { error?: string };
-      if (!r.ok) return setState({ busy: false, error: j.error ?? "Couldn't plan that. Try again." });
-      const place = (id: string, fallback: Saved["trip"]["from"]) => places.find((p) => p.id === id) ?? fallback;
-      onPlanned({
-        list: j.list,
-        goal: j.goal,
-        trip: {
-          from: place(j.from, current.trip.from), to: place(j.to, current.trip.to), mode: j.mode,
-          leave: j.leave || current.trip.leave, homeBy: j.homeBy || current.trip.homeBy,
-        },
-      });
-    } catch {
-      setState({ busy: false, error: "Couldn't reach the planner. Check your connection and try again." });
-    }
+  const tryExample = () => {
+    save(DEMO);
+    router.push("/plan");
   };
 
   return (
-    <form onSubmit={submit} className="mb-7 rounded-lg border border-varnish bg-white p-3">
-      <label htmlFor="ask" className="text-head font-bold">Or just tell UtahCart</label>
-      <textarea id="ask" rows={3} value={sentence} onChange={(e) => setSentence(e.target.value)}
-        className="mt-2 block w-full resize-none rounded-lg border border-varnish/40 bg-sky px-3 py-2 text-body" />
-      <div className="mt-2 flex items-center gap-3">
-        <p className="flex-1 text-small text-varnish-soft">Fills your cart and trip, then finds the best plan.</p>
-        <button type="submit" disabled={state.busy || !sentence.trim()}
-          className="flex shrink-0 items-center gap-2 rounded-lg bg-wingate px-4 py-2.5 text-body font-semibold text-white hover:bg-varnish disabled:bg-varnish/40">
-          {state.busy ? "Planning…" : <>Plan it <Icon d={ARROW} /></>}
+    <Screen nav={false}>
+      <div className="flex flex-col gap-[9px]">
+        <p className="text-[11px] font-bold tracking-[1.2px] text-forest">GROCERIES, ON YOUR TERMS</p>
+        <h1 className="text-[32px] font-bold leading-[1.12] tracking-[-1.1px]">Your groceries.<br />Fitted to your day.</h1>
+        <p className="text-[14px] leading-[1.45] text-muted">
+          Store stops, online orders, or a little of both. Make a grocery plan that fits your time, budget and way home.
+        </p>
+      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/figma/kitchen.jpg" alt="Fresh groceries on a kitchen counter" className="h-[202px] w-full rounded-[18px] object-cover" />
+      <div className="flex flex-col gap-3">
+        <Link href="/list" className={primaryBtn}>Start my list <ArrowRight size={18} aria-hidden /></Link>
+        <p className={`${fine} text-center`}>No account needed. Your list stays on this device.</p>
+        <button type="button" onClick={tryExample} className="flex items-center justify-center gap-2 text-[13px] font-semibold text-forest">
+          Just exploring? Try an example list <ArrowRight size={15} aria-hidden />
         </button>
       </div>
-      {state.error && <p role="alert" className="mt-2 text-small font-semibold text-wingate">{state.error}</p>}
-    </form>
+
+      <section className="-mx-6 flex flex-col gap-4 bg-white px-6 py-8">
+        <div>
+          <h2 className="text-[22px] font-bold tracking-[-0.5px]">One list. A plan that fits.</h2>
+          <p className="text-[13px] text-muted">You bring the list. We help with the where and how.</p>
+        </div>
+        <ol className="flex flex-col gap-4">
+          {STEPS.map(([t, d], i) => (
+            <li key={t} className="flex gap-3">
+              <span className="grid size-6 shrink-0 place-items-center rounded-full bg-mint text-[11px] font-bold text-forest">{i + 1}</span>
+              <span className="leading-[1.45]">
+                <span className="block text-[14px] font-semibold">{t}</span>
+                <span className="block text-[12px] text-muted">{d}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+        <div className="grid grid-cols-3 gap-2">
+          {["Most savings", "Fewest stops", "Most time saved"].map((g) => (
+            <span key={g} className="rounded-[8px] bg-mint py-2 text-center text-[11px] font-semibold text-forest">{g}</span>
+          ))}
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <div className="flex flex-col gap-1.5">
+          <p className="text-[11px] font-bold tracking-[1.2px] text-forest">A LITTLE OF BOTH</p>
+          <h2 className="text-[24px] font-bold leading-[1.12] tracking-[-0.6px]">Fresh on the way. Bulky to your door.</h2>
+          <p className="text-[13px] leading-[1.45] text-muted">A quick stop for the essentials. An online order for the things you’d rather not carry.</p>
+        </div>
+        <div className={`${card} flex flex-col gap-4 p-[18px]`}>
+          <div className="flex items-center justify-between text-[10px] font-bold tracking-[0.8px] text-muted">
+            <span>EXAMPLE PLAN · NOT YOUR LIST</span>
+            <span className="flex items-center gap-1 font-normal"><Footprints size={13} aria-hidden /> No car</span>
+          </div>
+          <ExampleLeg kind="PICK UP IN PERSON" store="Smith’s" note="Campus → store → home" items={[["eggs", "Eggs"], ["bananas", "Bananas"]]} />
+          <div className="h-px bg-line" />
+          <ExampleLeg kind="ORDER ONLINE" store="Costco via Instacart" note="Delivered separately" items={[["rice", "Rice"], ["paper_towels", "Paper towels"]]} />
+          <p className={fine}>Illustration only. Your options depend on your route, time, memberships and delivery availability.</p>
+        </div>
+        <button type="button" onClick={tryExample} className={secondaryBtn}>Explore this example list <ArrowRight size={16} aria-hidden /></button>
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <h2 className="text-[22px] font-bold tracking-[-0.5px]">Your day sets the plan.</h2>
+        <Benefit icon={<Footprints size={18} aria-hidden />} title="No car? You’re in the right place." text="Plan around walking, transit and delivery—not a car you don’t have." />
+        <Benefit icon={<WalletCards size={18} aria-hidden />} title="Use the memberships you already have." text="Tell us your store and delivery memberships. No new subscription needed to start." />
+        <p className="text-[11px] font-semibold text-forest">Smith’s · Harmons · Walmart · Costco</p>
+        <p className={fine}>Store options, not official partnerships.</p>
+      </section>
+
+      <section className="-mx-6 flex flex-col gap-3 bg-mint px-6 py-8">
+        <h2 className="text-[22px] font-bold tracking-[-0.5px]">What’s on your list?</h2>
+        <p className="text-[13px] leading-[1.45] text-muted">A few essentials for the whole week. Start as a guest; your list and trip stay on this device.</p>
+        <Link href="/list" className={primaryBtn}>Build my first list <ArrowRight size={18} aria-hidden /></Link>
+      </section>
+
+      <p className={fine}>
+        Plan here, go from there. Open directions in your maps app and place orders with the store. No checkout or payment in UtahCart.
+      </p>
+    </Screen>
   );
 }
 
-function Tile({ item, qty, onQty }: { item: Item; qty: number; onQty: (n: number) => void }) {
-  const price = fromPrice(item.id);
+function ExampleLeg({ kind, store, note, items }: { kind: string; store: string; note: string; items: [string, string][] }) {
   return (
-    <li className="flex flex-col rounded-lg border border-varnish/25 bg-white p-2.5">
-      <ProductImage id={item.id} name={item.name} className="aspect-square w-full rounded" />
-      <p className="mt-2 text-body font-semibold leading-snug">{item.name}</p>
-      <p className="text-small text-varnish-soft">{item.typicalSize} {UNIT_LABEL[item.unit]}</p>
-      <p className="mt-1 text-body">
-        {price !== undefined && <><span className="text-small">from </span><span className="font-bold">{money(price)}</span></>}
-      </p>
-      <div className="mt-auto pt-2">
-        {qty > 0 ? (
-          <Stepper name={item.name} qty={qty} onChange={onQty} />
-        ) : (
-          <button type="button" onClick={() => onQty(1)} aria-label={`Add ${item.name} to cart`}
-            className="flex h-10 w-full items-center justify-center gap-1.5 rounded-lg border border-varnish text-body font-semibold hover:bg-sky-deep">
-            <Icon d={PLUS} className="size-4" /> Add
-          </button>
-        )}
+    <div className="flex items-center gap-3">
+      <div className="flex-1 leading-[1.45]">
+        <p className="text-[10px] text-muted">{kind}</p>
+        <p className="text-[15px] font-semibold">{store}</p>
+        <p className="text-[11px] text-muted">{note}</p>
       </div>
-    </li>
+      {items.map(([id, name]) => (
+        <figure key={id} className="flex w-[56px] flex-col items-center gap-1">
+          <ProductImage id={id} name={name} className="size-[52px] rounded-[10px]" />
+          <figcaption className="text-[10px] text-muted">{name}</figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
+function Benefit({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
+  return (
+    <div className="flex gap-3">
+      <span className="grid size-8 shrink-0 place-items-center rounded-[10px] bg-mint text-forest">{icon}</span>
+      <span className="leading-[1.45]">
+        <span className="block text-[14px] font-semibold">{title}</span>
+        <span className="block text-[12px] text-muted">{text}</span>
+      </span>
+    </div>
   );
 }

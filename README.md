@@ -22,4 +22,6 @@ Prices marked "demo price" are placeholders, not real store prices.
 - Product illustrations generated with [ElevenLabs](https://elevenlabs.io) image generation (gpt-image-2)
 - [Vitest](https://vitest.dev)
 - [ESLint](https://eslint.org) with `eslint-config-next`
-- [Barlow](https://fonts.google.com/specimen/Barlow) (SIL Open Font License) via `next/font/google`
+- [Inter](https://rsms.me/inter/) (SIL Open Font License) via `next/font/google`
+- [Lucide](https://lucide.dev) icons (`lucide-react`, ISC license)
+- UI design and photos from the team's Figma file
