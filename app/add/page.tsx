@@ -57,7 +57,7 @@ export default function AddPage() {
       <Link href="/list" className="flex items-center gap-2 text-[13px] font-semibold text-bee no-underline">
         <ArrowLeft size={16} aria-hidden /> Your list · {count} items
       </Link>
-      <Intro title="Add items" sub="A week of staples. For 3 roommates." />
+      <Intro title="Add items" sub="Search or browse, then set amounts on your list." />
 
       <div className="flex flex-col gap-3">
         <label className="flex h-14 items-center gap-3 rounded-[12px] border-2 border-bee bg-white px-4">
@@ -98,7 +98,7 @@ export default function AddPage() {
           <section className="flex flex-col gap-3">
             <div>
               <h2 className="text-[18px]">Round out your week</h2>
-              <p className="text-[13px] text-muted">Easy staples for the three of you.</p>
+              <p className="text-[13px] text-muted">Easy pantry staples.</p>
             </div>
             <div className={`${card} p-4`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}

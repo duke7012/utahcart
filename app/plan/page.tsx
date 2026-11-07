@@ -5,8 +5,8 @@ import { ArrowRight, CircleDollarSign, ShoppingBag, Timer } from "lucide-react";
 import { itemById } from "@/lib/catalog";
 import { ampm } from "@/lib/session";
 import type { Goal, Plan } from "@/lib/types";
-import { GOALS, Intro, Screen, card, fine, money, primaryBtn } from "../ui";
-import { brand, breakdown, planKey, route, usePlans } from "./use-plans";
+import { GOALS, Intro, PriceNote, Screen, card, fine, money, primaryBtn } from "../ui";
+import { SetupCard, brand, breakdown, planKey, route, usePlans } from "./use-plans";
 
 const ICON: Record<Goal, typeof CircleDollarSign> = { savings: CircleDollarSign, fewest_stops: ShoppingBag, time: Timer };
 const today = new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }).toUpperCase();
@@ -22,15 +22,16 @@ export default function PlansPage() {
   return (
     <Screen>
       <Intro eyebrow={`PLANS · ${today}`} title={<>A little planning.<br />More left over.</>}
-        sub={saved && trip && `${saved.list.length} items · ${trip.start.label} → ${trip.end.label} · ${trip.mode === "car" ? "Car" : "No car"} · ${trip.timeLimitMin ?? "no"} min`} />
+        sub={saved && trip && `${saved.list.length} ${saved.list.length === 1 ? "item" : "items"} · ${trip.start.label} → ${trip.end.label} · ${trip.mode === "car" ? "Car" : "No car"}${trip.timeLimitMin ? ` · ${trip.timeLimitMin} min` : ""}`} />
       {saved && (
         <div className="-mt-2 flex flex-wrap gap-2 text-[12px]">
-          <span className="rounded-[8px] px-2.5 py-1.5">Leave {ampm(saved.trip.leave)}</span>
-          <span className="rounded-[8px] px-2.5 py-1.5">Home by {ampm(saved.trip.homeBy)}</span>
+          {saved.trip.leave && <span className="rounded-[8px] px-2.5 py-1.5">Leave {ampm(saved.trip.leave)}</span>}
+          <span className="rounded-[8px] px-2.5 py-1.5">{saved.trip.homeBy ? `Home by ${ampm(saved.trip.homeBy)}` : "No time limit"}</span>
           <Link href="/list" className="rounded-[8px] bg-honey-tint px-2.5 py-1.5 font-semibold text-bee no-underline">Edit trip</Link>
         </div>
       )}
 
+      {state.status === "setup" && <SetupCard missing={state.missing} />}
       {state.status === "loading" && <p className="text-[14px] text-muted">Fitting your list into your day…</p>}
       {state.status === "error" && (
         <div role="alert" className={`${card} p-[18px]`}>
@@ -40,7 +41,7 @@ export default function PlansPage() {
       )}
       {state.status === "ok" && state.plans.length === 0 && saved && (
         <div className={`${card} flex flex-col gap-3 p-[18px]`}>
-          <p className="text-[20px] font-bold">No plan fits by {ampm(saved.trip.homeBy)}.</p>
+          <p className="text-[20px] font-bold">{saved.trip.homeBy ? `No plan fits by ${ampm(saved.trip.homeBy)}.` : "No store mix covers your list."}</p>
           <p className="text-[14px] text-muted">No store mix covers your whole list in that time. Try a longer time limit, switch to Car, or take an item off.</p>
           <Link href="/list" className={primaryBtn}>Change the trip <ArrowRight size={18} aria-hidden /></Link>
         </div>
@@ -59,7 +60,7 @@ export default function PlansPage() {
             <span className="font-semibold">{money(baseline.money + baseline.savingsVsOneStore)}</span>
           </div>
           <p className={fine}>
-            Demo prices · Nov 2026, plus any receipts you scanned. Totals include delivery fees and, by car, $0.30 a mile. Times are estimates, not live.
+            <PriceNote /> Plus any receipts you scanned. Totals include delivery fees and, by car, $0.30 a mile. Times are estimates, not live.
           </p>
         </div>
       )}

@@ -6,9 +6,9 @@ import { useState } from "react";
 import { ArrowRight, ArrowUpRight, Car, ChevronDown, CircleCheck, Circle, Footprints, MapPin, Sparkles, Trash2 } from "lucide-react";
 import { DEMO_SENTENCE, type AskResult } from "@/lib/ask";
 import { itemById, places } from "@/lib/catalog";
-import { addMinutes, ampm, minutesBetween, type Saved } from "@/lib/session";
+import { addMinutes, ampm, minutesBetween, missingSteps, nowRounded, type Saved } from "@/lib/session";
 import type { Place } from "@/lib/types";
-import { GOALS, ProductImage, Qty, Screen, Intro, SectionHead, Toggle, card, fine, primaryBtn, useCart } from "../ui";
+import { GOALS, PriceNote, ProductImage, Qty, Screen, Intro, SectionHead, Toggle, card, fine, primaryBtn, useCart } from "../ui";
 
 const HERE = "here";
 const LIMITS = [30, 45, 60, 75, 90, 105, 120, 150, 180];
@@ -20,14 +20,17 @@ export default function ListPage() {
   const [open, setOpen] = useState<string | null>(null);
   const [geoError, setGeoError] = useState("");
   const count = s.list.length;
-  const limit = minutesBetween(s.trip.leave, s.trip.homeBy) ?? 90;
-  const roundTrip = s.trip.from.lat === s.trip.to.lat && s.trip.from.lng === s.trip.to.lng;
+  const limit = minutesBetween(s.trip.leave, s.trip.homeBy);
+  const { from, to } = s.trip;
+  const roundTrip = !!from && !!to && from.lat === to.lat && from.lng === to.lng;
   const [differentEnd, setDifferentEnd] = useState<boolean | null>(null);
-  const showEnd = differentEnd ?? !roundTrip;
+  const showEnd = differentEnd ?? (!!to && !roundTrip);
+  const missing = missingSteps(s);
 
-  const placeId = (p: Place) => places.find((x) => x.lat === p.lat && x.lng === p.lng)?.id ?? HERE;
+  const placeId = (p: Place | null) => (p ? places.find((x) => x.lat === p.lat && x.lng === p.lng)?.id ?? HERE : "");
   const setPlace = (key: "from" | "to", id: string) => {
     const apply = (p: Place) => update({ ...s, trip: { ...s.trip, [key]: p, ...(key === "from" && !showEnd ? { to: p } : {}) } });
+    if (!id) return;
     if (id !== HERE) return apply(places.find((p) => p.id === id)!);
     setGeoError("");
     navigator.geolocation?.getCurrentPosition(
@@ -38,7 +41,8 @@ export default function ListPage() {
 
   return (
     <Screen>
-      <Intro eyebrow="YOUR NEXT GROCERY RUN" title="A week of staples." sub={`${count} items. Built around your day.`} />
+      <Intro eyebrow="YOUR NEXT GROCERY RUN" title={count ? `${count} ${count === 1 ? "item" : "items"} on your list.` : "Start your list."}
+        sub={count ? "Now fit it into your day." : "Add groceries, then tell us about your day."} />
 
       <AskCard current={s} onPlanned={update} />
 
@@ -91,14 +95,14 @@ export default function ListPage() {
             <p className="text-[11px] text-muted">{showEnd ? "ONE WAY · DIFFERENT END" : "ROUND TRIP · RETURN TO START"}</p>
             <p className="text-[14px]">{showEnd ? "Start in one place, end in another." : "Start and end at the same location."}</p>
           </div>
-          <PlacePicker icon label={showEnd ? "START" : "START & END"} value={placeId(s.trip.from)} onChange={(id) => setPlace("from", id)} />
+          <PlacePicker icon label={showEnd ? "START" : "START & END"} placeholder="Choose a starting point" value={placeId(from)} onChange={(id) => setPlace("from", id)} />
           <button type="button" onClick={() => setPlace("from", HERE)} className="self-start text-[12px] font-semibold text-bee">
             Use my browser location instead
           </button>
           {geoError && <p role="alert" className="text-[12px] text-carrot">{geoError}</p>}
           <div className="h-px bg-line" />
           {showEnd ? (
-            <PlacePicker label="END" value={placeId(s.trip.to)} onChange={(id) => setPlace("to", id)} />
+            <PlacePicker label="END" placeholder="Choose where you end" value={placeId(to)} onChange={(id) => setPlace("to", id)} />
           ) : (
             <button type="button" onClick={() => setDifferentEnd(true)} className="flex h-[52px] items-center gap-3 rounded-[12px] bg-canvas px-4 text-[14px] font-semibold">
               <ArrowRight size={16} aria-hidden /> Different end location
@@ -108,14 +112,19 @@ export default function ListPage() {
             <label className={field}>
               <span className="block text-[10px] text-muted">LEAVE AT</span>
               <input type="time" value={s.trip.leave} aria-label="Leave at"
-                onChange={(e) => update({ ...s, trip: { ...s.trip, leave: e.target.value, homeBy: addMinutes(e.target.value, limit) } })}
+                onChange={(e) => update({ ...s, trip: { ...s.trip, leave: e.target.value, homeBy: e.target.value && limit ? addMinutes(e.target.value, limit) : "" } })}
                 className="w-full bg-transparent text-[14px]" />
             </label>
             <label className={field}>
               <span className="block text-[10px] text-muted">TIME LIMIT</span>
-              <select value={limit} aria-label="Time limit" onChange={(e) => update({ ...s, trip: { ...s.trip, homeBy: addMinutes(s.trip.leave, Number(e.target.value)) } })}
-                className="w-full bg-transparent text-[14px]">
-                {[...new Set([...LIMITS, limit])].sort((a, b) => a - b).map((m) => <option key={m} value={m}>{m} min</option>)}
+              <select value={limit ?? ""} aria-label="Time limit" className="w-full bg-transparent text-[14px]"
+                onChange={(e) => {
+                  if (!e.target.value) return update({ ...s, trip: { ...s.trip, homeBy: "" } });
+                  const leave = s.trip.leave || nowRounded();
+                  update({ ...s, trip: { ...s.trip, leave, homeBy: addMinutes(leave, Number(e.target.value)) } });
+                }}>
+                <option value="">No limit</option>
+                {[...new Set([...LIMITS, ...(limit ? [limit] : [])])].sort((a, b) => a - b).map((m) => <option key={m} value={m}>{m} min</option>)}
               </select>
             </label>
           </div>
@@ -130,7 +139,7 @@ export default function ListPage() {
               );
             })}
           </div>
-          <p className={fine}>Home by {ampm(s.trip.homeBy)}.</p>
+          <p className={fine}>{s.trip.homeBy ? `Home by ${ampm(s.trip.homeBy)}.` : "No time limit: plans can take as long as they need."}</p>
         </div>
       </section>
 
@@ -151,22 +160,26 @@ export default function ListPage() {
       </section>
 
       <div className="flex flex-col gap-3">
-        <Link href="/plan" aria-disabled={!count} className={`${primaryBtn} ${count ? "" : "pointer-events-none opacity-50"}`}>
+        <Link href="/plan" aria-disabled={missing.length > 0} className={`${primaryBtn} ${missing.length ? "pointer-events-none opacity-50" : ""}`}>
           Find my grocery plans <ArrowRight size={18} aria-hidden />
         </Link>
-        <p className={fine}>Demo prices · Nov 2026. No account needed. Your list and preferences stay on this device.</p>
+        {missing.length > 0 && (
+          <p className="text-[12px] leading-[1.45] text-muted">To plan: {missing.join(" · ")}.</p>
+        )}
+        <p className={fine}><PriceNote /> No account needed. Your list and preferences stay on this device.</p>
       </div>
     </Screen>
   );
 }
 
-function PlacePicker({ label, value, onChange, icon }: { label: string; value: string; onChange: (id: string) => void; icon?: boolean }) {
+function PlacePicker({ label, value, onChange, icon, placeholder }: { label: string; value: string; onChange: (id: string) => void; icon?: boolean; placeholder: string }) {
   return (
     <label className="relative flex items-center gap-3">
       {icon ? <MapPin size={20} className="shrink-0" aria-hidden /> : <ArrowRight size={20} className="shrink-0" aria-hidden />}
       <span className="flex min-w-0 flex-1 flex-col gap-0.5 leading-[1.45]">
         <span className="text-[11px] text-muted">{label} · PRESET</span>
-        <select value={value} onChange={(e) => onChange(e.target.value)} className="appearance-none bg-transparent pr-6 text-[14px]">
+        <select value={value} onChange={(e) => onChange(e.target.value)} className={`appearance-none bg-transparent pr-6 text-[14px] ${value ? "" : "text-muted"}`}>
+          <option value="" disabled>{placeholder}</option>
           {places.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
           <option value={HERE}>Current location</option>
         </select>
@@ -180,7 +193,7 @@ function PlacePicker({ label, value, onChange, icon }: { label: string; value: s
 function AskCard({ current, onPlanned }: { current: Saved; onPlanned: (s: Saved) => void }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [sentence, setSentence] = useState(DEMO_SENTENCE);
+  const [sentence, setSentence] = useState("");
   const [state, setState] = useState<{ busy: boolean; error?: string }>({ busy: false });
 
   const submit = async (e: React.FormEvent) => {
@@ -190,7 +203,7 @@ function AskCard({ current, onPlanned }: { current: Saved; onPlanned: (s: Saved)
       const r = await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ sentence }) });
       const j = (await r.json()) as AskResult & { error?: string };
       if (!r.ok) return setState({ busy: false, error: j.error ?? "Couldn't plan that. Try again." });
-      const place = (id: string, fallback: Place) => places.find((p) => p.id === id) ?? fallback;
+      const place = (id: string, fallback: Place | null) => places.find((p) => p.id === id) ?? fallback;
       onPlanned({
         list: j.list, goal: j.goal,
         trip: { from: place(j.from, current.trip.from), to: place(j.to, current.trip.to), mode: j.mode,
@@ -208,7 +221,7 @@ function AskCard({ current, onPlanned }: { current: Saved; onPlanned: (s: Saved)
         <Sparkles size={20} className="shrink-0 text-bee" aria-hidden />
         <span className="flex flex-1 flex-col gap-1 text-[12px] leading-[1.45]">
           <span>Set up with AI · optional</span>
-          <span>“{DEMO_SENTENCE.replace(/\.$/, "")}.”</span>
+          <span>Describe your run in one sentence, like “{DEMO_SENTENCE.replace(/\.$/, "")}.”</span>
         </span>
         <ArrowUpRight size={16} className="shrink-0" aria-hidden />
       </button>
@@ -217,7 +230,7 @@ function AskCard({ current, onPlanned }: { current: Saved; onPlanned: (s: Saved)
   return (
     <form onSubmit={submit} className="flex flex-col gap-3 rounded-[12px] bg-honey-tint p-[14px]">
       <label htmlFor="ask" className="flex items-center gap-2 text-[12px]"><Sparkles size={18} className="text-bee" aria-hidden /> Set up with AI · optional</label>
-      <textarea id="ask" rows={3} value={sentence} onChange={(e) => setSentence(e.target.value)}
+      <textarea id="ask" rows={3} value={sentence} onChange={(e) => setSentence(e.target.value)} placeholder={DEMO_SENTENCE}
         className="w-full resize-none rounded-[10px] border border-line bg-white px-3 py-2 text-[14px] leading-[1.45]" />
       {state.error && <p role="alert" className="text-[12px] font-semibold text-carrot">{state.error}</p>}
       <button type="submit" disabled={state.busy || !sentence.trim()} className={primaryBtn}>

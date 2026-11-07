@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ListChecks, Minus, Plus, Route, ScanLine, Wallet, type LucideIcon } from "lucide-react";
-import { DEMO, load, save, type Saved } from "@/lib/session";
+import { EMPTY, load, save, type Saved } from "@/lib/session";
+import { priceNote } from "@/lib/catalog";
 import type { Goal, Item } from "@/lib/types";
 
 export const GOALS: { id: Goal; label: string }[] = [
@@ -101,19 +102,24 @@ export const fine = "text-[11px] leading-[1.45] text-muted";
 
 /** The cart (list + trip + goal), saved in this browser. */
 export function useCart() {
-  const [s, setS] = useState<Saved>(DEMO);
+  const [s, setS] = useState<Saved>(EMPTY);
   useEffect(() => setS(load()), []);
   const update = (next: Saved) => {
     setS(next);
     save(next);
   };
   const entry = (id: string) => s.list.find((e) => e.itemId === id);
-  const setItem = (itemId: string, qty: number, bulkOk = entry(itemId)?.bulkOk ?? false) => {
-    const list = s.list.some((e) => e.itemId === itemId)
-      ? s.list.map((e) => (e.itemId === itemId ? { ...e, qty, bulkOk } : e)).filter((e) => e.qty > 0)
-      : qty > 0 ? [...s.list, { itemId, qty, bulkOk }] : s.list;
-    update({ ...s, list });
-  };
+  // Builds on the latest state, so quick taps on two items both stick.
+  const setItem = (itemId: string, qty: number, bulkOk?: boolean) =>
+    setS((prev) => {
+      const b = bulkOk ?? prev.list.find((e) => e.itemId === itemId)?.bulkOk ?? false;
+      const list = prev.list.some((e) => e.itemId === itemId)
+        ? prev.list.map((e) => (e.itemId === itemId ? { ...e, qty, bulkOk: b } : e)).filter((e) => e.qty > 0)
+        : qty > 0 ? [...prev.list, { itemId, qty, bulkOk: b }] : prev.list;
+      const next = { ...prev, list };
+      save(next);
+      return next;
+    });
   return { s, update, qty: (id: string) => entry(id)?.qty ?? 0, bulkOk: (id: string) => entry(id)?.bulkOk ?? false, setItem };
 }
 
@@ -155,3 +161,6 @@ export function Toggle({ label, hint, on, onChange }: { label: string; hint?: st
     </button>
   );
 }
+
+/** Where the prices come from (Kroger, team-checked, demo), for footnotes. */
+export const PriceNote = () => <>{priceNote()}</>;

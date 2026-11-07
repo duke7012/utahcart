@@ -9,8 +9,8 @@ import { travelMinutes } from "@/lib/geo";
 import { appleMapsUrl, googleMapsUrl, legs, orderUrl } from "@/lib/handoff";
 import { addMinutes, ampm } from "@/lib/session";
 import type { Goal, LineItem, Plan, Trip } from "@/lib/types";
-import { GOALS, Screen, UNIT_LABEL, card, fine, money, primaryBtn } from "../../ui";
-import { CHANNEL, brand, breakdown, usePlans } from "../use-plans";
+import { GOALS, PriceNote, Screen, UNIT_LABEL, card, fine, money, primaryBtn } from "../../ui";
+import { CHANNEL, SetupCard, brand, breakdown, usePlans } from "../use-plans";
 
 export default function DetailsPage() {
   return (
@@ -31,6 +31,7 @@ function Details() {
   return (
     <Screen>
       <Link href="/plan" className="flex items-center gap-2 text-[13px] font-semibold text-bee no-underline"><ArrowLeft size={16} aria-hidden /> All plans</Link>
+      {state.status === "setup" && <SetupCard missing={state.missing} />}
       {state.status === "loading" && <p className="text-[14px] text-muted">Loading your plan…</p>}
       {state.status === "error" && <p role="alert" className="text-[14px] font-semibold">{state.message}</p>}
       {state.status === "ok" && !plan && <p className="text-[14px]">No plan fits this trip. <Link href="/list" className="font-semibold text-bee">Change the trip</Link></p>}
@@ -67,7 +68,7 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
           {plan.savingsVsOneStore >= 0.5 && <span className="text-[11px] font-semibold text-leaf">SAVE {money(plan.savingsVsOneStore)}</span>}
         </div>
         <p className="text-[13px]">{stops} in-person {stops === 1 ? "stop" : "stops"} · ~{plan.minutes} min to home</p>
-        <p className={fine}>Leave {ampm(leave)} → home about {ampm(addMinutes(leave, plan.minutes))}. Estimates, not live timing.</p>
+        <p className={fine}>{leave ? `Leave ${ampm(leave)} → home about ${ampm(addMinutes(leave, plan.minutes))}. ` : ""}Estimates, not live timing.</p>
       </div>
 
       {stops > 0 && (
@@ -153,7 +154,7 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
         <div className="h-px bg-line" />
         <Row k="Estimated total" v={money(plan.money)} strong />
       </div>
-      <p className={fine}>Demo prices · Nov 2026 unless marked from a receipt. No live inventory or arrival times. BeeLow doesn’t provide navigation, checkout or payment.</p>
+      <p className={fine}><PriceNote /> No live inventory or arrival times. BeeLow doesn’t provide navigation, checkout or payment.</p>
     </>
   );
 }
@@ -171,7 +172,8 @@ function Lines({ lines, got, prefix, onToggle }: { lines: LineItem[]; got: Recor
               <span className={`flex-1 leading-[1.45] ${got[k] ? "text-muted line-through" : ""}`}>
                 {item?.name} · {l.packs} × {l.quote.size} {UNIT_LABEL[l.quote.unit]}
                 <span className="block text-[11px] text-muted no-underline">
-                  {money(l.quote.price / l.quote.size)}/{UNIT_LABEL[l.quote.unit]} · {l.quote.source === "receipt" ? "receipt price" : l.quote.source === "estimate" ? "estimate" : "demo price"}
+                  {money(l.quote.price / l.quote.size)}/{UNIT_LABEL[l.quote.unit]} · {sourceLabel(l.quote)}
+                  {l.quote.product && <> · {l.quote.link ? <a href={l.quote.link} target="_blank" rel="noopener noreferrer" className="underline">{l.quote.product}</a> : l.quote.product}</>}
                 </span>
               </span>
               <span>{money(l.cost)}</span>
@@ -181,6 +183,16 @@ function Lines({ lines, got, prefix, onToggle }: { lines: LineItem[]; got: Recor
       })}
     </ul>
   );
+}
+
+const day = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+/** Where this price came from, in plain words. */
+function sourceLabel(q: LineItem["quote"]): string {
+  if (q.source === "seed") return q.storeId === "smiths" ? `Smith’s price via Kroger, ${day(q.seenAt)}` : `store price, checked ${day(q.seenAt)}`;
+  if (q.source === "receipt") return `receipt price, ${day(q.seenAt)}`;
+  if (q.source === "estimate") return "estimate from in-store price";
+  return "demo price";
 }
 
 function Row({ k, v, strong }: { k: string; v: string; strong?: boolean }) {

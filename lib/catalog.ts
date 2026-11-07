@@ -28,3 +28,22 @@ export function fromPrice(itemId: string): number | undefined {
   const units = catalog.prices.filter((p) => p.itemId === itemId && p.channel === "in_person" && open.has(p.storeId)).map((p) => p.price / p.size);
   return item && units.length ? Math.round(Math.min(...units) * item.typicalSize * 100) / 100 : undefined;
 }
+
+const fmtDay = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+/** One line on where the prices come from, built from the quotes actually in the catalog. */
+export function priceNote(): string {
+  const real = catalog.prices.filter((p) => p.source === "seed");
+  const latest = (ps: typeof real) => fmtDay(ps.map((p) => p.seenAt).sort().at(-1)!);
+  const parts: string[] = [];
+  const kroger = real.filter((p) => p.storeId === "smiths");
+  if (kroger.length) parts.push(`Smith’s prices from Kroger, checked ${latest(kroger)}`);
+  const team = real.filter((p) => p.storeId !== "smiths");
+  if (team.length) {
+    const names = [...new Set(team.map((p) => storeById(p.storeId)?.name.split(" ")[0]))].join(", ");
+    parts.push(`${names} prices checked by our team ${latest(team)}`);
+  }
+  const demo = catalog.prices.some((p) => p.source === "demo");
+  if (!parts.length) return "Demo prices, not real store prices.";
+  return `${parts.join(" · ")}${demo ? " · demo prices where marked" : ""}.`;
+}

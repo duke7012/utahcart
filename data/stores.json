@@ -9,36 +9,37 @@
       "instacart"
     ],
     "link": "https://www.smithsfoodanddrug.com",
-    "coordsNote": "TODO: approximate coordinates, team to verify",
+    "coordsNote": "TODO: npm run prices:smiths sets the exact store from Kroger",
     "orderLinks": {
       "instacart": "https://www.instacart.com/store/smiths"
-    }
+    },
+    "address": "455 S 500 E, Salt Lake City, UT 84102"
   },
   {
     "id": "harmons",
     "name": "Harmons Emigration Market",
-    "lat": 40.7377,
-    "lng": -111.8405,
+    "lat": 40.7414378,
+    "lng": -111.8419091,
     "channels": [
       "in_person",
       "instacart"
     ],
     "link": "https://www.harmonsgrocery.com",
-    "coordsNote": "TODO: approximate coordinates, team to verify",
     "orderLinks": {
       "instacart": "https://www.instacart.com/store/harmons"
-    }
+    },
+    "address": "1706 E 1300 S, Salt Lake City, UT 84105"
   },
   {
     "id": "walmart",
     "name": "Walmart Supercenter (South Salt Lake)",
-    "lat": 40.723,
-    "lng": -111.889,
+    "lat": 40.7409819,
+    "lng": -111.9011287,
     "channels": [
       "in_person"
     ],
     "link": "https://www.walmart.com",
-    "coordsNote": "TODO: approximate coordinates, team to verify"
+    "address": "350 Hope Ave, Salt Lake City, UT 84115"
   },
   {
     "id": "costco",
@@ -51,9 +52,10 @@
       "instacart"
     ],
     "link": "https://www.costco.com",
-    "coordsNote": "TODO: approximate coordinates, team to verify",
+    "coordsNote": "TODO: confirm the Costco address (OpenStreetMap only matched the street), then npm run prices:import",
     "orderLinks": {
       "instacart": "https://www.instacart.com/store/costco"
-    }
+    },
+    "address": "660 W 600 S, Salt Lake City, UT 84104"
   }
 ]

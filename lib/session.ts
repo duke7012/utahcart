@@ -1,13 +1,16 @@
 import { places } from "./catalog";
 import type { Goal, ListEntry, Memberships, Mode, Place, PriceQuote, Trip } from "./types";
 
-export type TripForm = { from: Place; to: Place; mode: Mode; leave: string; homeBy: string };
-export type Saved = { list: ListEntry[]; trip: TripForm; goal: Goal };
+/** Nothing is chosen for a new visitor: places, mode and goal start as null, times as "". */
+export type TripForm = { from: Place | null; to: Place | null; mode: Mode | null; leave: string; homeBy: string };
+export type Saved = { list: ListEntry[]; trip: TripForm; goal: Goal | null };
+/** A Saved whose trip and goal are all chosen. */
+export type ReadySaved = Saved & { trip: TripForm & { from: Place; to: Place; mode: Mode }; goal: Goal };
 
 const e = (itemId: string, qty: number, bulkOk = false): ListEntry => ({ itemId, qty, bulkOk });
 
 /** "Groceries for 3 roommates this week, leaving the U at 5, no car, home by 6:30, cheapest." */
-export const DEMO: Saved = {
+export const DEMO: ReadySaved = {
   list: [
     e("eggs", 2), e("milk", 2), e("bread", 2), e("rice", 1, true), e("chicken", 3), e("ground_beef", 2),
     e("pasta", 2), e("pasta_sauce", 2), e("bananas", 1), e("apples", 1), e("onions", 1), e("potatoes", 1),
@@ -18,15 +21,32 @@ export const DEMO: Saved = {
   goal: "savings",
 };
 
-const KEY = "utahcart:v1";
+/** A brand-new visitor: empty list, no trip, no goal. */
+export const EMPTY: Saved = { list: [], trip: { from: null, to: null, mode: null, leave: "", homeBy: "" }, goal: null };
+
+// beelow:v2 (was utahcart:v1, which pre-filled the demo cart): every browser starts empty after the rebrand.
+const KEY = "beelow:v2";
 
 export function load(): Saved {
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return { ...DEMO, ...JSON.parse(raw) };
+    if (raw) return { ...EMPTY, ...JSON.parse(raw) };
   } catch {}
-  return DEMO;
+  return EMPTY;
 }
+
+/** What's still missing before BeeLow can plan, in the order the list page asks for it. */
+export function missingSteps(s: Saved): string[] {
+  return [
+    !s.list.length && "Add at least one item",
+    !s.trip.from && "Choose where you start",
+    !s.trip.to && "Choose where you end",
+    !s.trip.mode && "Choose car or no car",
+    !s.goal && "Choose what matters most",
+  ].filter((x): x is string => !!x);
+}
+
+export const tripReady = (s: Saved): s is ReadySaved => missingSteps(s).length === 0;
 
 export function save(s: Saved) {
   try {
@@ -41,7 +61,7 @@ export function minutesBetween(leave: string, homeBy: string): number | undefine
   return Number.isNaN(d) ? undefined : d < 0 ? d + 24 * 60 : d;
 }
 
-export const toTrip = (f: TripForm): Trip => ({
+export const toTrip = (f: ReadySaved["trip"]): Trip => ({
   start: f.from,
   end: f.to,
   mode: f.mode,
@@ -94,9 +114,18 @@ export function saveMemberships(m: Memberships) {
   } catch {}
 }
 
-/** Everything /api/plan needs, from this browser's saved cart, memberships and receipt prices. */
+/** Everything /api/plan needs, from this browser's saved cart, memberships and receipt prices; null until the trip is set up. */
 export const planRequest = (s: Saved, worth: (keyof Memberships)[] = []) =>
-  JSON.stringify({ list: s.list, trip: toTrip(s.trip), memberships: loadMemberships(), quotes: loadReceipts(), worth, goal: s.goal });
+  tripReady(s)
+    ? JSON.stringify({ list: s.list, trip: toTrip(s.trip), memberships: loadMemberships(), quotes: loadReceipts(), worth, goal: s.goal })
+    : null;
+
+/** Current time rounded up to 5 minutes, "HH:MM". */
+export function nowRounded(): string {
+  const d = new Date();
+  const m = Math.ceil((d.getHours() * 60 + d.getMinutes()) / 5) * 5;
+  return addMinutes("00:00", m);
+}
 
 export function clearReceipts() {
   try {

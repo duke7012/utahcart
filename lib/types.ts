@@ -2,7 +2,7 @@ export type Channel = "in_person" | "instacart" | "amazon" | "doordash" | "ubere
 export type Goal = "savings" | "fewest_stops" | "time";
 export type Mode = "car" | "no_car";
 
-export type Item = { id: string; name: string; unit: "oz" | "count" | "lb" | "fl_oz"; typicalSize: number; aisle?: string };
+export type Item = { id: string; name: string; unit: "oz" | "count" | "lb" | "fl_oz"; typicalSize: number; aisle?: string; /** Store search term for real prices. */ search?: string };
 /** qty = how many of the item's typicalSize the user needs. */
 export type ListEntry = { itemId: string; qty: number; bulkOk: boolean; brandLock?: string };
 
@@ -16,6 +16,8 @@ export type PriceQuote = {
   source: "demo" | "seed" | "receipt" | "shop" | "estimate";
   seenAt: string;
   link?: string;
+  /** Store's own product name, when the price came from the store (Kroger API or the team's sheet). */
+  product?: string;
 };
 
 export type Memberships = {
@@ -50,6 +52,10 @@ export type Store = {
   /** Channels this store offers, including "in_person". */
   channels: Channel[];
   link?: string;
+  /** Street address, for the team to confirm and for geocoding. */
+  address?: string;
+  /** Kroger API store id (Smith's), set by `npm run prices:smiths`. */
+  krogerLocationId?: string;
   /** Store page inside each delivery app, e.g. Instacart storefront. */
   orderLinks?: Partial<Record<Channel, string>>;
   coordsNote?: string;

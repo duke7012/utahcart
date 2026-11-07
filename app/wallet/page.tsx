@@ -7,7 +7,7 @@ import channels from "@/data/channels.json";
 import { load, loadMemberships, planRequest, saveMemberships } from "@/lib/session";
 import type { Memberships } from "@/lib/types";
 import type { Worth } from "@/lib/worth";
-import { Intro, Screen, Toggle, card, fine, money } from "../ui";
+import { Intro, PriceNote, Screen, Toggle, card, fine, money } from "../ui";
 
 type Id = keyof Memberships;
 const STORE: Id[] = ["costco", "samsClub", "restaurantDepot", "smithsRewards"];
@@ -30,11 +30,15 @@ export default function WalletPage() {
   const [worth, setWorth] = useState<Record<string, Worth>>({});
   const [checking, setChecking] = useState(true);
   const [cleared, setCleared] = useState(false);
+  const [ready, setReady] = useState(true);
 
   useEffect(() => setM(loadMemberships()), []);
   useEffect(() => {
+    const body = planRequest(load(), PRICED);
+    setReady(!!body);
+    if (!body) return setChecking(false);
     setChecking(true);
-    fetch("/api/plan", { method: "POST", headers: { "content-type": "application/json" }, body: planRequest(load(), PRICED) })
+    fetch("/api/plan", { method: "POST", headers: { "content-type": "application/json" }, body })
       .then((r) => r.json())
       .then((j) => setWorth(Object.fromEntries((j.worth ?? []).map((w: Worth) => [w.id, w]))))
       .catch(() => setWorth({}))
@@ -60,7 +64,7 @@ export default function WalletPage() {
             </div>
             {PRICED.includes(id) && (
               <p className="ml-11 mt-1.5 text-[12px] text-muted">
-                {checking || !w ? "Checking your cart…" : w.savingsPerTrip === null ? "No plan fits your trip to compare."
+                {!ready ? "Add items and a trip to see what this saves." : checking || !w ? "Checking your cart…" : w.savingsPerTrip === null ? "No plan fits your trip to compare."
                   : w.savingsPerTrip < 0.5 ? "Saves nothing on your current cart." : <span className="font-semibold text-leaf">Saves {money(w.savingsPerTrip)} on this cart</span>}
               </p>
             )}
@@ -103,7 +107,9 @@ export default function WalletPage() {
         <div className="flex items-center justify-between text-[11px] tracking-[0.8px] opacity-90">
           <span>IS COSTCO WORTH IT?</span><CalendarCheck size={18} aria-hidden />
         </div>
-        {checking || !costco ? (
+        {!ready ? (
+          <p className="text-[15px] opacity-90">Add items and a trip on your list, and BeeLow works out whether Costco pays off for you.</p>
+        ) : checking || !costco ? (
           <p className="text-[15px] opacity-90">Checking your cart…</p>
         ) : trips ? (
           <>
@@ -119,7 +125,7 @@ export default function WalletPage() {
         {ic?.savingsPerTrip ? (
           <p className="border-t border-white/25 pt-3 text-[12px] opacity-90">Instacart+ saves {money(ic.savingsPerTrip)} on this cart; at {money(info("instacartPlus").feePerYear)}/yr it pays off after {Math.ceil(info("instacartPlus").feePerYear / ic.savingsPerTrip)} trips like this.</p>
         ) : null}
-        <p className="text-[11px] leading-[1.5] opacity-80">Demo prices, not a forecast. Uses your current cart, trip and goal.</p>
+        <p className="text-[11px] leading-[1.5] opacity-80">Not a forecast. Uses your current cart, trip and goal.</p>
       </div>
 
       <section className="flex flex-col gap-3">
@@ -134,7 +140,7 @@ export default function WalletPage() {
           <Assume k="Driving · if using a car" v="$0.30/mi" />
           <Assume k="Shopping time per store" v="15 min" />
         </div>
-        <p className={fine}>Demo prices · Nov 2026. Fees and markups are assumptions, not retailer quotes.</p>
+        <p className={fine}><PriceNote /> Fees and markups are assumptions, not retailer quotes.</p>
       </section>
 
       <button type="button" onClick={() => {

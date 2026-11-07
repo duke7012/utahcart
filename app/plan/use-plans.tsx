@@ -1,11 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { storeById } from "@/lib/catalog";
-import { load, planRequest, toTrip, type Saved } from "@/lib/session";
+import { load, missingSteps, planRequest, toTrip, tripReady, type ReadySaved } from "@/lib/session";
 import type { Plan, Trip } from "@/lib/types";
 
-export type PlansState = { status: "loading" } | { status: "error"; message: string } | { status: "ok"; plans: Plan[] };
+export type PlansState =
+  | { status: "loading" }
+  | { status: "setup"; missing: string[] }
+  | { status: "error"; message: string }
+  | { status: "ok"; plans: Plan[] };
 
 export const CHANNEL: Record<string, string> = { instacart: "Instacart", amazon: "Amazon", doordash: "DoorDash", ubereats: "Uber Eats" };
 /** "Walmart Supercenter (South Salt Lake)" -> "Walmart" */
@@ -13,10 +18,11 @@ export const brand = (id: string) => storeById(id)?.name.split(" ")[0] ?? id;
 
 /** Loads the saved cart and asks /api/plan for the three plans. */
 export function usePlans() {
-  const [saved, setSaved] = useState<Saved | null>(null);
+  const [saved, setSaved] = useState<ReadySaved | null>(null);
   const [state, setState] = useState<PlansState>({ status: "loading" });
   useEffect(() => {
     const s = load();
+    if (!tripReady(s)) return setState({ status: "setup", missing: missingSteps(s) });
     setSaved(s);
     fetch("/api/plan", { method: "POST", headers: { "content-type": "application/json" }, body: planRequest(s) })
       .then(async (r) => (r.ok ? setState({ status: "ok", plans: (await r.json()).plans }) : Promise.reject((await r.json()).error)))
@@ -40,4 +46,15 @@ export function route(plan: Plan) {
   return [stops, online].filter(Boolean).join(" + ");
 }
 
-export const planKey = (p: Plan) => JSON.stringify([p.stops.map((s) => s.storeId), p.onlineOrders.map((o) => o.storeId + o.channel)]);
+/** Shown on the plan screens until the list and trip are set up. */
+export function SetupCard({ missing }: { missing: string[] }) {
+  return (
+    <div className="flex flex-col gap-3 rounded-[18px] border border-line bg-white p-[18px]">
+      <p className="text-[20px] font-bold">Finish setting up your trip</p>
+      <ul className="list-disc pl-5 text-[14px] leading-[1.6] text-muted">{missing.map((m) => <li key={m}>{m}</li>)}</ul>
+      <Link href="/list" className="flex h-[52px] items-center justify-center rounded-[12px] bg-bee text-[14px] text-white no-underline">Go to your list</Link>
+    </div>
+  );
+}
+
+export const planKey =(p: Plan) => JSON.stringify([p.stops.map((s) => s.storeId), p.onlineOrders.map((o) => o.storeId + o.channel)]);

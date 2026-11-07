@@ -39,7 +39,9 @@ function currentUnit(storeId: string, itemId: string): number | undefined {
 /** Best plan total for the user's goal, optionally with extra receipt prices. */
 async function bestTotal(extra: PriceQuote[] = []): Promise<number | undefined> {
   const s = load();
-  const body = JSON.parse(planRequest(s));
+  const req = planRequest(s);
+  if (!req) return undefined;
+  const body = JSON.parse(req);
   body.quotes = [...body.quotes, ...extra];
   const r = await fetch("/api/plan", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
   if (!r.ok) return undefined;
@@ -267,7 +269,7 @@ export default function ScanPage() {
                 <div className="flex justify-between text-muted"><span>Plan before</span><span>{money(impact.before)}</span></div>
                 <div className="flex justify-between"><span className="text-muted">After saving these prices</span><span className="text-[18px] font-bold">{money(impact.after)}</span></div>
               </>
-            ) : <p className="text-muted">{storeId ? "Checking your plan…" : "Pick the store to see how your plan changes."}</p>}
+            ) : <p className="text-muted">{!storeId ? "Pick the store to see how your plan changes." : planRequest(load()) ? "Checking your plan…" : "Add items and a trip to see what these prices save."}</p>}
           </div>
           <button type="button" disabled={!storeId || !chosen.length} onClick={onSave} className={primaryBtn}>
             {storeId ? <>Save {chosen.length} {chosen.length === 1 ? "price" : "prices"} & refresh plan <Check size={18} aria-hidden /></> : "Pick the store to save"}
