@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-06T00:00:00Z",
+  "title": "Design System: UtahCart",
+  "extensions": {
+    "colorMeta": {
+      "wingate": { "role": "primary", "displayName": "Wingate Red", "canonical": "#b8462a", "tonalRamp": ["#220000", "#480800", "#711f0a", "#9d381f", "#c75b41", "#e58870", "#ffb4a0", "#ffddcd"] },
+      "navajo": { "role": "secondary", "displayName": "Navajo Salmon", "canonical": "#e08b5b", "tonalRamp": ["#1d0200", "#401500", "#662d06", "#8e471b", "#b66a3e", "#d5936e", "#f5bc9e", "#ffe4cc"] },
+      "tan": { "role": "secondary", "displayName": "Bleached Tan", "canonical": "#f0c9a0", "tonalRamp": ["#140800", "#32200a", "#533a1f", "#755735", "#9a7955", "#bc9f80", "#dec6ad", "#ffebd7"] },
+      "sage": { "role": "tertiary", "displayName": "Juniper Sage", "canonical": "#5e6e54", "tonalRamp": ["#080d05", "#1f2719", "#384431", "#55634c", "#76866d", "#9caa94", "#c3cfbd", "#e9f2e3"] },
+      "sky": { "role": "neutral", "displayName": "Sky", "canonical": "#e7eef2", "tonalRamp": ["#090c0d", "#212526", "#3c4043", "#595f62", "#7b8185", "#a0a5a8", "#c7cbce", "#eceff1"] },
+      "sky-deep": { "role": "neutral", "displayName": "Deep Sky", "canonical": "#d3dee5", "tonalRamp": ["#080c0e", "#202528", "#3a4145", "#565f64", "#788288", "#9ea6ab", "#c5ccd0", "#eaeff3"] },
+      "varnish": { "role": "neutral", "displayName": "Desert Varnish", "canonical": "#2a1a14", "tonalRamp": ["#100907", "#2c211d", "#4a3c37", "#6b5953", "#8f7b74", "#b1a09a", "#d5c7c2", "#f7ece7"] },
+      "varnish-soft": { "role": "neutral", "displayName": "Soft Varnish", "canonical": "#5a4238", "tonalRamp": ["#120906", "#2e201b", "#4d3b33", "#6f584e", "#937a70", "#b59f96", "#d9c6be", "#faebe5"] },
+      "white": { "role": "neutral", "displayName": "White", "canonical": "#ffffff", "tonalRamp": ["#0b0b0b", "#242424", "#404040", "#5d5d5d", "#808080", "#a4a4a4", "#cacaca", "#eeeeee"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Total", "purpose": "The plan total only, one per plan." },
+      "headline": { "displayName": "Head (bold)", "purpose": "Section titles, wordmark, empty-state headlines." },
+      "title": { "displayName": "Head (semibold)", "purpose": "Store group titles, text-wrap balance." },
+      "body": { "displayName": "Body", "purpose": "Item names, inputs, trip strip, button labels at 600." },
+      "label": { "displayName": "Small (semibold)", "purpose": "Field labels, strata labels, savings chip, toggles." },
+      "caption": { "displayName": "Small", "purpose": "Metadata, counts, warnings, disclaimers, top-bar actions." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "settle", "value": "settle 700ms cubic-bezier(0.16, 1, 0.3, 1) both; from transform: scaleY(0.82); transform-origin: bottom; stagger 70ms per layer", "purpose": "Strata layers settle upward once when a plan appears. Removed under prefers-reduced-motion." },
+      { "name": "disclosure-chevron", "value": "transform 150ms cubic-bezier(0.4, 0, 0.2, 1); rotate(180deg) when open", "purpose": "Chevron on store-group expand toggles." }
+    ],
+    "breakpoints": [],
+    "focus": { "value": "outline: 2px solid var(--color-wingate); outline-offset: 2px", "purpose": "Global :focus-visible ring." }
+  },
+  "components": [
+    {
+      "name": "Call-to-action Button",
+      "kind": "button",
+      "refersTo": "button-cta",
+      "description": "Wingate fill for the one act-now step, such as Plan my trip.",
+      "html": "<a class=\"ds-btn-cta\" href=\"#\">Plan my trip <svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--color-wingate, #b8462a); color: #fff; padding: 12px 20px; border-radius: 8px; font: 600 15px/1.45 var(--font-sans, Barlow, system-ui, sans-serif); text-decoration: none; } .ds-btn-cta:hover { background: var(--color-varnish, #2a1a14); } .ds-btn-cta:focus-visible { outline: 2px solid var(--color-wingate, #b8462a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Varnish fill, one per plan action stack.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Go to Walmart</a>",
+      "css": ".ds-btn-primary { display: block; text-align: center; background: var(--color-varnish, #2a1a14); color: #fff; padding: 12px; border-radius: 8px; font: 600 15px/1.45 var(--font-sans, Barlow, system-ui, sans-serif); text-decoration: none; } .ds-btn-primary:hover { background: var(--color-wingate, #b8462a); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-wingate, #b8462a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Varnish outline for the other actions in a stack.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Open in Apple Maps</a>",
+      "css": ".ds-btn-secondary { display: block; text-align: center; background: transparent; color: var(--color-varnish, #2a1a14); border: 1px solid var(--color-varnish, #2a1a14); padding: 12px; border-radius: 8px; font: 600 15px/1.45 var(--font-sans, Barlow, system-ui, sans-serif); text-decoration: none; } .ds-btn-secondary:hover { background: var(--color-sky-deep, #d3dee5); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--color-wingate, #b8462a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "chip",
+      "refersTo": "segment-active",
+      "description": "Outlined radio group; the active segment is Wingate.",
+      "html": "<div class=\"ds-seg\" role=\"radiogroup\" aria-label=\"Goal\"><button role=\"radio\" aria-checked=\"true\">Most savings</button><button role=\"radio\" aria-checked=\"false\">Fewest stops</button><button role=\"radio\" aria-checked=\"false\">Most time</button></div>",
+      "css": ".ds-seg { display: flex; overflow: hidden; border: 1px solid var(--color-varnish, #2a1a14); border-radius: 8px; } .ds-seg button { flex: 1; padding: 10px 0; border: 0; border-left: 1px solid var(--color-varnish, #2a1a14); background: transparent; color: var(--color-varnish, #2a1a14); font: 600 15px/1.45 var(--font-sans, Barlow, system-ui, sans-serif); cursor: pointer; } .ds-seg button:first-child { border-left: 0; } .ds-seg button:hover { background: var(--color-sky-deep, #d3dee5); } .ds-seg button[aria-checked=\"true\"] { background: var(--color-wingate, #b8462a); color: #fff; } .ds-seg button:focus-visible { outline: 2px solid var(--color-wingate, #b8462a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "White well with varnish border and a stacked semibold label.",
+      "html": "<label class=\"ds-field\">Leaving at<input type=\"time\" value=\"17:00\"></label>",
+      "css": ".ds-field { display: block; color: var(--color-varnish, #2a1a14); font: 600 13px/1.4 var(--font-sans, Barlow, system-ui, sans-serif); } .ds-field input { display: block; width: 100%; margin-top: 4px; padding: 8px 12px; background: #fff; border: 1px solid var(--color-varnish, #2a1a14); border-radius: 8px; font: 400 15px/1.45 var(--font-sans, Barlow, system-ui, sans-serif); color: inherit; accent-color: var(--color-wingate, #b8462a); caret-color: var(--color-wingate, #b8462a); } .ds-field input:focus-visible { outline: 2px solid var(--color-wingate, #b8462a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Stepper",
+      "kind": "custom",
+      "refersTo": "stepper",
+      "description": "Quantity control on list rows with 40px targets.",
+      "html": "<div class=\"ds-stepper\"><button aria-label=\"Fewer\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/></svg></button><span>2</span><button aria-label=\"More\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></button></div>",
+      "css": ".ds-stepper { display: inline-flex; align-items: center; background: #fff; border: 1px solid var(--color-varnish, #2a1a14); border-radius: 8px; color: var(--color-varnish, #2a1a14); } .ds-stepper button { display: grid; place-items: center; width: 40px; height: 40px; border: 0; background: none; color: inherit; cursor: pointer; } .ds-stepper button:disabled { opacity: 0.3; } .ds-stepper button:focus-visible { outline: 2px solid var(--color-wingate, #b8462a); outline-offset: 2px; } .ds-stepper span { width: 28px; text-align: center; font: 600 15px/1.45 var(--font-sans, Barlow, system-ui, sans-serif); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Savings Chip",
+      "kind": "chip",
+      "refersTo": "chip-savings",
+      "description": "Sage chip under the total; savings only.",
+      "html": "<span class=\"ds-chip-savings\">$4.12 less than the cheapest single store</span>",
+      "css": ".ds-chip-savings { display: inline-block; background: var(--color-sage, #5e6e54); color: #fff; padding: 4px 8px; border-radius: 4px; font: 600 13px/1.4 var(--font-sans, Barlow, system-ui, sans-serif); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Top Bar",
+      "kind": "nav",
+      "refersTo": "top-bar",
+      "description": "Sticky varnish bar with wordmark and one tan action.",
+      "html": "<header class=\"ds-topbar\"><a class=\"ds-topbar-mark\" href=\"#\">UtahCart</a><a class=\"ds-topbar-action\" href=\"#\">Edit list</a></header>",
+      "css": ".ds-topbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--color-varnish, #2a1a14); color: var(--color-tan, #f0c9a0); font-family: var(--font-sans, Barlow, system-ui, sans-serif); } .ds-topbar-mark { color: #fff; font-size: 18px; font-weight: 700; line-height: 1.25; letter-spacing: -0.025em; text-decoration: none; } .ds-topbar-action { color: var(--color-tan, #f0c9a0); font-size: 13px; line-height: 1.4; text-decoration: underline; text-underline-offset: 3px; } .ds-topbar a:focus-visible { outline: 2px solid var(--color-wingate, #b8462a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Strata Column",
+      "kind": "custom",
+      "refersTo": "strata-column",
+      "description": "Signature: the plan's minutes stacked as sandstone layers up to the dashed time-limit rim; spare time is sky.",
+      "html": "<figure class=\"ds-strata\" aria-label=\"About 72 of 90 minutes used\"><figcaption>Home by 6:30 PM</figcaption><div class=\"ds-strata-col\"><div class=\"ds-stratum ds-navajo\" style=\"flex-grow:18\">Ride to Walmart 18</div><div class=\"ds-stratum ds-shop\" style=\"flex-grow:20;animation-delay:70ms\">Shop 20</div><div class=\"ds-stratum ds-tan\" style=\"flex-grow:34;animation-delay:140ms\">Ride home 34</div><div class=\"ds-strata-sky\" style=\"flex-grow:18\">18 min to spare</div></div></figure>",
+      "css": ".ds-strata { width: 104px; margin: 0; color: var(--color-varnish, #2a1a14); font: 600 13px/1.25 var(--font-sans, Barlow, system-ui, sans-serif); } .ds-strata figcaption { padding-bottom: 4px; } .ds-strata-col { display: flex; flex-direction: column-reverse; height: 320px; overflow: hidden; border: 1px solid var(--color-varnish, #2a1a14); border-top: 2px dashed var(--color-varnish, #2a1a14); background: var(--color-varnish, #2a1a14); } .ds-stratum { display: flex; align-items: center; min-height: 0; padding: 0 6px; border-top: 1px solid var(--color-varnish, #2a1a14); transform-origin: bottom; animation: ds-settle 700ms cubic-bezier(0.16, 1, 0.3, 1) both; } .ds-navajo { background: var(--color-navajo, #e08b5b); } .ds-tan { background: var(--color-tan, #f0c9a0); } .ds-shop { background: var(--color-wingate, #b8462a); color: #fff; } .ds-strata-sky { display: flex; align-items: flex-end; min-height: 0; padding: 0 6px 4px; background: var(--color-sky, #e7eef2); font-weight: 400; } @keyframes ds-settle { from { transform: scaleY(0.82); } } @media (prefers-reduced-motion: reduce) { .ds-stratum { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Red Rock Strata",
+    "overview": "Every plan is a Utah cliff face. The minutes a trip uses stack as flat sandstone layers, one per travel leg and shop stop, up to a dashed rim that marks the user's time limit. Time left over shows as open sky above the layers. The rest of the system serves that image: a pale sky ground, desert-varnish ink, one fixed sandstone ramp, and hairline rules in place of cards.\n\nThe world is flat and dense, made for a phone held in one hand. Hierarchy comes from a four-step size ladder in a single family (Barlow), from weight, and from where the sandstone colour falls. Surfaces are never lifted or layered. A rule, a fill, or a change of ink does all the separating. The chosen plan fills the screen and the other plans sit one horizontal swipe away.\n\nThe build rejects the category default of white cards with a green button and a map thumbnail.",
+    "keyCharacteristics": [
+      "Sky-pale ground, varnish ink, one sandstone ramp (Wingate, Navajo, tan) plus sage for savings.",
+      "Flat colour only: no gradients, no shadows, no tints beyond the ramp.",
+      "1px varnish hairlines separate content; no cards.",
+      "One family, four sizes (13 / 15 / 18 / 44px), tabular figures everywhere.",
+      "Small radii (4px and 8px); the strata column itself is square.",
+      "One signature motion: layers settle upward from the base, once."
+    ],
+    "rules": [
+      { "name": "The Fixed Ramp Rule", "body": "The colours above are the whole palette. Express a new state with a ramp colour or with varnish at reduced opacity (25% for soft rules, 40% for disabled outlines), never with a new hue or tint.", "section": "colors" },
+      { "name": "The Sandstone Is Time Rule", "body": "Navajo and tan mean travel minutes and Wingate means shop minutes inside the strata. Outside the strata, Wingate means \"selected\" or \"act now\". Sage means money saved and nothing else.", "section": "colors" },
+      { "name": "The Four-Step Ladder Rule", "body": "Only 13, 15, 18 and 44px exist. Build hierarchy from weight (400 / 600 / 700) and ink (varnish vs. soft varnish) before you reach for another size.", "section": "typography" },
+      { "name": "The Ledger Figures Rule", "body": "Every number uses tabular figures. Write durations as \"about N min\" and money with two decimals.", "section": "typography" },
+      { "name": "The Hairline Rule", "body": "Separate with 1px varnish lines: full strength under a section or group header, 25% for rows and soft dividers. Don't use cards, shadows, or fill blocks to group content.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do take every colour from the fixed ramp, and use varnish opacity (25%, 40%) for soft rules and disabled outlines.",
+      "Do separate content with 1px varnish hairlines and leave surfaces flat.",
+      "Do keep type to the four sizes (13 / 15 / 18 / 44px) in Barlow with tabular figures.",
+      "Do give each action stack exactly one filled button, and swap varnish and Wingate on hover.",
+      "Do keep the settle motion for strata layers only, and remove it under reduced-motion.",
+      "Do label demo prices and estimated times in caption text next to the numbers they qualify."
+    ],
+    "donts": [
+      "Don't use white cards, shadows, gradients or blurs. The build is flat colour on sky.",
+      "Don't add a green brand button or a map thumbnail. Those are the category default this world rejects.",
+      "Don't use sage for anything except savings, or navajo outside the strata.",
+      "Don't use dashed lines except for the time-limit rim.",
+      "Don't use radii above 8px.",
+      "Don't add a second typeface or sizes between the four ladder steps."
+    ]
+  }
+}
