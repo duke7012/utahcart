@@ -2,7 +2,7 @@ export type Channel = "in_person" | "instacart" | "amazon" | "doordash" | "ubere
 export type Goal = "savings" | "fewest_stops" | "time";
 export type Mode = "car" | "no_car";
 
-export type Item = { id: string; name: string; unit: "oz" | "count" | "lb" | "fl_oz"; typicalSize: number };
+export type Item = { id: string; name: string; unit: "oz" | "count" | "lb" | "fl_oz"; typicalSize: number; aisle?: string };
 /** qty = how many of the item's typicalSize the user needs. */
 export type ListEntry = { itemId: string; qty: number; bulkOk: boolean; brandLock?: string };
 

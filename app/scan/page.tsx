@@ -76,7 +76,7 @@ export default function ScanPage() {
 
   return (
     <>
-      <TopBar right={<Link href="/" className="text-tan underline">Your list</Link>} />
+      <TopBar right={<Link href="/cart" className="text-tan underline">Your cart</Link>} />
       <main className="mx-auto max-w-xl px-4 pb-16 pt-5">
         <h1 className="text-head font-bold">Scan a receipt</h1>
         <p className="mt-1 text-body">

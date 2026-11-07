@@ -61,7 +61,7 @@ export default function PlanPage() {
 
   return (
     <>
-      <TopBar right={<Link href="/" className="text-tan underline">Edit list</Link>} />
+      <TopBar right={<Link href="/cart" className="text-tan underline">Edit cart</Link>} />
       {saved && trip && (
         <div className="mx-auto max-w-xl">
           <p className="flex justify-between gap-3 border-b border-varnish/25 px-4 py-3 text-body">

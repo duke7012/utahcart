@@ -19,6 +19,7 @@ Prices marked "demo price" are placeholders, not real store prices.
 - [Next.js](https://nextjs.org), [React](https://react.dev), [TypeScript](https://www.typescriptlang.org)
 - [Tailwind CSS](https://tailwindcss.com)
 - [Anthropic TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript) (`@anthropic-ai/sdk`) for receipt scanning with Claude
+- Product illustrations generated with [ElevenLabs](https://elevenlabs.io) image generation (gpt-image-2)
 - [Vitest](https://vitest.dev)
 - [ESLint](https://eslint.org) with `eslint-config-next`
 - [Barlow](https://fonts.google.com/specimen/Barlow) (SIL Open Font License) via `next/font/google`

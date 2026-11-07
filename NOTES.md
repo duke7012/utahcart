@@ -39,3 +39,11 @@ Decisions and assumptions made while building. Newest at the bottom.
 - **No API key → the saved example receipt** (`data/example-receipt.json`, a Smith's receipt). "Use the example receipt" on `/scan` always uses it, so the demo works offline. With it saved, the demo's Most savings plan goes from Walmart alone ($125.99) to Smith's + Walmart ($106.49).
 - **Store on the receipt** is guessed from the first word of each store name; the user confirms it in a dropdown before saving.
 - **Not verified yet:** a real Claude vision call (no `ANTHROPIC_API_KEY` on the dev machine) and a real receipt photo.
+
+## Shop redesign (after Phase 2)
+
+- **Shop flow like Instacart:** `/` is now a shop (search, aisle chips, product grid with Add / stepper, floating cart bar); `/cart` holds the cart, trip and goal, and "Find my best plan" opens `/plan`. Same Red Rock look.
+- **Catalog grew to 48 items in 7 aisles** (`data/items.json` has `aisle`). New items get demo prices with the same store factors. The demo cart and its plans are unchanged.
+- **Search is a plain substring match** on item names (no fuzzy matching, per the spec).
+- **"from $X" on a tile** = cheapest in-store price for one typical pack at a store anyone can walk into (Costco excluded without a membership); the cart bar's "about $X" adds those up. The real total comes from the planner.
+- **Product pictures are generated illustrations** (ElevenLabs, model gpt-image-2): three 4x4 sheets cut into 48 JPEG tiles in `public/products/`, each with its prompt embedded. Labeled "Pictures are illustrations" on the shop page. A missing picture falls back to a tan panel with the item name.

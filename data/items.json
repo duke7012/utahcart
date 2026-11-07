@@ -1,122 +1,338 @@
 [
   {
-    "id": "eggs",
-    "name": "Eggs",
-    "unit": "count",
-    "typicalSize": 12
-  },
-  {
-    "id": "milk",
-    "name": "Milk, 2%",
-    "unit": "fl_oz",
-    "typicalSize": 128
-  },
-  {
-    "id": "bread",
-    "name": "Sandwich bread",
-    "unit": "oz",
-    "typicalSize": 20
-  },
-  {
-    "id": "rice",
-    "name": "Long-grain rice",
-    "unit": "oz",
-    "typicalSize": 32
-  },
-  {
-    "id": "chicken",
-    "name": "Chicken breast",
-    "unit": "lb",
-    "typicalSize": 2
-  },
-  {
-    "id": "ground_beef",
-    "name": "Ground beef",
-    "unit": "lb",
-    "typicalSize": 1
-  },
-  {
-    "id": "pasta",
-    "name": "Spaghetti",
-    "unit": "oz",
-    "typicalSize": 16
-  },
-  {
-    "id": "pasta_sauce",
-    "name": "Pasta sauce",
-    "unit": "oz",
-    "typicalSize": 24
-  },
-  {
     "id": "bananas",
     "name": "Bananas",
     "unit": "lb",
-    "typicalSize": 2
+    "typicalSize": 2,
+    "aisle": "produce"
   },
   {
     "id": "apples",
     "name": "Apples",
     "unit": "lb",
-    "typicalSize": 3
+    "typicalSize": 3,
+    "aisle": "produce"
   },
   {
     "id": "onions",
     "name": "Yellow onions",
     "unit": "lb",
-    "typicalSize": 3
+    "typicalSize": 3,
+    "aisle": "produce"
   },
   {
     "id": "potatoes",
     "name": "Russet potatoes",
     "unit": "lb",
-    "typicalSize": 5
+    "typicalSize": 5,
+    "aisle": "produce"
   },
   {
     "id": "lettuce",
     "name": "Romaine lettuce",
     "unit": "count",
-    "typicalSize": 1
+    "typicalSize": 1,
+    "aisle": "produce"
+  },
+  {
+    "id": "tomatoes",
+    "name": "Tomatoes",
+    "unit": "lb",
+    "typicalSize": 1,
+    "aisle": "produce"
+  },
+  {
+    "id": "carrots",
+    "name": "Carrots",
+    "unit": "lb",
+    "typicalSize": 2,
+    "aisle": "produce"
+  },
+  {
+    "id": "broccoli",
+    "name": "Broccoli",
+    "unit": "lb",
+    "typicalSize": 1,
+    "aisle": "produce"
+  },
+  {
+    "id": "avocados",
+    "name": "Avocados",
+    "unit": "count",
+    "typicalSize": 4,
+    "aisle": "produce"
+  },
+  {
+    "id": "oranges",
+    "name": "Oranges",
+    "unit": "lb",
+    "typicalSize": 3,
+    "aisle": "produce"
+  },
+  {
+    "id": "strawberries",
+    "name": "Strawberries",
+    "unit": "oz",
+    "typicalSize": 16,
+    "aisle": "produce"
+  },
+  {
+    "id": "spinach",
+    "name": "Baby spinach",
+    "unit": "oz",
+    "typicalSize": 10,
+    "aisle": "produce"
+  },
+  {
+    "id": "eggs",
+    "name": "Eggs",
+    "unit": "count",
+    "typicalSize": 12,
+    "aisle": "dairy"
+  },
+  {
+    "id": "milk",
+    "name": "Milk, 2%",
+    "unit": "fl_oz",
+    "typicalSize": 128,
+    "aisle": "dairy"
   },
   {
     "id": "cheese",
     "name": "Shredded cheese",
     "unit": "oz",
-    "typicalSize": 16
+    "typicalSize": 16,
+    "aisle": "dairy"
   },
   {
     "id": "yogurt",
     "name": "Greek yogurt",
     "unit": "oz",
-    "typicalSize": 32
+    "typicalSize": 32,
+    "aisle": "dairy"
   },
   {
     "id": "butter",
     "name": "Butter",
     "unit": "oz",
-    "typicalSize": 16
+    "typicalSize": 16,
+    "aisle": "dairy"
+  },
+  {
+    "id": "sour_cream",
+    "name": "Sour cream",
+    "unit": "oz",
+    "typicalSize": 16,
+    "aisle": "dairy"
+  },
+  {
+    "id": "oat_milk",
+    "name": "Oat milk",
+    "unit": "fl_oz",
+    "typicalSize": 64,
+    "aisle": "dairy"
+  },
+  {
+    "id": "orange_juice",
+    "name": "Orange juice",
+    "unit": "fl_oz",
+    "typicalSize": 52,
+    "aisle": "dairy"
+  },
+  {
+    "id": "chicken",
+    "name": "Chicken breast",
+    "unit": "lb",
+    "typicalSize": 2,
+    "aisle": "meat"
+  },
+  {
+    "id": "ground_beef",
+    "name": "Ground beef",
+    "unit": "lb",
+    "typicalSize": 1,
+    "aisle": "meat"
+  },
+  {
+    "id": "bacon",
+    "name": "Bacon",
+    "unit": "oz",
+    "typicalSize": 12,
+    "aisle": "meat"
+  },
+  {
+    "id": "salmon",
+    "name": "Salmon fillet",
+    "unit": "lb",
+    "typicalSize": 1,
+    "aisle": "meat"
+  },
+  {
+    "id": "deli_turkey",
+    "name": "Sliced turkey",
+    "unit": "oz",
+    "typicalSize": 9,
+    "aisle": "meat"
+  },
+  {
+    "id": "pork_chops",
+    "name": "Pork chops",
+    "unit": "lb",
+    "typicalSize": 1.5,
+    "aisle": "meat"
+  },
+  {
+    "id": "bread",
+    "name": "Sandwich bread",
+    "unit": "oz",
+    "typicalSize": 20,
+    "aisle": "bakery"
+  },
+  {
+    "id": "tortillas",
+    "name": "Flour tortillas",
+    "unit": "count",
+    "typicalSize": 10,
+    "aisle": "bakery"
+  },
+  {
+    "id": "bagels",
+    "name": "Bagels",
+    "unit": "count",
+    "typicalSize": 6,
+    "aisle": "bakery"
+  },
+  {
+    "id": "burger_buns",
+    "name": "Burger buns",
+    "unit": "count",
+    "typicalSize": 8,
+    "aisle": "bakery"
+  },
+  {
+    "id": "rice",
+    "name": "Long-grain rice",
+    "unit": "oz",
+    "typicalSize": 32,
+    "aisle": "pantry"
+  },
+  {
+    "id": "pasta",
+    "name": "Spaghetti",
+    "unit": "oz",
+    "typicalSize": 16,
+    "aisle": "pantry"
+  },
+  {
+    "id": "pasta_sauce",
+    "name": "Pasta sauce",
+    "unit": "oz",
+    "typicalSize": 24,
+    "aisle": "pantry"
   },
   {
     "id": "peanut_butter",
     "name": "Peanut butter",
     "unit": "oz",
-    "typicalSize": 16
+    "typicalSize": 16,
+    "aisle": "pantry"
   },
   {
     "id": "cereal",
     "name": "Cereal",
     "unit": "oz",
-    "typicalSize": 18
+    "typicalSize": 18,
+    "aisle": "pantry"
+  },
+  {
+    "id": "oats",
+    "name": "Rolled oats",
+    "unit": "oz",
+    "typicalSize": 42,
+    "aisle": "pantry"
+  },
+  {
+    "id": "black_beans",
+    "name": "Black beans",
+    "unit": "oz",
+    "typicalSize": 15,
+    "aisle": "pantry"
+  },
+  {
+    "id": "canned_tomatoes",
+    "name": "Crushed tomatoes",
+    "unit": "oz",
+    "typicalSize": 28,
+    "aisle": "pantry"
+  },
+  {
+    "id": "olive_oil",
+    "name": "Olive oil",
+    "unit": "fl_oz",
+    "typicalSize": 17,
+    "aisle": "pantry"
+  },
+  {
+    "id": "coffee",
+    "name": "Ground coffee",
+    "unit": "oz",
+    "typicalSize": 12,
+    "aisle": "pantry"
+  },
+  {
+    "id": "ramen",
+    "name": "Instant ramen",
+    "unit": "count",
+    "typicalSize": 12,
+    "aisle": "pantry"
+  },
+  {
+    "id": "frozen_pizza",
+    "name": "Frozen pizza",
+    "unit": "count",
+    "typicalSize": 1,
+    "aisle": "frozen"
+  },
+  {
+    "id": "frozen_veggies",
+    "name": "Frozen mixed vegetables",
+    "unit": "oz",
+    "typicalSize": 12,
+    "aisle": "frozen"
+  },
+  {
+    "id": "ice_cream",
+    "name": "Ice cream",
+    "unit": "fl_oz",
+    "typicalSize": 48,
+    "aisle": "frozen"
   },
   {
     "id": "paper_towels",
     "name": "Paper towels",
     "unit": "count",
-    "typicalSize": 6
+    "typicalSize": 6,
+    "aisle": "household"
   },
   {
     "id": "toilet_paper",
     "name": "Toilet paper",
     "unit": "count",
-    "typicalSize": 12
+    "typicalSize": 12,
+    "aisle": "household"
+  },
+  {
+    "id": "dish_soap",
+    "name": "Dish soap",
+    "unit": "fl_oz",
+    "typicalSize": 19,
+    "aisle": "household"
+  },
+  {
+    "id": "laundry_detergent",
+    "name": "Laundry detergent",
+    "unit": "fl_oz",
+    "typicalSize": 92,
+    "aisle": "household"
   }
 ]
