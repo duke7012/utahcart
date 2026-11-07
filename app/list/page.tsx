@@ -87,12 +87,12 @@ export default function ListPage() {
               const expanded = open === e.itemId;
               return (
                 <li key={e.itemId} className={i ? "border-t border-line" : ""}>
-                  <div className="flex items-center gap-[10px] py-3">
+                  <div className="flex items-center gap-2 py-3">
                     <button type="button" onClick={() => setOpen(expanded ? null : e.itemId)} aria-expanded={expanded}
                       className="flex min-w-0 flex-1 items-center gap-[10px] text-left">
-                      <ProductImage id={item.id} name={item.name} className="size-[60px] shrink-0 rounded-[10px]" />
+                      <ProductImage id={item.id} name={item.name} className="size-11 shrink-0 rounded-[10px]" />
                       <span className="flex min-w-0 flex-col gap-[3px] leading-[1.45]">
-                        <span className="truncate text-[14px]">{item.name}</span>
+                        <span className="line-clamp-2 text-[14px] leading-[1.3]">{item.name}</span>
                         <span className="text-[11px] text-muted">{e.brandLock ? `Brand locked: ${e.brandLock}` : "Any brand"}</span>
                         {e.productQuery && <span className="text-[11px] text-muted">{e.productQuery}</span>}
                         {e.bulkOk && <span className="text-[10px] font-semibold text-bee">✓ Larger package OK</span>}
