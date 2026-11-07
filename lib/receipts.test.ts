@@ -1,7 +1,8 @@
 import { describe, expect, test } from "vitest";
-import { planTrip } from "./planner";
+import { planTrip as plan } from "./planner";
 import { parseScan, toQuotes, withQuotes } from "./receipts";
 import type { CatalogData, Trip } from "./types";
+const planTrip: typeof plan = (list, trip, memberships, data) => plan(list, trip, memberships, data, "demo");
 
 const catalog: CatalogData = {
   stores: [

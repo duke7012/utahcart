@@ -1,6 +1,6 @@
 import { roadMiles, travelMinutes } from "./geo";
-import { channelTerms, quoteFor, round2 } from "./prices";
-import type { CatalogData, Channel, Goal, LineItem, ListEntry, Memberships, Plan, Store, Trip } from "./types";
+import { channelTerms, quotesFor, round2 } from "./prices";
+import type { CatalogData, Channel, Goal, LineItem, ListEntry, Memberships, Plan, PricingMode, Store, Trip } from "./types";
 
 const MAX_STOPS = 3;
 const MOST_OF_PACK = 0.75; // a pack is "bulk overbuy" when the list uses less than this share of it
@@ -14,18 +14,18 @@ function permutations<T>(xs: T[]): T[][] {
 }
 
 /** Each store: skip, in person (if the user can get in), or one online channel it offers. */
-function setups(data: CatalogData, m: Memberships): Option[][] {
+function setups(data: CatalogData, m: Memberships, mode: PricingMode): Option[][] {
   let all: Option[][] = [[]];
   for (const store of data.stores) {
     const choices = store.channels.filter((ch) =>
-      ch === "in_person" ? !store.membershipRequired || !!m[store.membershipRequired] : !!data.channels[ch],
+      ch === "in_person" ? !store.membershipRequired || !!m[store.membershipRequired] : mode === "demo" && !!data.channels[ch],
     );
     all = all.flatMap((s) => [s, ...choices.map((channel) => [...s, { store, channel }])]);
   }
   return all.filter((s) => s.length > 0 && s.filter((o) => o.channel === "in_person").length <= MAX_STOPS);
 }
 
-function evaluate(setup: Option[], list: ListEntry[], trip: Trip, m: Memberships, data: CatalogData): Candidate | null {
+function evaluate(setup: Option[], list: ListEntry[], trip: Trip, m: Memberships, data: CatalogData, mode: PricingMode): Candidate | null {
   const lines: LineItem[][] = setup.map(() => []);
   const warnings = new Set<string>();
 
@@ -33,12 +33,10 @@ function evaluate(setup: Option[], list: ListEntry[], trip: Trip, m: Memberships
     const item = data.items.find((i) => i.id === entry.itemId);
     if (!item) return null;
     const needed = entry.qty * item.typicalSize;
-    const cands = setup.flatMap((o, idx) => {
-      const quote = quoteFor(data, item.id, o.store, o.channel, m);
-      if (!quote) return [];
+    const cands = setup.flatMap((o, idx) => quotesFor(data, entry, o.store, o.channel, m, mode).map((quote) => {
       const packs = Math.ceil(needed / quote.size - 1e-9);
-      return [{ idx, quote, packs, cost: packs * quote.price, unit: quote.price / quote.size, overbuy: needed / (packs * quote.size) < MOST_OF_PACK }];
-    });
+      return { idx, quote, packs, cost: packs * quote.price, unit: quote.price / quote.size, overbuy: needed / (packs * quote.size) < MOST_OF_PACK };
+    }));
     if (!cands.length) return null; // this setup can't cover the list
     const fits = entry.bulkOk ? cands : cands.filter((c) => !c.overbuy);
     const pool = fits.length ? fits : cands;
@@ -47,6 +45,7 @@ function evaluate(setup: Option[], list: ListEntry[], trip: Trip, m: Memberships
       warnings.add(`Bulk pack: ${item.name} comes in ${best.quote.size * best.packs} ${item.unit}, you need ${needed}.`);
     }
     if (best.quote.source === "estimate") warnings.add("Some online prices are estimates (in-store price x typical markup).");
+    if (best.quote.offer && !best.quote.offer.locationVerified) warnings.add("Local branch price unconfirmed. Stops are proposed; totals and savings are estimates.");
     lines[best.idx].push({ itemId: item.id, qty: entry.qty, quote: best.quote, packs: best.packs, cost: round2(best.cost) });
   }
 
@@ -93,6 +92,7 @@ function evaluate(setup: Option[], list: ListEntry[], trip: Trip, m: Memberships
     minutes: Math.round(minutes),
     miles: Math.round(best.miles * 10) / 10,
     stopCount: inPerson.length,
+    estimated: mode === "demo" || lines.flat().some((l) => l.quote.source === "estimate" || (l.quote.offer && !l.quote.offer.locationVerified)),
     warnings: [...warnings],
   };
 }
@@ -104,9 +104,10 @@ const PICK: Record<Goal, (a: Candidate, b: Candidate) => number> = {
 };
 
 /** Best plan per goal, in order [savings, fewest_stops, time]. Empty when nothing covers the list in time. */
-export function planTrip(list: ListEntry[], trip: Trip, memberships: Memberships, data: CatalogData): Plan[] {
-  const cands = setups(data, memberships)
-    .map((s) => evaluate(s, list, trip, memberships, data))
+export function planTrip(list: ListEntry[], trip: Trip, memberships: Memberships, data: CatalogData, mode: PricingMode = "real"): Plan[] {
+  if (!list.length) return [];
+  const cands = setups(data, memberships, mode)
+    .map((s) => evaluate(s, list, trip, memberships, data, mode))
     .filter((c): c is Candidate => c !== null);
   if (!cands.length) return [];
 
@@ -115,6 +116,12 @@ export function planTrip(list: ListEntry[], trip: Trip, memberships: Memberships
 
   return (Object.keys(PICK) as Goal[]).map((goal) => {
     const c = [...cands].sort(PICK[goal])[0];
-    return { ...c, goal, savingsVsOneStore: oneStore === undefined ? 0 : round2(oneStore - c.money) };
+    return { ...c, estimated: c.estimated || cands.some((s) => s.money === oneStore && s.estimated), goal, savingsVsOneStore: oneStore === undefined ? null : round2(oneStore - c.money) };
   });
+}
+
+/** Missing prices are explicit diagnostics; they never become zero or disappear from a basket. */
+export function priceCoverage(list: ListEntry[], memberships: Memberships, data: CatalogData, mode: PricingMode = "real") {
+  return list.map((entry) => ({ itemId: entry.itemId, available: data.stores.some((store) =>
+    (!store.membershipRequired || memberships[store.membershipRequired]) && quotesFor(data, entry, store, "in_person", memberships, mode).length > 0) }));
 }

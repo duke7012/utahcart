@@ -4,7 +4,26 @@ export type Mode = "car" | "no_car";
 
 export type Item = { id: string; name: string; unit: "oz" | "count" | "lb" | "fl_oz"; typicalSize: number; aisle?: string; /** Store search term for real prices. */ search?: string };
 /** qty = how many of the item's typicalSize the user needs. */
-export type ListEntry = { itemId: string; qty: number; bulkOk: boolean; brandLock?: string };
+export type ListEntry = { itemId: string; qty: number; bulkOk: boolean; brandLock?: string; productQuery?: string };
+export type PricingMode = "real" | "demo";
+export type Match = "exact" | "substitute" | "reject" | "uncertain";
+export type OfferChannel = "in_store" | "pickup" | "delivery" | "shipping" | "unknown";
+export type Offer = {
+  id: string; providerProductId: string | null; itemId: string; title: string; brand: string | null;
+  packageQuantity: number | null; packageUnit: Item["unit"] | null; packCount: number | null;
+  priceCents: number; currency: string; unitPriceCents: number | null;
+  merchant: string; match: Match; matchReason: string; matchingConfirmed: boolean;
+  channel: OfferChannel; storeId: string | null; storeLocationId: string | null;
+  storeAddress: string | null; locationVerified: boolean;
+  sourceType: "google_shopping" | "kroger_api" | "manual" | "receipt" | "retailer_page";
+  sourceUrl: string | null; retrievedAt: string; observedAt: string | null; retailerUpdatedAt: string | null;
+  conditions: string[]; raw: Record<string, unknown>;
+};
+export type OfferSnapshot = { version: 1; requestKey: string; offers: Offer[]; signature: string };
+export type PriceResult = {
+  status: "ok" | "empty" | "setup" | "error"; offers: Offer[]; snapshot?: OfferSnapshot;
+  matching: "confirmed" | "unconfirmed"; cached: boolean; message?: string;
+};
 
 export type PriceQuote = {
   itemId: string;
@@ -13,11 +32,14 @@ export type PriceQuote = {
   price: number;
   size: number;
   unit: Item["unit"];
-  source: "demo" | "seed" | "receipt" | "shop" | "estimate";
+  source: "demo" | "seed" | "receipt" | "shop" | "estimate" | "google_shopping";
   seenAt: string;
   link?: string;
   /** Store's own product name, when the price came from the store (Kroger API or the team's sheet). */
   product?: string;
+  /** Validated discovery metadata, never accepted from an unsigned browser quote. */
+  offer?: Offer;
+  demo?: boolean;
 };
 
 export type Memberships = {
@@ -93,6 +115,7 @@ export type Plan = {
   minutes: number;
   miles: number;
   stopCount: number;
-  savingsVsOneStore: number;
+  savingsVsOneStore: number | null;
+  estimated: boolean;
   warnings: string[];
 };

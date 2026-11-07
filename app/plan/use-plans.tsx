@@ -10,7 +10,7 @@ export type PlansState =
   | { status: "loading" }
   | { status: "setup"; missing: string[] }
   | { status: "error"; message: string }
-  | { status: "ok"; plans: Plan[] };
+  | { status: "ok"; plans: Plan[]; coverage: { itemId: string; available: boolean }[] };
 
 export const CHANNEL: Record<string, string> = { instacart: "Instacart", amazon: "Amazon", doordash: "DoorDash", ubereats: "Uber Eats" };
 /** "Walmart Supercenter (South Salt Lake)" -> "Walmart" */
@@ -25,7 +25,11 @@ export function usePlans() {
     if (!tripReady(s)) return setState({ status: "setup", missing: missingSteps(s) });
     setSaved(s);
     fetch("/api/plan", { method: "POST", headers: { "content-type": "application/json" }, body: planRequest(s) })
-      .then(async (r) => (r.ok ? setState({ status: "ok", plans: (await r.json()).plans }) : Promise.reject((await r.json()).error)))
+      .then(async (r) => {
+        const body = await r.json();
+        if (!r.ok) throw body.error;
+        setState({ status: "ok", plans: body.plans, coverage: body.coverage ?? [] });
+      })
       .catch((err) => setState({ status: "error", message: typeof err === "string" ? err : "Couldn't reach the planner. Check your connection and try again." }));
   }, []);
   const trip: Trip | null = saved && toTrip(saved.trip);

@@ -6,6 +6,8 @@ import { useState } from "react";
 import { ArrowRight, ArrowUpRight, Car, ChevronDown, CircleCheck, Circle, Footprints, MapPin, Sparkles, Trash2 } from "lucide-react";
 import { DEMO_SENTENCE, type AskResult } from "@/lib/ask";
 import { itemById, places } from "@/lib/catalog";
+import { DEFAULT_SEARCH_LOCATION } from "@/lib/offers";
+import { ItemPrices, usePrices } from "./prices";
 import { addMinutes, ampm, minutesBetween, missingSteps, nowRounded, type Saved } from "@/lib/session";
 import type { Place } from "@/lib/types";
 import { GOALS, PriceNote, ProductImage, Qty, Screen, Intro, SectionHead, Toggle, card, fine, primaryBtn, useCart } from "../ui";
@@ -17,6 +19,10 @@ const field = "w-full rounded-[10px] bg-canvas p-3 text-left";
 export default function ListPage() {
   const cart = useCart();
   const { s, update, setItem } = cart;
+  const location = s.searchLocation ?? DEFAULT_SEARCH_LOCATION;
+  const prices = usePrices(location);
+  const patchItem = (itemId: string, patch: { brandLock?: string; productQuery?: string }) =>
+    update({ ...s, list: s.list.map((e) => e.itemId === itemId ? { ...e, ...patch } : e) });
   const [open, setOpen] = useState<string | null>(null);
   const [geoError, setGeoError] = useState("");
   const count = s.list.length;
@@ -47,6 +53,25 @@ export default function ListPage() {
 
       <AskCard current={s} onPlanned={update} />
 
+      <section className={`${card} flex flex-col gap-3 p-[18px]`} aria-label="Price discovery">
+        <SectionHead title="Check published prices" />
+        <label className="text-[12px]">Search location
+          <input value={location} maxLength={200} onChange={(e) => update({ ...s, searchLocation: e.target.value })}
+            className="mt-1 w-full rounded-[10px] border border-line p-3 text-[14px]" />
+        </label>
+        <label className="text-[12px]">Prices used in plans
+          <select value={s.priceMode ?? "real"} onChange={(e) => update({ ...s, priceMode: e.target.value as "real" | "demo" })}
+            className="mt-1 w-full rounded-[10px] border border-line p-3 text-[14px]">
+            <option value="real">Real observations only</option><option value="demo">Example mode · includes demo prices</option>
+          </select>
+        </label>
+        {s.priceMode === "demo" && <p className="rounded-[10px] bg-amber-tint p-3 text-[12px]">Example mode includes invented demo prices and assumed delivery markups.</p>}
+        <button type="button" disabled={!count || prices.anyBusy || !location.trim()} onClick={() => prices.refresh(s.list)} className={primaryBtn}>
+          {prices.anyBusy ? "Checking your list…" : "Find / refresh list prices"}
+        </button>
+        <p className={fine}>One Google Shopping search per product query. Results are published offers, not guaranteed inventory or local branch prices. Unknown channels and delivery fees stay browse-only.</p>
+      </section>
+
       <section className="flex flex-col gap-[14px]">
         <SectionHead title="Your list" right={<Link href="/add" className="text-[12px] font-semibold text-bee no-underline">+ Add item</Link>} />
         {count === 0 ? (
@@ -67,26 +92,35 @@ export default function ListPage() {
                       <ProductImage id={item.id} name={item.name} className="size-[60px] shrink-0 rounded-[10px]" />
                       <span className="flex min-w-0 flex-col gap-[3px] leading-[1.45]">
                         <span className="truncate text-[14px]">{item.name}</span>
-                        <span className="text-[11px] text-muted">Any brand</span>
+                        <span className="text-[11px] text-muted">{e.brandLock ? `Brand locked: ${e.brandLock}` : "Any brand"}</span>
+                        {e.productQuery && <span className="text-[11px] text-muted">{e.productQuery}</span>}
                         {e.bulkOk && <span className="text-[10px] font-semibold text-bee">✓ Bulk OK</span>}
                       </span>
                     </button>
                     <Qty item={item} qty={e.qty} onChange={(n) => setItem(e.itemId, n)} />
                   </div>
                   {expanded && (
-                    <div className="mb-3 flex items-center justify-between gap-3 rounded-[12px] bg-canvas px-3 py-2.5">
+                    <div className="mb-3 flex flex-col gap-3 rounded-[12px] bg-canvas px-3 py-2.5">
+                      <label className="text-[12px]">Product / variety
+                        <input value={e.productQuery ?? ""} maxLength={200} placeholder={item.name} onChange={(ev) => patchItem(e.itemId, { productQuery: ev.target.value })} className="mt-1 w-full rounded-[8px] border border-line bg-white p-2" />
+                      </label>
+                      <label className="text-[12px]">Brand lock · optional
+                        <input value={e.brandLock ?? ""} maxLength={100} placeholder="Any brand" onChange={(ev) => patchItem(e.itemId, { brandLock: ev.target.value })} className="mt-1 w-full rounded-[8px] border border-line bg-white p-2" />
+                      </label>
+                      <p className={fine}>Requested package: {item.typicalSize} {item.unit.replace("_", " ")}. Amounts count packages of this size.</p>
                       <Toggle label="Bulk OK" hint="Allow a larger pack for this item." on={e.bulkOk} onChange={(b) => setItem(e.itemId, e.qty, b)} />
                       <button type="button" onClick={() => setItem(e.itemId, 0)} className="flex items-center gap-1 text-[12px] font-semibold text-carrot">
                         <Trash2 size={14} aria-hidden /> Remove
                       </button>
                     </div>
                   )}
+                  <ItemPrices entry={e} result={prices.result(e)} busy={prices.busy(e)} onRefresh={() => prices.refresh([e])} />
                 </li>
               );
             })}
           </ul>
         )}
-        <p className={fine}>Tap an item for Bulk OK. We won’t suggest a larger pack unless you allow it.</p>
+        <p className={fine}>Tap an item for product details, brand lock and Bulk OK. Bulk packs without Bulk OK are avoided when a suitable smaller pack is available; otherwise the plan warns about overbuying.</p>
       </section>
 
       <section className="flex flex-col gap-[14px]">
@@ -173,7 +207,7 @@ export default function ListPage() {
         {missing.length > 0 && (
           <p className="text-[12px] leading-[1.45] text-muted">To plan: {missing.join(" · ")}.</p>
         )}
-        <p className={fine}><PriceNote /> No account needed. Your list and preferences stay on this device.</p>
+        <p className={fine}>{s.priceMode === "demo" ? <PriceNote /> : "Real mode requires confirmed product matches or your confirmed receipts. Missing prices never count as zero."} No account needed. Your list and preferences stay on this device.</p>
       </div>
     </Screen>
   );
@@ -208,10 +242,11 @@ function AskCard({ current, onPlanned }: { current: Saved; onPlanned: (s: Saved)
     setState({ busy: true });
     try {
       const r = await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ sentence }) });
-      const j = (await r.json()) as AskResult & { error?: string };
+      const j = (await r.json()) as AskResult & { error?: string; example?: boolean };
       if (!r.ok) return setState({ busy: false, error: j.error ?? "Couldn't plan that. Try again." });
       const place = (id: string, fallback: Place | null) => places.find((p) => p.id === id) ?? fallback;
       onPlanned({
+        ...current, priceMode: j.example ? "demo" : current.priceMode ?? "real",
         list: j.list, goal: j.goal,
         trip: { from: place(j.from, current.trip.from), to: place(j.to, current.trip.to), mode: j.mode,
           leave: j.leave || current.trip.leave, homeBy: j.homeBy || current.trip.homeBy },

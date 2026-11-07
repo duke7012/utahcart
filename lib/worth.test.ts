@@ -1,6 +1,7 @@
 import { expect, test } from "vitest";
-import { worth } from "./worth";
+import { worth as compare } from "./worth";
 import type { CatalogData, Trip } from "./types";
+const worth: typeof compare = (list, trip, m, data, ids, goal) => compare(list, trip, m, data, ids, goal, "demo");
 
 const q = (storeId: string, itemId: string, price: number, size: number) =>
   ({ itemId, storeId, channel: "in_person" as const, price, size, unit: "lb" as const, source: "demo" as const, seenAt: "2026-11-06" });

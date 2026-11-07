@@ -1,4 +1,4 @@
-import Anthropic from "@anthropic-ai/sdk";
+import { AiError, aiConfigured, generateJson } from "@/lib/ai-server";
 import { isDemoSentence, parseAsk, type AskResult } from "@/lib/ask";
 import { catalog, places } from "@/lib/catalog";
 import { DEMO } from "@/lib/session";
@@ -57,26 +57,17 @@ export async function POST(req: Request) {
 
   // The demo never depends on the network; without a key every sentence gets the saved demo result.
   if (isDemoSentence(sentence)) return Response.json({ ...DEMO_RESULT, example: true });
-  if (!process.env.ANTHROPIC_API_KEY) return Response.json({ ...DEMO_RESULT, example: true, note: "No AI key is set, so this is the demo cart." });
+  if (!aiConfigured()) return Response.json({ ...DEMO_RESULT, example: true, note: "No Gemini key is set, so this is the demo cart." });
 
   try {
-    const res = await new Anthropic().beta.messages.create({
-      model: "claude-opus-5-5",
-      max_tokens: 16000,
-      betas: ["server-side-fallback-2026-07-01"],
-      fallbacks: "default",
-      system: SYSTEM,
-      output_config: { effort: "low", format: { type: "json_schema", schema: SCHEMA } },
-      messages: [{ role: "user", content: sentence }],
-    });
-    if (res.stop_reason === "refusal") return fail(422, "BeeLow can't plan that one. Try describing a grocery run.");
-    const text = res.content.flatMap((b) => (b.type === "text" ? [b.text] : [])).join("");
-    const parsed = parseAsk(text, ids, placeIds);
+    const res = await generateJson({ system: SYSTEM, schema: SCHEMA, prompt: sentence, maxOutputTokens: 8000 });
+    const parsed = parseAsk(JSON.stringify(res), ids, placeIds);
     if (!parsed) return fail(422, "Couldn't find groceries in that. Try naming a few items or a meal.");
     return Response.json(parsed);
   } catch (err) {
-    if (err instanceof Anthropic.RateLimitError) return fail(429, "The planner is busy. Wait a few seconds and try again.");
-    if (err instanceof Anthropic.APIError) return Response.json({ ...DEMO_RESULT, example: true, note: "The AI planner is unavailable, so this is the demo cart." });
+    if (err instanceof AiError && err.code === "rate_limit") return fail(429, err.message);
+    if (err instanceof AiError && ["refusal", "invalid_response"].includes(err.code)) return fail(422, err.message);
+    if (err instanceof AiError) return Response.json({ ...DEMO_RESULT, example: true, note: `${err.message} This is the demo cart.` });
     throw err;
   }
 }

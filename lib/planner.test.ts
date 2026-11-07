@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
-import { planTrip } from "./planner";
+import { planTrip as plan } from "./planner";
 import type { CatalogData, ListEntry, PriceQuote, Trip } from "./types";
+const planTrip: typeof plan = (list, trip, memberships, data) => plan(list, trip, memberships, data, "demo");
 
 // Straight north-south trip; "near" sits on the line, "far" is a ~6 mi detour east.
 const trip: Trip = {

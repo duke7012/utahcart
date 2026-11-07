@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Next.js (App Router) + TypeScript + Tailwind CSS, deployed on Vercel. Anthropic TypeScript SDK (`@anthropic-ai/sdk`), called only from server route handlers. Vitest for tests. Optional: Leaflet + react-leaflet with OpenStreetMap tiles (OSM attribution shown). Storage: JSON seed files, an in-memory store for scanned receipts and shop posts, and `localStorage` for memberships and settings. Fixed by the build spec (`CLAUDE.md`).
+Next.js (App Router) + TypeScript + Tailwind CSS, deployed on Vercel. Gemini REST API for AI, called only from server route handlers. Vitest for tests. Storage: JSON catalog snapshots, a bounded server price cache, and `localStorage` for lists, confirmed receipts, signed offers and memberships. The current Gemini integration replaces the original Anthropic provider described in `CLAUDE.md`.
 
 ## Users
 
@@ -40,7 +40,7 @@ What a neighboring product cannot truthfully copy: BeeLow plans across **in-pers
 - **Planner** (`lib/planner.ts`, pure TypeScript, unit tested): exact search over 4 stores, each skipped, in person, or online via one channel; at most 3 in-person stops. Items go to the cheapest allowed option by unit price. Returns three plans, one per goal, each with money, minutes, stop count, savings versus the cheapest single store, and warnings.
 - **Memberships gate access.** Warehouse memberships gate in-person entry; delivery memberships change fees and markups. Memberships are toggles, not account links.
 - **Travel times are estimates** (haversine x 1.3 road factor, per-mode speed), shown as "about N min". The maps app shows the real time after handoff.
-- **Receipt / shelf-tag scan** (Claude vision) turns a photo into price lines the user reviews in an editable table before saving. The image and card details are never stored.
+- **Receipt / shelf-tag scan** (Gemini image understanding) turns a photo into price lines the user reviews in an editable table before saving. BeeLow never stores the image or card details; the scanner explains Gemini's free-tier data policy.
 - **Plain-sentence planner** (Tier 2): a sentence becomes list, goal, mode, and time limit.
 - **Membership wallet with "is it worth it?"** (fee versus savings per trip), **bulk-overbuy warnings** (Tier 2/3).
 - **Business portal** for local shops to post prices: Tier 2, only if time allows.

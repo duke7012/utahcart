@@ -18,7 +18,7 @@ export function parseScan(text: string, itemIds: string[]): ScanResult | null {
   const r = raw as { store?: unknown; date?: unknown; lines?: unknown };
   if (!r || !Array.isArray(r.lines)) return null;
   const lines = r.lines.flatMap((l: Partial<ScanLine> | null): ScanLine[] => {
-    if (!l || typeof l.rawName !== "string" || !pos(l.price) || !pos(l.size) || !UNITS.has(l.unit as Item["unit"])) return [];
+    if (!l || typeof l.rawName !== "string" || !pos(l.price) || Math.round(l.price * 100) <= 0 || !pos(l.size) || !UNITS.has(l.unit as Item["unit"])) return [];
     const itemId = typeof l.itemId === "string" && itemIds.includes(l.itemId) ? l.itemId : null;
     return [{ rawName: l.rawName.slice(0, 80), itemId, price: l.price, size: l.size, unit: l.unit as Item["unit"] }];
   });
@@ -26,10 +26,11 @@ export function parseScan(text: string, itemIds: string[]): ScanResult | null {
 }
 
 /** Matched lines become in-store quotes with source "receipt". */
-export const toQuotes = (storeId: string, date: string, lines: ScanLine[]): PriceQuote[] =>
+export const toQuotes = (storeId: string, date: string, lines: ScanLine[], demo = false): PriceQuote[] =>
   lines.flatMap((l) =>
-    l.itemId
-      ? [{ itemId: l.itemId, storeId, channel: "in_person" as const, price: l.price, size: l.size, unit: l.unit, source: "receipt" as const,
+    l.itemId && pos(l.price) && Math.round(l.price * 100) > 0 && pos(l.size)
+      ? [{ itemId: l.itemId, storeId, channel: "in_person" as const, price: Math.round(l.price * 100) / 100, size: l.size, unit: l.unit, source: demo ? "demo" as const : "receipt" as const,
+           ...(l.rawName ? { product: l.rawName.slice(0, 80) } : {}), ...(demo ? { demo: true } : {}),
            seenAt: isDate(date) ? date : new Date().toISOString().slice(0, 10) }]
       : [],
   );
@@ -42,6 +43,6 @@ export function cleanQuotes(input: unknown, data: CatalogData): PriceQuote[] {
   return input.slice(0, 500).flatMap((q: Partial<PriceQuote> | null): PriceQuote[] => {
     if (!q || !data.stores.some((s) => s.id === q.storeId) || !data.items.some((i) => i.id === q.itemId)) return [];
     if (!pos(q.price) || !pos(q.size) || !UNITS.has(q.unit as Item["unit"])) return [];
-    return toQuotes(q.storeId!, isDate(q.seenAt) ? q.seenAt : "", [{ rawName: "", itemId: q.itemId!, price: q.price, size: q.size, unit: q.unit! }]);
+    return toQuotes(q.storeId!, isDate(q.seenAt) ? q.seenAt : "", [{ rawName: typeof q.product === "string" ? q.product : "", itemId: q.itemId!, price: q.price, size: q.size, unit: q.unit! }], q.demo === true);
   });
 }

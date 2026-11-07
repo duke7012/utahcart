@@ -1,9 +1,11 @@
 import { places } from "./catalog";
-import type { Goal, ListEntry, Memberships, Mode, Place, PriceQuote, Trip } from "./types";
+import { DEFAULT_SEARCH_LOCATION } from "./offers";
+import { currentSnapshots } from "./price-session";
+import type { Goal, ListEntry, Memberships, Mode, Place, PriceQuote, PricingMode, Trip } from "./types";
 
 /** Nothing is chosen for a new visitor: places, mode and goal start as null, times as "". `to: null` = back to the start. */
 export type TripForm = { from: Place | null; to: Place | null; mode: Mode | null; leave: string; homeBy: string };
-export type Saved = { list: ListEntry[]; trip: TripForm; goal: Goal | null };
+export type Saved = { list: ListEntry[]; trip: TripForm; goal: Goal | null; priceMode?: PricingMode; searchLocation?: string };
 /** A Saved whose trip and goal are all chosen. */
 export type ReadySaved = Saved & { trip: TripForm & { from: Place; mode: Mode }; goal: Goal };
 
@@ -11,6 +13,7 @@ const e = (itemId: string, qty: number, bulkOk = false): ListEntry => ({ itemId,
 
 /** "Groceries for 3 roommates this week, leaving the U at 5, no car, home by 6:30, cheapest." */
 export const DEMO: ReadySaved = {
+  priceMode: "demo",
   list: [
     e("eggs", 2), e("milk", 2), e("bread", 2), e("rice", 1, true), e("chicken", 3), e("ground_beef", 2),
     e("pasta", 2), e("pasta_sauce", 2), e("bananas", 1), e("apples", 1), e("onions", 1), e("potatoes", 1),
@@ -22,7 +25,7 @@ export const DEMO: ReadySaved = {
 };
 
 /** A brand-new visitor: empty list, no trip, no goal. */
-export const EMPTY: Saved = { list: [], trip: { from: null, to: null, mode: null, leave: "", homeBy: "" }, goal: null };
+export const EMPTY: Saved = { list: [], trip: { from: null, to: null, mode: null, leave: "", homeBy: "" }, goal: null, priceMode: "real", searchLocation: DEFAULT_SEARCH_LOCATION };
 
 // beelow:v2 (was utahcart:v1, which pre-filled the demo cart): every browser starts empty after the rebrand.
 const KEY = "beelow:v2";
@@ -116,7 +119,9 @@ export function saveMemberships(m: Memberships) {
 /** Everything /api/plan needs, from this browser's saved cart, memberships and receipt prices; null until the trip is set up. */
 export const planRequest = (s: Saved, worth: (keyof Memberships)[] = []) =>
   tripReady(s)
-    ? JSON.stringify({ list: s.list, trip: toTrip(s.trip), memberships: loadMemberships(), quotes: loadReceipts(), worth, goal: s.goal })
+    ? JSON.stringify({ list: s.list, trip: toTrip(s.trip), memberships: loadMemberships(), quotes: loadReceipts(), worth, goal: s.goal,
+      priceMode: s.priceMode ?? "real", searchLocation: s.searchLocation ?? DEFAULT_SEARCH_LOCATION,
+      offerSnapshots: currentSnapshots(s.list, s.searchLocation ?? DEFAULT_SEARCH_LOCATION) })
     : null;
 
 /** Current time rounded up to 5 minutes, "HH:MM". */

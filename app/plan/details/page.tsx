@@ -9,7 +9,7 @@ import { travelMinutes } from "@/lib/geo";
 import { appleMapsUrl, googleMapsUrl, legs, orderUrl } from "@/lib/handoff";
 import { addMinutes, ampm } from "@/lib/session";
 import type { Goal, LineItem, Plan, Trip } from "@/lib/types";
-import { GOALS, PriceNote, Screen, UNIT_LABEL, card, fine, money, primaryBtn } from "../../ui";
+import { GOALS, Screen, UNIT_LABEL, card, fine, money, primaryBtn } from "../../ui";
 import { CHANNEL, SetupCard, brand, breakdown, usePlans } from "../use-plans";
 
 export default function DetailsPage() {
@@ -65,9 +65,10 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
       <div className="flex flex-col gap-2 rounded-[18px] bg-honey-tint p-[18px]">
         <div className="flex items-start justify-between">
           <p className="text-[34px] font-bold leading-none tracking-[-1px]">{money(plan.money)}</p>
-          {plan.savingsVsOneStore >= 0.5 && <span className="text-[11px] font-semibold text-leaf">SAVE {money(plan.savingsVsOneStore)}</span>}
+          {plan.savingsVsOneStore !== null && plan.savingsVsOneStore >= 0.5 && <span className="text-[11px] font-semibold text-leaf">{plan.estimated ? "EST. SAVINGS" : "SAVE"} {money(plan.savingsVsOneStore)}</span>}
         </div>
         <p className="text-[13px]">{stops} in-person {stops === 1 ? "stop" : "stops"} · ~{plan.minutes} min to home</p>
+        <p className={fine}>{plan.estimated ? "Estimated total and savings." : "Total before tax and tips."} Taxes and tips excluded.</p>
         <p className={fine}>{leave ? `Leave ${ampm(leave)} → home about ${ampm(addMinutes(leave, plan.minutes))}. ` : ""}Estimates, not live timing.</p>
       </div>
 
@@ -102,6 +103,7 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
                   <div>
                     <p className="text-[10px] font-semibold tracking-[0.6px] text-bee">{i === 0 ? "FIRST STOP" : "THEN"} · ~{mins} MIN {trip.mode === "car" ? "DRIVE" : "TRANSIT"}, ~{trip.minutesPerStop} MIN SHOP</p>
                     <p className="text-[16px] font-semibold">{storeById(s.storeId)?.name}</p>
+                    {s.items.some((l) => l.quote.offer && !l.quote.offer.locationVerified) && <p className="text-[11px] text-muted">Proposed stop · local branch price unconfirmed</p>}
                   </div>
                   <p className="text-[16px] font-semibold">{money(s.items.reduce((t, l) => t + l.cost, 0))}</p>
                 </div>
@@ -147,14 +149,15 @@ function PlanDetail({ plan, trip, label, leave }: { plan: Plan; trip: Trip; labe
       ))}
 
       <div className={`${card} flex flex-col gap-2.5 p-[18px] text-[13px]`}>
-        <h2 className="mb-1 text-[16px]">Every dollar included</h2>
+        <h2 className="mb-1 text-[16px]">Costs used in this plan</h2>
         <Row k="Items" v={money(b.items)} />
         <Row k="Delivery fees" v={money(b.fees)} />
         <Row k={trip.mode === "car" ? `Driving · ${plan.miles} mi at $0.30` : "Driving · no car"} v={money(b.driving)} />
         <div className="h-px bg-line" />
         <Row k="Estimated total" v={money(plan.money)} strong />
+        <p className={fine}>Tax and tips are unknown and excluded. Unknown delivery fees are never assumed to be zero.</p>
       </div>
-      <p className={fine}><PriceNote /> No live inventory or arrival times. BeeLow doesn’t provide navigation, checkout or payment.</p>
+      <p className={fine}>Every item shows its price source. No live inventory or arrival times. BeeLow doesn’t provide navigation, checkout or payment.</p>
     </>
   );
 }
@@ -185,10 +188,11 @@ function Lines({ lines, got, prefix, onToggle }: { lines: LineItem[]; got: Recor
   );
 }
 
-const day = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+const day = (d: string) => new Date(`${d.slice(0, 10)}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric" });
 
 /** Where this price came from, in plain words. */
 function sourceLabel(q: LineItem["quote"]): string {
+  if (q.source === "google_shopping") return `Google Shopping, retrieved ${day(q.seenAt)} · retailer update unknown${q.offer?.locationVerified ? "" : " · branch unconfirmed"}`;
   if (q.source === "seed") return q.storeId === "smiths" ? `Smith’s price via Kroger, ${day(q.seenAt)}` : `store price, checked ${day(q.seenAt)}`;
   if (q.source === "receipt") return `receipt price, ${day(q.seenAt)}`;
   if (q.source === "estimate") return "estimate from in-store price";

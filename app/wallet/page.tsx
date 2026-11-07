@@ -65,7 +65,7 @@ export default function WalletPage() {
             {PRICED.includes(id) && (
               <p className="ml-11 mt-1.5 text-[12px] text-muted">
                 {!ready ? "Add items and a trip to see what this saves." : checking || !w ? "Checking your cart…" : w.savingsPerTrip === null ? "No plan fits your trip to compare."
-                  : w.savingsPerTrip < 0.5 ? "Saves nothing on your current cart." : <span className="font-semibold text-leaf">Saves {money(w.savingsPerTrip)} on this cart</span>}
+                  : w.savingsPerTrip < 0.5 ? "Saves nothing on your current cart." : <span className="font-semibold text-leaf">{w.estimated ? "Estimated savings" : "Saves"} {money(w.savingsPerTrip)} on this cart</span>}
               </p>
             )}
           </li>
@@ -92,7 +92,7 @@ export default function WalletPage() {
         {!m.costco && (
           <div className={`${card} flex flex-col gap-2 p-[18px]`}>
             <p className="flex items-center gap-2 text-[14px]"><Lock size={16} aria-hidden /> Costco in person is locked</p>
-            <p className={fine}>No warehouse membership selected. Costco via Instacart can still be used at the non-member markup. Instacart+ waives the delivery fee on bigger orders—not warehouse access.</p>
+            <p className={fine}>No warehouse membership selected. Costco via Instacart offers remain browsable. Assumed delivery fees and markups are used only in example mode; Instacart+ does not grant warehouse access.</p>
           </div>
         )}
       </section>
@@ -111,6 +111,8 @@ export default function WalletPage() {
           <p className="text-[15px] opacity-90">Add items and a trip on your list, and BeeLow works out whether Costco pays off for you.</p>
         ) : checking || !costco ? (
           <p className="text-[15px] opacity-90">Checking your cart…</p>
+        ) : costco.savingsPerTrip === null ? (
+          <p className="text-[15px] opacity-90">A complete priced plan is needed to compare this membership. Find prices or confirm a receipt first.</p>
         ) : trips ? (
           <>
             <p className="text-[24px] leading-[1.2]">It takes {trips} trips like this to cover the fee.</p>
@@ -125,7 +127,7 @@ export default function WalletPage() {
         {ic?.savingsPerTrip ? (
           <p className="border-t border-white/25 pt-3 text-[12px] opacity-90">Instacart+ saves {money(ic.savingsPerTrip)} on this cart; at {money(info("instacartPlus").feePerYear)}/yr it pays off after {Math.ceil(info("instacartPlus").feePerYear / ic.savingsPerTrip)} trips like this.</p>
         ) : null}
-        <p className="text-[11px] leading-[1.5] opacity-80">Not a forecast. Uses your current cart, trip and goal.</p>
+        <p className="text-[11px] leading-[1.5] opacity-80">{costco?.estimated ? "Estimated savings. " : ""}Uses your current cart, trip and goal, before tax and tips.</p>
       </div>
 
       <section className="flex flex-col gap-3">
@@ -144,7 +146,7 @@ export default function WalletPage() {
       </section>
 
       <button type="button" onClick={() => {
-        try { ["utahcart:v1", "utahcart:receipts", "utahcart:memberships"].forEach((k) => localStorage.removeItem(k)); } catch {}
+        try { ["utahcart:v1", "beelow:v2", "beelow:prices:v1", "utahcart:receipts", "utahcart:memberships"].forEach((k) => localStorage.removeItem(k)); } catch {}
         setM({}); setCleared(true);
       }} className="flex items-center justify-between text-[13px] font-semibold text-carrot">
         {cleared ? "Saved data cleared" : "Clear saved data on this device"} <Trash2 size={16} aria-hidden />

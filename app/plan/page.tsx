@@ -17,7 +17,8 @@ export default function PlansPage() {
   const ordered = state.status === "ok" && saved
     ? [...state.plans].sort((a, b) => Number(b.goal === saved.goal) - Number(a.goal === saved.goal))
     : [];
-  const baseline = state.status === "ok" ? state.plans.find((p) => p.savingsVsOneStore !== 0) : undefined;
+  const baseline = state.status === "ok" ? state.plans.find((p) => p.savingsVsOneStore !== null && p.savingsVsOneStore !== 0) : undefined;
+  const missingPrices = state.status === "ok" ? state.coverage.filter((c) => !c.available) : [];
 
   return (
     <Screen>
@@ -32,6 +33,7 @@ export default function PlansPage() {
       )}
 
       {state.status === "setup" && <SetupCard missing={state.missing} />}
+      {saved?.priceMode === "demo" && <p className="rounded-[10px] bg-amber-tint p-3 text-[12px]">EXAMPLE MODE · Includes demo prices and assumed delivery fees and markups. <Link href="/list">Switch to real prices</Link>.</p>}
       {state.status === "loading" && <p className="text-[14px] text-muted">Fitting your list into your day…</p>}
       {state.status === "error" && (
         <div role="alert" className={`${card} p-[18px]`}>
@@ -41,8 +43,8 @@ export default function PlansPage() {
       )}
       {state.status === "ok" && state.plans.length === 0 && saved && (
         <div className={`${card} flex flex-col gap-3 p-[18px]`}>
-          <p className="text-[20px] font-bold">{saved.trip.homeBy ? `No plan fits by ${ampm(saved.trip.homeBy)}.` : "No store mix covers your list."}</p>
-          <p className="text-[14px] text-muted">No store mix covers your whole list in that time. Try a longer time limit, switch to Car, or take an item off.</p>
+          <p className="text-[20px] font-bold">{missingPrices.length ? "Your basket is missing usable prices." : saved.trip.homeBy ? `No plan fits by ${ampm(saved.trip.homeBy)}.` : "No store mix covers your list."}</p>
+          <p className="text-[14px] text-muted">{missingPrices.length ? `No matching price found for: ${missingPrices.map((c) => itemById(c.itemId)?.name ?? c.itemId).join(", ")}. Find prices or confirm a receipt. Unconfirmed offers remain available for browsing; no incomplete basket total is shown.` : "No store mix covers your whole list in that time. Try a longer time limit or switch to Car."}</p>
           <Link href="/list" className={primaryBtn}>Change the trip <ArrowRight size={18} aria-hidden /></Link>
         </div>
       )}
@@ -57,10 +59,10 @@ export default function PlansPage() {
           <h2 className="text-[16px]">A fair comparison, not a live quote</h2>
           <div className="flex justify-between text-[14px]">
             <span className="text-muted">Cheapest single store, in person</span>
-            <span className="font-semibold">{money(baseline.money + baseline.savingsVsOneStore)}</span>
+            <span className="font-semibold">{money(baseline.money + baseline.savingsVsOneStore!)}</span>
           </div>
           <p className={fine}>
-            <PriceNote /> Plus any receipts you scanned. Totals include delivery fees and, by car, $0.30 a mile. Times are estimates, not live.
+            {saved?.priceMode === "demo" ? <PriceNote /> : "Uses confirmed receipts and matched published observations."} Totals include known fees and estimated driving costs; taxes and tips are excluded. Times are estimates.
           </p>
         </div>
       )}
@@ -82,7 +84,7 @@ function PlanCard({ plan, chosen, sameAs }: { plan: Plan; chosen: boolean; sameA
         {chosen && <span className="text-[11px] tracking-[0.6px] text-bee">YOUR GOAL</span>}
       </div>
       <div className="flex items-start justify-between gap-3">
-        <p className="text-[34px] font-bold leading-none tracking-[-1px]">{money(plan.money)}</p>
+        <div><p className="text-[34px] font-bold leading-none tracking-[-1px]">{money(plan.money)}</p><p className={fine}>{plan.estimated ? "Estimated total" : "Total before tax and tips"}</p></div>
         <p className="text-right text-[13px] leading-[1.45]">
           <span className="block font-semibold">{plan.stopCount} {plan.stopCount === 1 ? "stop" : "stops"} in person</span>
           <span className="text-muted">~{plan.minutes} min to home</span>
@@ -97,14 +99,16 @@ function PlanCard({ plan, chosen, sameAs }: { plan: Plan; chosen: boolean; sameA
         Items {money(b.items)}{b.fees ? ` + delivery ${money(b.fees)}` : ""} · Travel {money(b.driving)}
       </p>
       <div className="flex items-center justify-between">
-        {plan.savingsVsOneStore >= 0.5 ? (
-          <p className="text-[14px] font-semibold text-leaf">Save {money(plan.savingsVsOneStore)}</p>
+        {plan.savingsVsOneStore === null ? (
+          <p className="text-[12px] text-muted">No complete one-store comparison</p>
+        ) : plan.savingsVsOneStore >= 0.5 ? (
+          <p className="text-[14px] font-semibold text-leaf">{plan.estimated ? "Estimated savings" : "Save"} {money(plan.savingsVsOneStore)}</p>
         ) : plan.savingsVsOneStore <= -0.5 ? (
           <p className="text-[14px] font-semibold text-carrot">{money(-plan.savingsVsOneStore)} more</p>
         ) : (
           <p className="text-[14px] font-semibold text-bee">Cheapest single store</p>
         )}
-        <span className="text-[12px] text-muted">vs. one-store shop</span>
+        {plan.savingsVsOneStore !== null && <span className="text-[12px] text-muted">vs. one-store shop</span>}
       </div>
       {plan.warnings.length > 0 && <p className="rounded-[10px] bg-amber-tint px-3 py-2 text-[12px] leading-[1.45]">{plan.warnings[0]}</p>}
       {chosen ? (

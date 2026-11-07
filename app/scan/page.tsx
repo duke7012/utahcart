@@ -11,7 +11,7 @@ import { Screen, UNIT_LABEL, card, fine, money, primaryBtn, secondaryBtn } from 
 
 type Step = "upload" | "reading" | "review" | "saved";
 type Review = ScanResult & { example?: boolean; keep: boolean[] };
-type Saved = { count: number; store: string; date: string; changes: { name: string; before?: number; after: number; unit: string }[]; before?: number; after?: number };
+type Saved = { count: number; store: string; date: string; example?: boolean; changes: { name: string; before?: number; after: number; unit: string }[]; before?: number; after?: number };
 
 const UNITS: Line["unit"][] = ["oz", "fl_oz", "lb", "count"];
 const input = "w-full rounded-[10px] border border-line bg-white px-3 py-2.5 text-[14px]";
@@ -93,7 +93,7 @@ export default function ScanPage() {
     }
   };
 
-  const chosen = review && storeId ? toQuotes(storeId, review.date, review.lines.filter((l, i) => review.keep[i] && l.price > 0 && l.size > 0)) : [];
+  const chosen = review && storeId ? toQuotes(storeId, review.date, review.lines.filter((l, i) => review.keep[i] && l.price > 0 && l.size > 0), review.example === true) : [];
   const chosenKey = JSON.stringify(chosen);
   useEffect(() => {
     if (step !== "review") return;
@@ -110,7 +110,7 @@ export default function ScanPage() {
     if (!review || !chosen.length) return;
     const changes = chosen.map((q) => ({ name: itemById(q.itemId)?.name ?? q.itemId, before: currentUnit(q.storeId, q.itemId), after: q.price / q.size, unit: UNIT_LABEL[q.unit] }));
     setStored(addReceipts(chosen).length);
-    setSaved({ count: chosen.length, store: catalog.stores.find((s) => s.id === storeId)!.name, date: review.date, changes, ...impact });
+    setSaved({ count: chosen.length, store: catalog.stores.find((s) => s.id === storeId)!.name, date: review.date, example: review.example, changes, ...impact });
     setFile(null);
     setPreview(null);
     setStep("saved");
@@ -180,7 +180,8 @@ export default function ScanPage() {
           </p>
           <div className="flex flex-col gap-2 rounded-[18px] bg-honey-tint p-[18px]">
             <p className="flex items-center gap-2 text-[15px] font-semibold text-bee"><ShieldCheck size={18} aria-hidden /> Prices, not your personal details.</p>
-            <p className="text-[13px] leading-[1.5]">AI reads store, date, items and prices. You review and edit before anything is saved. We keep only the item lines you choose—not the photo or card details.</p>
+            <p className="text-[13px] leading-[1.5]">Google Gemini reads store, date, items and prices. You review and edit before anything is saved. BeeLow keeps only the item lines you choose—not the photo or card details.</p>
+            <p className="text-[11px] leading-[1.5]">Photos are sent to Gemini for processing. Its <a href="https://ai.google.dev/gemini-api/docs/pricing?hl=en" target="_blank" rel="noopener noreferrer" className="underline">free-tier data policy</a> permits using submitted content to improve Google’s products.</p>
           </div>
           {error && <p role="alert" className="text-[13px] font-semibold text-carrot">{error}</p>}
           <button type="button" disabled={!file || step === "reading"} onClick={() => read(false)} className={primaryBtn}>
@@ -197,7 +198,7 @@ export default function ScanPage() {
         <>
           <div className={`${card} flex flex-col gap-3 p-[18px]`}>
             <h2 className="text-[16px]">Receipt details</h2>
-            {review.example && <p className="text-[11px] text-muted">Example receipt: no photo was read.</p>}
+            {review.example && <p className="text-[11px] text-muted">Demo receipt: no photo was read. These prices are only usable in example mode.</p>}
             <label className="text-[11px] text-muted">STORE
               <select value={storeId} onChange={(e) => setStoreId(e.target.value)} className={`${input} mt-1 font-semibold text-ink`}>
                 <option value="">Pick the store</option>
@@ -281,6 +282,7 @@ export default function ScanPage() {
 
       {step === "saved" && saved && (
         <>
+          {saved.example && <p className="rounded-[10px] bg-amber-tint p-3 text-[12px]">DEMO RECEIPT · These example prices are only used in example mode.</p>}
           <div className="flex flex-col items-center gap-2 rounded-[18px] bg-bee p-6 text-center text-white">
             <CircleCheck size={32} strokeWidth={1.5} aria-hidden />
             <p className="text-[20px] font-bold">{saved.count} {saved.count === 1 ? "price" : "prices"} saved. Photo discarded.</p>

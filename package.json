@@ -9,10 +9,10 @@
     "lint": "eslint",
     "test": "vitest run",
     "prices:smiths": "tsx scripts/prices-smiths.mts",
-    "prices:import": "tsx scripts/prices-import.mts"
+    "prices:import": "tsx scripts/prices-import.mts",
+    "prices:smoke": "tsx scripts/prices-smoke.mts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^1.6.0",
     "lucide-react": "^1.70.0",
     "next": "15.5.29",
     "react": "19.1.0",
