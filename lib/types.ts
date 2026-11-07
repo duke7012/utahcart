@@ -50,6 +50,8 @@ export type Store = {
   /** Channels this store offers, including "in_person". */
   channels: Channel[];
   link?: string;
+  /** Store page inside each delivery app, e.g. Instacart storefront. */
+  orderLinks?: Partial<Record<Channel, string>>;
   coordsNote?: string;
 };
 

@@ -9,7 +9,10 @@
       "instacart"
     ],
     "link": "https://www.smithsfoodanddrug.com",
-    "coordsNote": "TODO: approximate coordinates, team to verify"
+    "coordsNote": "TODO: approximate coordinates, team to verify",
+    "orderLinks": {
+      "instacart": "https://www.instacart.com/store/smiths"
+    }
   },
   {
     "id": "harmons",
@@ -21,7 +24,10 @@
       "instacart"
     ],
     "link": "https://www.harmonsgrocery.com",
-    "coordsNote": "TODO: approximate coordinates, team to verify"
+    "coordsNote": "TODO: approximate coordinates, team to verify",
+    "orderLinks": {
+      "instacart": "https://www.instacart.com/store/harmons"
+    }
   },
   {
     "id": "walmart",
@@ -45,6 +51,9 @@
       "instacart"
     ],
     "link": "https://www.costco.com",
-    "coordsNote": "TODO: approximate coordinates, team to verify"
+    "coordsNote": "TODO: approximate coordinates, team to verify",
+    "orderLinks": {
+      "instacart": "https://www.instacart.com/store/costco"
+    }
   }
 ]

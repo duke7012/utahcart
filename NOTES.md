@@ -19,3 +19,14 @@ Decisions and assumptions made while building. Newest at the bottom.
 - **Store coordinates are approximate** (`coordsNote: "TODO ..."` in `data/stores.json`). Team to verify.
 - **All prices are `source: "demo"`**: Smith's = base, Walmart = 0.9x, Harmons = 1.18x, Costco = bulk pack at 0.78x unit price. Replace with real prices.
 - **Tailwind pinned to 4.1.** Tailwind 4.3 needs Node 22.12+ (it `require()`s an ESM-only package); the dev machine runs Node 22.11.
+
+## Phase 1
+
+- **State lives in `localStorage`** (`utahcart:v1`: list, trip form, goal) via `lib/session.ts`; the plan page reads it and POSTs to `/api/plan`, so Phase 2 receipt prices (server memory) can change plans.
+- **Demo list for 3 roommates** is preloaded; "Reset demo" restores it. Rice, paper towels and toilet paper are `bulkOk`.
+- **Trip time limit** = minutes from "Leaving at" to "Home by" (wraps past midnight). Car cost $0.30/mile and 15 min per stop are constants in `toTrip` until a settings page exists.
+- **No-car handoff** is one Google Maps transit link per leg ("Go to Walmart", "Then to Home"). Car mode opens the whole route in Google or Apple Maps.
+- **Order links** use `orderLinks.instacart` in `data/stores.json` (`instacart.com/store/<slug>`); slugs unverified, team to check on a phone.
+- **Goal tabs + swipe:** the chosen goal's plan fills the screen; the other two are one swipe away. When two goals pick the same plan, the later card says "Same plan as ...".
+- **Strata column** layer heights come from `lib/geo.ts` per leg plus minutes per stop, so they can differ from the rounded total by a minute.
+- **Visual direction "Red Rock Strata"** chosen on the Impeccable decision page; contract in `.impeccable/surfaces/app-page-tsx.md`.
