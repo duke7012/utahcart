@@ -59,6 +59,7 @@ export default function ScanPage() {
   const [impact, setImpact] = useState<{ before?: number; after?: number }>({});
   const [saved, setSaved] = useState<Saved | null>(null);
   const [stored, setStored] = useState(0);
+  const [sharing, setSharing] = useState<"idle" | "sharing" | "shared" | "local">("idle");
   useEffect(() => setStored(loadReceipts().length), []);
   useEffect(() => () => { if (preview) URL.revokeObjectURL(preview); }, [preview]);
 
@@ -110,6 +111,13 @@ export default function ScanPage() {
     if (!review || !chosen.length) return;
     const changes = chosen.map((q) => ({ name: itemById(q.itemId)?.name ?? q.itemId, before: currentUnit(q.storeId, q.itemId), after: q.price / q.size, unit: UNIT_LABEL[q.unit] }));
     setStored(addReceipts(chosen).length);
+    // Real (not example) receipt prices also go to the shared list, so every BeeLow user's plans use them.
+    if (!review.example) {
+      setSharing("sharing");
+      fetch("/api/shared", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ kind: "receipt", quotes: chosen }) })
+        .then((r) => setSharing(r.ok ? "shared" : "local"))
+        .catch(() => setSharing("local"));
+    } else setSharing("local");
     setSaved({ count: chosen.length, store: catalog.stores.find((s) => s.id === storeId)!.name, date: review.date, example: review.example, changes, ...impact });
     setFile(null);
     setPreview(null);
@@ -180,7 +188,7 @@ export default function ScanPage() {
           </p>
           <div className="flex flex-col gap-2 rounded-[18px] bg-honey-tint p-[18px]">
             <p className="flex items-center gap-2 text-[15px] font-semibold text-bee"><ShieldCheck size={18} aria-hidden /> Prices, not your personal details.</p>
-            <p className="text-[13px] leading-[1.5]">Google Gemini reads store, date, items and prices. You review and edit before anything is saved. BeeLow keeps only the item lines you choose—not the photo or card details.</p>
+            <p className="text-[13px] leading-[1.5]">Google Gemini reads store, date, items and prices. You review and edit before anything is saved. BeeLow keeps only the item lines you choose—not the photo or card details—and shares those prices with other BeeLow users.</p>
             <p className="text-[11px] leading-[1.5]">Photos are sent to Gemini for processing. Its <a href="https://ai.google.dev/gemini-api/docs/pricing?hl=en" target="_blank" rel="noopener noreferrer" className="underline">free-tier data policy</a> permits using submitted content to improve Google’s products.</p>
           </div>
           {error && <p role="alert" className="text-[13px] font-semibold text-carrot">{error}</p>}
@@ -276,7 +284,7 @@ export default function ScanPage() {
             {storeId ? <>Save {chosen.length} {chosen.length === 1 ? "price" : "prices"} & refresh plan <Check size={18} aria-hidden /></> : "Pick the store to save"}
           </button>
           <button type="button" onClick={() => setStep("upload")} className="text-[13px] font-semibold text-muted">Discard and start over</button>
-          <p className={fine}>Only the selected item lines, store, date and prices are saved, in this browser. The photo and any card details are discarded.</p>
+          <p className={fine}>Only the selected item lines, store, date and prices are saved, on this phone and in BeeLow’s shared price list. The photo and any card details are discarded.</p>
         </>
       )}
 
@@ -287,6 +295,9 @@ export default function ScanPage() {
             <CircleCheck size={32} strokeWidth={1.5} aria-hidden />
             <p className="text-[20px] font-bold">{saved.count} {saved.count === 1 ? "price" : "prices"} saved. Photo discarded.</p>
             <p className="text-[12px] leading-[1.5] opacity-90">{saved.store}{saved.date && ` · Receipt dated ${saved.date}`} · Confirmed today</p>
+            <p className="text-[12px] font-semibold">
+              {sharing === "sharing" ? "Sharing with everyone…" : sharing === "shared" ? "Shared: every BeeLow user’s plans now use these prices." : saved.example ? "Example prices stay on this phone." : "Saved on this phone only (sharing is unavailable right now)."}
+            </p>
           </div>
           <div className={`${card} flex flex-col gap-3 p-[18px]`}>
             <h2 className="text-[18px]">What changed</h2>

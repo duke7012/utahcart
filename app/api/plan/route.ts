@@ -3,6 +3,7 @@ import { planTrip, priceCoverage } from "@/lib/planner";
 import { DEFAULT_SEARCH_LOCATION, offerToQuote, validEntry } from "@/lib/offers";
 import { verifySnapshot } from "@/lib/shopping-server";
 import { cleanQuotes, withQuotes } from "@/lib/receipts";
+import { sharedQuotes } from "@/lib/shared-store";
 import { worth } from "@/lib/worth";
 import memberships from "@/data/memberships.json";
 import type { Goal, ListEntry, Memberships, Trip } from "@/lib/types";
@@ -41,7 +42,9 @@ export async function POST(req: Request) {
       const quote = offer.itemId === item.id && offerToQuote(offer, entry, item, m);
       return quote ? [quote] : [];
     }));
-  const data = withQuotes(catalog, [...cleanQuotes(quotes, catalog), ...discovered]);
+  // Prices everyone shares (team-entered store prices, receipt scans), if the shared database is set up.
+  const shared = await sharedQuotes().catch(() => []);
+  const data = withQuotes(catalog, [...shared, ...cleanQuotes(quotes, catalog), ...discovered]);
   const ids = (Array.isArray(body?.worth) ? body.worth : []).filter((id): id is keyof Memberships => KNOWN.has(id)).slice(0, 8);
   return Response.json({ plans: planTrip(list, trip, m, data, mode), coverage: priceCoverage(list, m, data, mode), priceMode: mode,
     worth: worth(list, trip, m, data, ids, GOALS.has(body?.goal as Goal) ? (body?.goal as Goal) : "savings", mode) });
