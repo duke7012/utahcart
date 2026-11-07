@@ -1,0 +1,802 @@
+[
+  {
+    "itemId": "eggs",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.49,
+    "size": 12,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "eggs",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.09,
+    "size": 12,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "eggs",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.09,
+    "size": 12,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "eggs",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 5.39,
+    "size": 24,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "milk",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.79,
+    "size": 128,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "milk",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.39,
+    "size": 128,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "milk",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.49,
+    "size": 128,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "milk",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 5.89,
+    "size": 256,
+    "unit": "fl_oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bread",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.29,
+    "size": 20,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bread",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.99,
+    "size": 20,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bread",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.89,
+    "size": 20,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bread",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 5.09,
+    "size": 40,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "rice",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.49,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "rice",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.09,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "rice",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.09,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "rice",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 33.99,
+    "size": 400,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chicken",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 8.99,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chicken",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 8.09,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chicken",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 10.59,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "chicken",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 20.99,
+    "size": 6,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "ground_beef",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 5.49,
+    "size": 1,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "ground_beef",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 4.89,
+    "size": 1,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "ground_beef",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 6.49,
+    "size": 1,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "ground_beef",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 17.09,
+    "size": 4,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pasta",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.49,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pasta",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.29,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pasta",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.79,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pasta",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 9.29,
+    "size": 128,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pasta_sauce",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.99,
+    "size": 24,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pasta_sauce",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.69,
+    "size": 24,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pasta_sauce",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.49,
+    "size": 24,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "pasta_sauce",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.99,
+    "size": 72,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bananas",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.19,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bananas",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.09,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bananas",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 1.49,
+    "size": 2,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "bananas",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 1.49,
+    "size": 3,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "apples",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.99,
+    "size": 3,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "apples",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 4.49,
+    "size": 3,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "apples",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 5.89,
+    "size": 3,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "apples",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.49,
+    "size": 5,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "onions",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.49,
+    "size": 3,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "onions",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.09,
+    "size": 3,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "onions",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.09,
+    "size": 3,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "onions",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 9.09,
+    "size": 10,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "potatoes",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.49,
+    "size": 5,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "potatoes",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.99,
+    "size": 5,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "potatoes",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 5.29,
+    "size": 5,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "potatoes",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 10.49,
+    "size": 15,
+    "unit": "lb",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lettuce",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 1.99,
+    "size": 1,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lettuce",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 1.79,
+    "size": 1,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lettuce",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 2.29,
+    "size": 1,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "lettuce",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 9.29,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "cheese",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.49,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "cheese",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.99,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "cheese",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 5.29,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "cheese",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 17.49,
+    "size": 80,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "yogurt",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 3.99,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "yogurt",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.59,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "yogurt",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 4.69,
+    "size": 32,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "yogurt",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 6.19,
+    "size": 64,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "butter",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.79,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "butter",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 4.29,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "butter",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 5.69,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "butter",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 14.89,
+    "size": 64,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "peanut_butter",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 2.99,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "peanut_butter",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 2.69,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "peanut_butter",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 3.49,
+    "size": 16,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "peanut_butter",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 8.19,
+    "size": 56,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "cereal",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 4.29,
+    "size": 18,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "cereal",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 3.89,
+    "size": 18,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "cereal",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 5.09,
+    "size": 18,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "cereal",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 9.29,
+    "size": 50,
+    "unit": "oz",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "paper_towels",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 9.99,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "paper_towels",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 8.99,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "paper_towels",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 11.79,
+    "size": 6,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "paper_towels",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 15.59,
+    "size": 12,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "toilet_paper",
+    "storeId": "smiths",
+    "channel": "in_person",
+    "price": 11.99,
+    "size": 12,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "toilet_paper",
+    "storeId": "walmart",
+    "channel": "in_person",
+    "price": 10.79,
+    "size": 12,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "toilet_paper",
+    "storeId": "harmons",
+    "channel": "in_person",
+    "price": 14.09,
+    "size": 12,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  },
+  {
+    "itemId": "toilet_paper",
+    "storeId": "costco",
+    "channel": "in_person",
+    "price": 23.39,
+    "size": 30,
+    "unit": "count",
+    "source": "demo",
+    "seenAt": "2026-11-06"
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "eggs",
+    "name": "Eggs",
+    "unit": "count",
+    "typicalSize": 12
+  },
+  {
+    "id": "milk",
+    "name": "Milk, 2%",
+    "unit": "fl_oz",
+    "typicalSize": 128
+  },
+  {
+    "id": "bread",
+    "name": "Sandwich bread",
+    "unit": "oz",
+    "typicalSize": 20
+  },
+  {
+    "id": "rice",
+    "name": "Long-grain rice",
+    "unit": "oz",
+    "typicalSize": 32
+  },
+  {
+    "id": "chicken",
+    "name": "Chicken breast",
+    "unit": "lb",
+    "typicalSize": 2
+  },
+  {
+    "id": "ground_beef",
+    "name": "Ground beef",
+    "unit": "lb",
+    "typicalSize": 1
+  },
+  {
+    "id": "pasta",
+    "name": "Spaghetti",
+    "unit": "oz",
+    "typicalSize": 16
+  },
+  {
+    "id": "pasta_sauce",
+    "name": "Pasta sauce",
+    "unit": "oz",
+    "typicalSize": 24
+  },
+  {
+    "id": "bananas",
+    "name": "Bananas",
+    "unit": "lb",
+    "typicalSize": 2
+  },
+  {
+    "id": "apples",
+    "name": "Apples",
+    "unit": "lb",
+    "typicalSize": 3
+  },
+  {
+    "id": "onions",
+    "name": "Yellow onions",
+    "unit": "lb",
+    "typicalSize": 3
+  },
+  {
+    "id": "potatoes",
+    "name": "Russet potatoes",
+    "unit": "lb",
+    "typicalSize": 5
+  },
+  {
+    "id": "lettuce",
+    "name": "Romaine lettuce",
+    "unit": "count",
+    "typicalSize": 1
+  },
+  {
+    "id": "cheese",
+    "name": "Shredded cheese",
+    "unit": "oz",
+    "typicalSize": 16
+  },
+  {
+    "id": "yogurt",
+    "name": "Greek yogurt",
+    "unit": "oz",
+    "typicalSize": 32
+  },
+  {
+    "id": "butter",
+    "name": "Butter",
+    "unit": "oz",
+    "typicalSize": 16
+  },
+  {
+    "id": "peanut_butter",
+    "name": "Peanut butter",
+    "unit": "oz",
+    "typicalSize": 16
+  },
+  {
+    "id": "cereal",
+    "name": "Cereal",
+    "unit": "oz",
+    "typicalSize": 18
+  },
+  {
+    "id": "paper_towels",
+    "name": "Paper towels",
+    "unit": "count",
+    "typicalSize": 6
+  },
+  {
+    "id": "toilet_paper",
+    "name": "Toilet paper",
+    "unit": "count",
+    "typicalSize": 12
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "smiths",
+    "name": "Smith's Marketplace (500 E)",
+    "lat": 40.7597,
+    "lng": -111.8778,
+    "channels": [
+      "in_person",
+      "instacart"
+    ],
+    "link": "https://www.smithsfoodanddrug.com",
+    "coordsNote": "TODO: approximate coordinates, team to verify"
+  },
+  {
+    "id": "harmons",
+    "name": "Harmons Emigration Market",
+    "lat": 40.7377,
+    "lng": -111.8405,
+    "channels": [
+      "in_person",
+      "instacart"
+    ],
+    "link": "https://www.harmonsgrocery.com",
+    "coordsNote": "TODO: approximate coordinates, team to verify"
+  },
+  {
+    "id": "walmart",
+    "name": "Walmart Supercenter (South Salt Lake)",
+    "lat": 40.723,
+    "lng": -111.889,
+    "channels": [
+      "in_person"
+    ],
+    "link": "https://www.walmart.com",
+    "coordsNote": "TODO: approximate coordinates, team to verify"
+  },
+  {
+    "id": "costco",
+    "name": "Costco Salt Lake City",
+    "lat": 40.7558,
+    "lng": -111.9105,
+    "membershipRequired": "costco",
+    "channels": [
+      "in_person",
+      "instacart"
+    ],
+    "link": "https://www.costco.com",
+    "coordsNote": "TODO: approximate coordinates, team to verify"
+  }
+]

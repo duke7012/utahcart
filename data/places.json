@@ -1,0 +1,14 @@
+[
+  {
+    "id": "campus",
+    "label": "U of U campus",
+    "lat": 40.7649,
+    "lng": -111.8421
+  },
+  {
+    "id": "home",
+    "label": "Home",
+    "lat": 40.7234,
+    "lng": -111.8555
+  }
+]

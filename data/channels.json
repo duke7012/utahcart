@@ -1,0 +1,17 @@
+{
+  "instacart": {
+    "name": "Instacart",
+    "fee": 7.99,
+    "minOrder": 10,
+    "membership": "instacartPlus",
+    "memberFreeOver": 10,
+    "markup": 1.15,
+    "storeOverrides": {
+      "costco": {
+        "memberFreeOver": 35,
+        "markup": 1.24,
+        "markupWithMembership": 1.1
+      }
+    }
+  }
+}
