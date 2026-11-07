@@ -30,6 +30,15 @@
         ],
         "createdAt": "2026-11-07T03:01:30.158Z",
         "reason": "Claude: unchosen decision-round sketch (gitignored, never shipped); its font belongs to the alternate direction it depicts"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/assigned.html"
+        ],
+        "createdAt": "2026-11-07T04:09:24.661Z",
+        "reason": "Claude: spent decision-round sketch of the replaced Red Rock world (gitignored, never shipped); the app now follows the team's Figma"
       }
     ]
   }

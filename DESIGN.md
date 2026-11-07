@@ -1,254 +1,328 @@
 ---
 name: UtahCart
-description: Grocery plans read as a Utah cliff face, where a trip's minutes stack up to the time-limit rim.
+description: Groceries fitted to your day, on a warm paper canvas with forest green and Inter.
 colors:
-  sky: "#e7eef2"
-  sky-deep: "#d3dee5"
-  varnish: "#2a1a14"
-  varnish-soft: "#5a4238"
-  wingate: "#b8462a"
-  navajo: "#e08b5b"
-  tan: "#f0c9a0"
-  sage: "#5e6e54"
-  white: "#ffffff"
+  forest: "#245c42"
+  forest-dark: "#1b4733"
+  mint: "#e7efe5"
+  brick: "#af493b"
+  amber-tint: "#f7efd9"
+  canvas: "#f6f5ef"
+  surface: "#ffffff"
+  ink: "#202e27"
+  muted: "#626d64"
+  line: "#dce1d7"
 typography:
   display:
-    fontFamily: "Barlow, system-ui, sans-serif"
-    fontSize: "44px"
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "34px"
     fontWeight: 700
     lineHeight: 1
-    letterSpacing: "-0.025em"
-    fontFeature: "tnum"
+    letterSpacing: "-1px"
+    fontFeature: "\"tnum\" 1"
   headline:
-    fontFamily: "Barlow, system-ui, sans-serif"
-    fontSize: "18px"
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "32px"
     fontWeight: 700
-    lineHeight: 1.25
+    lineHeight: 1.12
+    letterSpacing: "-1.1px"
+  headline-sm:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "22px"
+    fontWeight: 700
+    lineHeight: 1.12
+    letterSpacing: "-0.5px"
+  headline-md:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "24px"
+    fontWeight: 700
+    lineHeight: 1.12
+    letterSpacing: "-0.6px"
+  result:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "20px"
+    fontWeight: 700
   title:
-    fontFamily: "Barlow, system-ui, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "18px"
+    fontWeight: 400
+  card-title:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "16px"
     fontWeight: 600
-    lineHeight: 1.25
-  body:
-    fontFamily: "Barlow, system-ui, sans-serif"
+  title-strong:
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "15px"
+    fontWeight: 600
+    lineHeight: 1.45
+  body:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "14px"
     fontWeight: 400
     lineHeight: 1.45
-    fontFeature: "tnum"
-  label:
-    fontFamily: "Barlow, system-ui, sans-serif"
-    fontSize: "13px"
-    fontWeight: 600
-    lineHeight: 1.4
-    fontFeature: "tnum"
-  caption:
-    fontFamily: "Barlow, system-ui, sans-serif"
+  body-sm:
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "13px"
     fontWeight: 400
-    lineHeight: 1.4
-    fontFeature: "tnum"
+    lineHeight: 1.45
+  caption:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1.45
+  label:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "11px"
+    fontWeight: 400
+    lineHeight: 1.45
+  label-sm:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "10px"
+    fontWeight: 400
+    lineHeight: 1.45
+  wordmark:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "22px"
+    fontWeight: 400
+    letterSpacing: "-0.8px"
 rounded:
-  sm: "4px"
-  lg: "8px"
+  sm: "8px"
+  md: "10px"
+  lg: "12px"
+  xl: "18px"
+  full: "9999px"
 spacing:
   xs: "4px"
   sm: "8px"
   md: "12px"
   lg: "16px"
-  xl: "24px"
+  card: "18px"
+  section: "24px"
+  gutter: "24px"
 components:
-  top-bar:
-    backgroundColor: "{colors.varnish}"
-    textColor: "{colors.tan}"
-    typography: "{typography.caption}"
-    padding: "12px 16px"
-  button-cta:
-    backgroundColor: "{colors.wingate}"
-    textColor: "{colors.white}"
-    typography: "{typography.body}"
-    rounded: "{rounded.lg}"
-    padding: "12px 20px"
-  button-cta-hover:
-    backgroundColor: "{colors.varnish}"
   button-primary:
-    backgroundColor: "{colors.varnish}"
-    textColor: "{colors.white}"
+    backgroundColor: "{colors.forest}"
+    textColor: "{colors.surface}"
     typography: "{typography.body}"
     rounded: "{rounded.lg}"
-    padding: "12px"
+    padding: "0 16px"
+    height: "52px"
   button-primary-hover:
-    backgroundColor: "{colors.wingate}"
+    backgroundColor: "{colors.forest-dark}"
   button-secondary:
-    textColor: "{colors.varnish}"
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
     typography: "{typography.body}"
     rounded: "{rounded.lg}"
-    padding: "12px"
+    padding: "0 16px"
+    height: "52px"
   button-secondary-hover:
-    backgroundColor: "{colors.sky-deep}"
-  segment-active:
-    backgroundColor: "{colors.wingate}"
-    textColor: "{colors.white}"
-    typography: "{typography.body}"
-    padding: "10px 0"
-  segment-inactive:
-    textColor: "{colors.varnish}"
-    typography: "{typography.body}"
-    padding: "10px 0"
-  segment-inactive-hover:
-    backgroundColor: "{colors.sky-deep}"
-  input-field:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.varnish}"
-    typography: "{typography.body}"
+    backgroundColor: "{colors.canvas}"
+  card:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.xl}"
+    padding: "{spacing.card}"
+  card-selected:
+    backgroundColor: "{colors.mint}"
+    rounded: "{rounded.xl}"
+    padding: "{spacing.card}"
+  choice-row:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.lg}"
+    height: "52px"
+    padding: "0 16px"
+  choice-row-selected:
+    backgroundColor: "{colors.mint}"
+    textColor: "{colors.ink}"
+  input:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
+    typography: "{typography.body}"
+    rounded: "{rounded.md}"
     padding: "10px 12px"
-  stepper:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.varnish}"
+  search-field:
+    backgroundColor: "{colors.surface}"
     rounded: "{rounded.lg}"
-    height: "40px"
-  chip-savings:
-    backgroundColor: "{colors.sage}"
-    textColor: "{colors.white}"
+    height: "56px"
+    padding: "0 16px"
+  chip:
+    backgroundColor: "{colors.mint}"
+    textColor: "{colors.forest}"
     typography: "{typography.label}"
     rounded: "{rounded.sm}"
-    padding: "4px 8px"
-  strata-column:
-    backgroundColor: "{colors.varnish}"
-    width: "104px"
+    padding: "8px 0"
+  nav-tab:
+    textColor: "{colors.muted}"
+    typography: "{typography.label}"
+    rounded: "{rounded.lg}"
+  nav-tab-active:
+    backgroundColor: "{colors.mint}"
+    textColor: "{colors.forest}"
+  qty-stepper:
+    backgroundColor: "{colors.canvas}"
+    typography: "{typography.caption}"
+    rounded: "{rounded.sm}"
+    height: "36px"
+  caveat-note:
+    backgroundColor: "{colors.amber-tint}"
+    textColor: "{colors.ink}"
+    typography: "{typography.caption}"
+    rounded: "{rounded.md}"
+    padding: "8px 12px"
+  feature-panel:
+    backgroundColor: "{colors.forest}"
+    textColor: "{colors.surface}"
+    rounded: "{rounded.xl}"
+    padding: "22px"
 ---
 
 # Design System: UtahCart
 
 ## Overview
 
-**Creative North Star: "Red Rock Strata"**
+**Creative North Star: "The Kitchen Counter Notebook"**
 
-Every plan is a Utah cliff face. The minutes a trip uses stack as flat sandstone layers, one per travel leg and shop stop, up to a dashed rim that marks the user's time limit. Time left over shows as open sky above the layers. The rest of the system serves that image: a pale sky ground, desert-varnish ink, one fixed sandstone ramp, and hairline rules in place of cards.
+UtahCart reads like a well-kept grocery list on a sunlit counter: a warm off-white paper canvas, white cards laid flat on it with hairline edges, one forest green that does all the deciding, and real photographs of food. The world was set by the team's Figma file and rebuilt from it; the build is the record. It is a single phone column, calm and dense with useful numbers, never decorated for its own sake.
 
-The world is flat and dense, made for a phone held in one hand. Hierarchy comes from a four-step size ladder in a single family (Barlow), from weight, and from where the sandstone colour falls. Surfaces are never lifted or layered. A rule, a fill, or a change of ink does all the separating. The chosen plan fills the screen and the other plans sit one horizontal swipe away.
-
-The build rejects the category default of white cards with a green button and a map thumbnail.
+Hierarchy comes from size and weight in one family (Inter), not from color or ornament. Green means "act" or "chosen"; mint means "selected" or "highlighted"; brick means "costs you" or "went wrong"; amber means "caveat". Everything else is ink, muted gray-green, white and canvas.
 
 **Key Characteristics:**
-- Sky-pale ground, varnish ink, one sandstone ramp (Wingate, Navajo, tan) plus sage for savings.
-- Flat colour only: no gradients, no shadows, no tints beyond the ramp.
-- 1px varnish hairlines separate content; no cards.
-- One family, four sizes (13 / 15 / 18 / 44px), tabular figures everywhere.
-- Small radii (4px and 8px); the strata column itself is square.
-- One signature motion: layers settle upward from the base, once.
+- Warm paper canvas with flat white cards and 1px pale-sage hairlines; no shadows anywhere.
+- One forest green for primary action and selection, softened to mint for selected fills.
+- Inter throughout, tight negative tracking on large headings, tabular figures everywhere.
+- Generous 18px card radius, 12px control radius, 52px-tall touch targets.
+- Real food photography and product shots, cropped into rounded frames.
+- Lucide line icons at 13-21px.
 
 ## Colors
 
-A cool, pale sky over warm desert rock: neutrals in sky and varnish, with a three-step sandstone ramp carrying every accent.
+A restrained green-and-paper palette: one saturated forest accent, a mint tint of it, two sparing signal colors, and warm neutrals.
 
 ### Primary
-- **Wingate Red** (wingate): the active state and the main call to action. Fills the selected goal or mode segment, the "Plan my trip" bar button, and shop layers in the strata column. Also the focus ring, caret, native accent colour, and inline error text.
+- **Forest** (`forest`): primary buttons, active toggles, focus rings, caret and form accent color, selected borders, links-as-actions, the brand mark tile, and the dark "feature panel" in Wallet.
+- **Deep Forest** (`forest-dark`): hover state of the primary button only.
+- **Mint Leaf** (`mint`): selected fills (chosen plan card, chosen goal, kept receipt line, active tab), goal chips, step-number discs, icon tiles, the closing call-to-action band on Home, and the missing-photo fallback. Also the text selection color.
 
 ### Secondary
-- **Navajo Salmon** (navajo): travel layers in the strata column, alternating with tan so neighbouring legs stay distinct. Not used outside the strata.
-- **Bleached Tan** (tan): the second travel-layer tone, text and links in the top bar, and the text-selection fill.
-
-### Tertiary
-- **Juniper Sage** (sage): only for savings, as the fill of the savings chip with white text. Darker than a typical sage so 13px semibold white text stays legible (about 5.5:1).
+- **Brick** (`brick`): money lost and things removed: "Remove" actions, inline errors, "$X more" deltas, membership initials, and the small location dot beside "SALT LAKE CITY" in the header.
+- **Amber Tint** (`amber-tint`): background of caveat and warning notes, always with ink text.
 
 ### Neutral
-- **Sky** (sky): the page ground, the sticky bottom action bar, and spare time above the strata layers.
-- **Deep Sky** (sky-deep): hover fill on outlined buttons and inactive segments.
-- **Desert Varnish** (varnish): all body ink, the top bar, every hairline and outline, the dark primary button, the strata column's frame and the gaps between its layers. Also the browser theme colour.
-- **Soft Varnish** (varnish-soft): secondary text such as metadata, counts, disclaimers, unpicked list rows, and the loading line.
-- **White** (white): text on Wingate, varnish and sage fills, the wordmark, and the wells of inputs and steppers. It is the only colour outside the declared token block. Treat it as part of the system, not as a new hue.
+- **Paper Canvas** (`canvas`): page background, browser theme color, quantity stepper, secondary-button hover, quiet inset rows.
+- **Surface White** (`surface`): cards, inputs, the bottom tab bar, full-bleed white bands.
+- **Ink** (`ink`): headings and primary text.
+- **Sage Muted** (`muted`): supporting copy, fine print, inactive tabs, field labels, placeholder text.
+- **Hairline** (`line`): every 1px border and divider; the off state of toggles.
 
 ### Named Rules
-**The Fixed Ramp Rule.** The colours above are the whole palette. Express a new state with a ramp colour or with varnish at reduced opacity (25% for soft rules, 40% for disabled outlines), never with a new hue or tint.
+**The Selected-Is-Mint Rule.** A chosen option is shown by a forest border plus a mint fill (2px border on cards, 1px on rows), never by a shadow, a lift, or a different hue.
 
-**The Sandstone Is Time Rule.** Navajo and tan mean travel minutes and Wingate means shop minutes inside the strata. Outside the strata, Wingate means "selected" or "act now". Sage means money saved and nothing else.
+**The Brick Means Cost Rule.** Brick appears only where the user loses money, loses an item, or hits an error (the header location dot is the one brand use). It is never a decorative accent.
+
+**The Amber Caveat Rule.** Warnings and limits sit in amber-tint notes with ink text; they are never set in brick or in alert red.
 
 ## Typography
 
-**Display Font:** Barlow (with system-ui, sans-serif)
-**Body Font:** Barlow (with system-ui, sans-serif)
+**Display Font:** Inter (via next/font, falling back to system-ui, sans-serif)
+**Body Font:** Inter
+**Label Font:** Inter
 
-**Character:** One sturdy, slightly condensed grotesque on a strict ladder. Figures are tabular throughout (set on body), so prices and minutes line up like a ledger.
+**Character:** One neutral grotesque carrying everything; large sizes pull tight (-0.5px to -1.1px tracking) and go bold, body stays regular at a comfortable 1.45 line height. Figures are tabular across the whole app so prices line up.
 
 ### Hierarchy
-- **Display** (700, 44px, line-height 1, tracking -0.025em): the plan total only. One per plan.
-- **Headline** (700, 18px, 1.25): section titles ("Your trip", "Your list") and the wordmark. Also empty-state headlines.
-- **Title** (600, 18px, 1.25, text-wrap balance): store group titles in a plan.
-- **Body** (400, 15px, 1.45): list item names, inputs, the trip strip, and buttons (at 600). Picked list rows go to 600.
-- **Label** (600, 13px, 1.4): field labels, strata layer labels, the savings chip, and expand toggles.
-- **Caption** (400, 13px, 1.4): metadata, counts, warnings, disclaimers, and top-bar actions.
+The scale is recorded as built from the Figma (10, 11, 12, 13, 14, 15, 16, 18, 20, 22, 24, 32, 34px), not a stricter ladder. Weights in use: 400, 500, 600 (most common), 700.
+- **Display** (700, 34px, line-height 1, -1px): plan totals and the updated price on Scan. Money only.
+- **Headline** (700, 32px, 1.12, -1.1px): the one page title per screen.
+- **Headline Small** (700, 22-24px, 1.12, -0.5 to -0.6px): section headings on Home; 24px regular at 1.2 for the statement inside the Wallet feature panel.
+- **Title** (400, 18px): section heads within app screens; 20px bold for single-sentence results ("No plan fits by 6:30 PM.", "3 prices saved.").
+- **Title Strong** (600, 15px, 1.45): store names and item names in rows.
+- **Body** (400 or 600, 14px, 1.45): button labels, choice rows, inputs, intro subtitles; 16px in the search field.
+- **Body Small** (13px, 1.45): secondary paragraphs, toggle labels (600), text links (600, forest).
+- **Caption** (12px, 1.45): row descriptions, warnings, the quantity readout (600).
+- **Label** (11px, 1.45): fine print, tab labels, chips, hints. Status labels inside cards ("YOUR GOAL", "KEEP", "YOUR PLAN") are written uppercase with 0.6-0.8px tracking.
+- **Label Small** (10px, 1.45): field labels ("LEAVE AT", "TIME LIMIT"), photo captions, leg metadata.
+- **Wordmark** (400, 22px, -0.8px): "UtahCart" in the header only.
 
 ### Named Rules
-**The Four-Step Ladder Rule.** Only 13, 15, 18 and 44px exist. Build hierarchy from weight (400 / 600 / 700) and ink (varnish vs. soft varnish) before you reach for another size.
+**The Tabular Money Rule.** `font-variant-numeric: tabular-nums` is set on the body; every price, count and time inherits it. Do not override it.
 
-**The Ledger Figures Rule.** Every number uses tabular figures. Write durations as "about N min" and money with two decimals.
+**The One Family Rule.** Inter only. Hierarchy is built with size, weight and tracking, not with a second typeface.
 
 ## Layout
 
-There is one centred column, max 36rem (576px), with 16px side gutters at every width. On desktop that same column sits centred on the sky ground and does not widen into a multi-column layout. Vertical rhythm runs on 4px steps: sections start 20–24px apart, controls sit 12px below their headline, and rows are padded 10px top and bottom. Field pairs use a two-column grid with a 12px gap.
+A single mobile column, max 480px wide and centered, with a 24px side gutter. The header is 78px tall; the bottom tab bar is fixed, 86px tall, and the main column reserves 118px of bottom padding for it (40px on the tab-less Home screen). Sections stack with a 24px gap; inside sections the dominant rhythm is 12px, with 8px for tight groups and 16px for list items. Cards pad 18px (14px for compact notes, 22px for the forest feature panel). Full-bleed bands (white or mint) break out of the gutter with -24px margins and 32px vertical padding. Touch targets are 52px tall for buttons and choice rows, 56px for search, 36px for the quantity stepper.
 
-On the plans screen, a varnish top bar sticks to the top, followed by a trip strip and the goal segments. Under those, a horizontal snap rail holds one full-width page per goal, with the scrollbar hidden. Each page puts the strata column on the left (104px, shrink-locked, height min(56vh, 450px)) beside the plan details with a 16px gap. On the list screen, a fixed bottom bar on sky with a top hairline holds the summary and the main call to action. The main content gets 128px of bottom padding so the bar never covers it.
+**The One Column Rule.** Every screen is the same 480px column with 24px gutters; width never grows into multi-column layouts on larger screens.
 
 ## Elevation & Depth
 
-The system is flat. Nothing in the build has a shadow, a blur, or a raised surface. Depth comes only from stacking order (the sticky top bar and fixed bottom bar) and from the strata column, whose layers read as rock through flat colour bands split by 1px varnish rules.
+Flat. There is no box-shadow, no blur and no gradient in the build. Depth is tonal: white surfaces on the warm canvas, separated by 1px hairlines; selection deepens to mint with a forest border; the strongest emphasis is the solid forest feature panel. Focus is a 2px forest outline offset 2px.
 
-### Named Rules
-**The Hairline Rule.** Separate with 1px varnish lines: full strength under a section or group header, 25% for rows and soft dividers. Don't use cards, shadows, or fill blocks to group content.
+**The Flat Paper Rule.** Surfaces sit flat on the canvas. Emphasis comes from fill (white, mint, forest) and border weight, never from shadow or lift.
 
 ## Shapes
 
-Corners are small and few. Controls (buttons, inputs, steppers, the segment group) take 8px. The savings chip takes 4px. The strata column is a square-cornered block with a 1px varnish frame and a 2px dashed top edge. That dashed edge is the rim, the time limit, and it is the only dashed line in the system. SVG icons use a 24px grid with a 2px round-capped stroke in currentColor.
+Soft, friendly rounding at a few fixed steps: 8px for chips and the quantity stepper; 10px for inputs, product thumbnails, icon tiles and the brand mark; 12px for buttons, choice rows, tabs and warning notes; 18px for cards and photographs (16px once for a small promo photo); full circles for toggles, step numbers and membership initials. Borders are 1px hairline by default and 2px forest for the selected or focused-by-design state (selected cards, the search field).
 
 ## Components
 
 ### Buttons
-Solid, flat, and labelled with words.
-- **Shape:** gently rounded (8px), full-width blocks in plan actions.
-- **Call to action:** Wingate fill, white 15px semibold label, 12px × 20px padding, with an optional trailing arrow icon. Hover swaps to varnish.
-- **Primary:** varnish fill, white label, 12px padding. Hover swaps to Wingate. There is one primary per action stack ("Go to <store>", "Open in Google Maps").
-- **Secondary:** 1px varnish outline on transparent, varnish label. Hover fills with deep sky.
-- **Disabled stand-in:** a 40%-varnish outline with soft-varnish text that says what is missing ("Add an item to plan").
-- **Focus:** a 2px Wingate outline offset 2px, set globally.
-
-### Segmented control
-One outlined group (1px varnish, 8px radius) split by vertical hairlines into equal-width radios. The active segment fills with Wingate and white text. Inactive segments are transparent with varnish text and take deep sky on hover. It is used for goal and for car or no car.
+Full-width, calm and certain.
+- **Shape:** gently rounded (12px), 52px tall, icon trailing with a 12px gap.
+- **Primary:** forest fill, white 14px label; hover deepens to forest-dark; disabled at 50% opacity.
+- **Secondary:** white fill, 1px hairline border, ink label; hover fills with canvas.
+- **Text link action:** 13px semibold forest with a trailing arrow icon, no fill.
+- **Destructive inline:** 12-13px semibold brick text ("Remove").
 
 ### Chips
-- **Savings chip:** sage fill, white 13px semibold text, 4px radius, 4px × 8px padding. Only one per plan, directly under the total.
+- **Style:** mint fill, forest 11px semibold text, 8px radius, centered in a three-up grid (the goal names). Static; selection uses choice rows instead.
+
+### Cards / Containers
+- **Corner Style:** 18px.
+- **Background:** white; selected cards switch to mint with a 2px forest border.
+- **Shadow Strategy:** none (see Elevation & Depth).
+- **Border:** 1px hairline.
+- **Internal Padding:** 18px.
+- **Caveat note:** amber-tint fill, ink 12px text, 10-12px radius.
+- **Feature panel:** solid forest, white text, 18px radius, 22px padding; one per screen at most (Wallet's "Is Costco worth it?").
 
 ### Inputs / Fields
-- **Style:** white well, 1px varnish border, 8px radius, 15px regular text, with a 13px semibold label stacked above with a 4px gap.
-- **Focus:** the global Wingate outline. The native accent and caret colours are also Wingate.
-- **Error:** a Wingate 13px line below the field group, announced with role="alert".
+- **Style:** white fill, 1px hairline border, 10px radius, 10px by 12px padding, 14px text; labels above in 10-11px muted.
+- **Search:** 56px tall, 2px forest border, 12px radius, leading search icon in muted, 16px text.
+- **Focus:** global 2px forest outline, 2px offset; native controls take forest as accent color.
 
-### Stepper
-A white, 8px-rounded outlined pill with 40px square minus and plus targets around a 15px semibold count. Minus drops to 30% opacity at zero.
+### Choice Rows (radio groups)
+52px rows, 12px radius, 1px hairline on white; selected becomes forest border on mint with a filled forest check-circle icon, unselected shows an empty muted circle.
 
-### List rows and store groups
-List rows are flush with no fill and separated by 25% varnish rules. Unpicked rows sit in soft varnish and turn varnish at 600 once picked. Store groups are native disclosure elements under a full-strength top rule: an 18px semibold title, a caption line, and an underlined "Show N items" toggle with a chevron that rotates 180° when open.
+### Toggle
+46 by 26px pill; forest when on, hairline when off; 20px white knob that slides on a color and position transition.
+
+### Quantity Stepper
+36px canvas pill (8px radius) holding decrease, a "2 × 15 oz" readout in 12px semibold, and increase.
 
 ### Navigation
-A sticky varnish top bar holds the bold 18px white wordmark on the left and a tan 13px underlined action on the right. There is no other chrome.
+- **Header:** basket mark in a forest 10px-radius tile beside the 22px wordmark; a "SALT LAKE CITY" 11px muted tag with a brick dot on the right.
+- **Bottom tabs:** fixed white bar with a hairline top border, four equal tabs (List, Plans, Scan, Wallet) with 21px Lucide icons over 11px labels. Active tab: mint fill, forest bold. Inactive: muted medium; hover fills canvas.
 
-### Strata column (signature)
-A 104px column that stacks the plan's minutes from the bottom, in trip order. Travel legs alternate navajo and tan and shop stops are Wingate with white text. Each layer's height is proportional to its minutes. Layers are split by 1px varnish rules. A dashed top edge marks the time limit, captioned above in 13px semibold, and spare time shows as sky. A layer is labelled only when it takes more than 7% of the column. On mount, each layer settles from 82% height up to full over 700ms (cubic-bezier(0.16, 1, 0.3, 1)), staggered 70ms per layer. Motion is removed under reduced-motion.
+### Product Image
+Product shots sit on canvas inside 10px-radius frames, scaled to contain; a missing photo falls back to a mint panel with the name in 10px forest.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** take every colour from the fixed ramp, and use varnish opacity (25%, 40%) for soft rules and disabled outlines.
-- **Do** separate content with 1px varnish hairlines and leave surfaces flat.
-- **Do** keep type to the four sizes (13 / 15 / 18 / 44px) in Barlow with tabular figures.
-- **Do** give each action stack exactly one filled button, and swap varnish and Wingate on hover.
-- **Do** keep the settle motion for strata layers only, and remove it under reduced-motion.
-- **Do** label demo prices and estimated times in caption text next to the numbers they qualify.
+- **Do** use forest for exactly one primary action per view and for selection borders.
+- **Do** mark selection with a forest border plus mint fill (The Selected-Is-Mint Rule).
+- **Do** keep every surface flat: white on canvas with 1px hairlines (The Flat Paper Rule).
+- **Do** set money in the 34px bold display style and keep tabular figures on.
+- **Do** keep buttons and choice rows at 52px tall with 12px radius.
+- **Do** use Lucide line icons at 13-21px, and real food photography in 18px-radius frames.
+- **Do** put caveats in amber-tint notes with ink text.
 
 ### Don't:
-- **Don't** use white cards, shadows, gradients or blurs. The build is flat colour on sky.
-- **Don't** add a green brand button or a map thumbnail. Those are the category default this world rejects.
-- **Don't** use sage for anything except savings, or navajo outside the strata.
-- **Don't** use dashed lines except for the time-limit rim.
-- **Don't** use radii above 8px.
-- **Don't** add a second typeface or sizes between the four ladder steps.
+- **Don't** add box-shadows, blurs or gradients.
+- **Don't** use brick for decoration; it means cost, removal or error.
+- **Don't** lighten muted back to the Figma's #68736a: on mint it falls below 4.5:1. #626d64 passes on mint, canvas and white.
+- **Don't** introduce a second typeface or a non-Inter display face.
+- **Do** keep the Figma's small uppercase forest label (11px, 700, 1.2px tracking) above page titles; it is part of the team's design.
+- **Don't** use typed characters as control icons; use Lucide icons.

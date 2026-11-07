@@ -4,7 +4,7 @@
 @theme {
   --color-canvas: #f6f5ef;
   --color-ink: #202e27;
-  --color-muted: #68736a;
+  --color-muted: #626d64; /* Figma #68736a, darkened to reach 4.5:1 on mint */
   --color-forest: #245c42;
   --color-forest-dark: #1b4733;
   --color-mint: #e7efe5;

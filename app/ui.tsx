@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ListChecks, Route, ScanLine, ShoppingBasket, Wallet, type LucideIcon } from "lucide-react";
+import { ListChecks, Minus, Plus, Route, ScanLine, ShoppingBasket, Wallet, type LucideIcon } from "lucide-react";
 import { DEMO, load, save, type Saved } from "@/lib/session";
 import type { Goal, Item } from "@/lib/types";
 
@@ -133,9 +133,13 @@ export function ProductImage({ id, name, className = "" }: { id: string; name: s
 export function Qty({ item, qty, onChange }: { item: Item; qty: number; onChange: (q: number) => void }) {
   return (
     <div className="flex h-9 shrink-0 items-center rounded-[8px] bg-canvas">
-      <button type="button" aria-label={`Fewer ${item.name}`} onClick={() => onChange(qty - 1)} className="grid h-9 w-8 place-items-center text-[16px]">−</button>
+      <button type="button" aria-label={`Fewer ${item.name}`} onClick={() => onChange(qty - 1)} className="grid h-9 w-8 place-items-center">
+        <Minus size={15} aria-hidden />
+      </button>
       <span className="min-w-[4.5rem] text-center text-[12px] font-semibold" aria-live="polite">{packLabel(item, qty)}</span>
-      <button type="button" aria-label={`More ${item.name}`} onClick={() => onChange(qty + 1)} className="grid h-9 w-8 place-items-center text-[16px]">+</button>
+      <button type="button" aria-label={`More ${item.name}`} onClick={() => onChange(qty + 1)} className="grid h-9 w-8 place-items-center">
+        <Plus size={15} aria-hidden />
+      </button>
     </div>
   );
 }
