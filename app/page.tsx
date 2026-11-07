@@ -44,33 +44,33 @@ export default function ListPage() {
       <TopBar right={<button onClick={() => update(DEMO)} className="underline">Reset demo</button>} />
       <main className="mx-auto max-w-xl px-4 pb-32">
         <section aria-labelledby="trip" className="pt-5">
-          <h2 id="trip" className="text-lg font-bold">Your trip</h2>
+          <h2 id="trip" className="text-head font-bold">Your trip</h2>
           <div className="mt-3 grid grid-cols-2 gap-3">
             {(["from", "to"] as const).map((k) => (
-              <label key={k} className="text-sm font-semibold">
+              <label key={k} className="text-small font-semibold">
                 {k === "from" ? "From" : "To"}
                 <select
                   value={placeId(s.trip[k])}
                   onChange={(ev) => setPlace(k, ev.target.value)}
-                  className="mt-1 block w-full rounded-lg border border-varnish bg-white px-3 py-2.5 text-base font-normal"
+                  className="mt-1 block w-full rounded-lg border border-varnish bg-white px-3 py-2.5 text-body font-normal"
                 >
                   {places.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
                   <option value={HERE}>Current location</option>
                 </select>
               </label>
             ))}
-            <label className="text-sm font-semibold">
+            <label className="text-small font-semibold">
               Leaving at
               <input type="time" value={s.trip.leave} onChange={(ev) => update({ ...s, trip: { ...s.trip, leave: ev.target.value } })}
-                className="mt-1 block w-full rounded-lg border border-varnish bg-white px-3 py-2 text-base font-normal" />
+                className="mt-1 block w-full rounded-lg border border-varnish bg-white px-3 py-2 text-body font-normal" />
             </label>
-            <label className="text-sm font-semibold">
+            <label className="text-small font-semibold">
               Home by
               <input type="time" value={s.trip.homeBy} onChange={(ev) => update({ ...s, trip: { ...s.trip, homeBy: ev.target.value } })}
-                className="mt-1 block w-full rounded-lg border border-varnish bg-white px-3 py-2 text-base font-normal" />
+                className="mt-1 block w-full rounded-lg border border-varnish bg-white px-3 py-2 text-body font-normal" />
             </label>
           </div>
-          {geoError && <p role="alert" className="mt-2 text-sm text-wingate">{geoError}</p>}
+          {geoError && <p role="alert" className="mt-2 text-small text-wingate">{geoError}</p>}
           <div className="mt-3">
             <Segments label="Getting around" value={s.trip.mode} onChange={(mode) => update({ ...s, trip: { ...s.trip, mode } })}
               options={[{ id: "no_car", label: "No car" }, { id: "car", label: "Car" }]} />
@@ -78,7 +78,7 @@ export default function ListPage() {
         </section>
 
         <section aria-labelledby="goal" className="pt-6">
-          <h2 id="goal" className="text-lg font-bold">What matters most</h2>
+          <h2 id="goal" className="text-head font-bold">What matters most</h2>
           <div className="mt-3">
             <Segments label="Goal" options={GOALS} value={s.goal} onChange={(goal) => update({ ...s, goal })} />
           </div>
@@ -86,8 +86,8 @@ export default function ListPage() {
 
         <section aria-labelledby="list" className="pt-6">
           <div className="flex items-baseline justify-between">
-            <h2 id="list" className="text-lg font-bold">Your list</h2>
-            <span className="text-sm text-varnish-soft">{count} of {catalog.items.length} staples</span>
+            <h2 id="list" className="text-head font-bold">Your list</h2>
+            <span className="text-small text-varnish-soft">{count} of {catalog.items.length} staples</span>
           </div>
           <ul className="mt-2 border-t border-varnish">
             {catalog.items.map((item) => {
@@ -95,8 +95,8 @@ export default function ListPage() {
               return (
                 <li key={item.id} className={`flex items-center gap-3 border-b border-varnish/25 py-2.5 ${q ? "" : "text-varnish-soft"}`}>
                   <div className="min-w-0 flex-1">
-                    <p className={`truncate text-base ${q ? "font-semibold" : ""}`}>{item.name}</p>
-                    <p className="text-sm text-varnish-soft">
+                    <p className={`truncate text-body ${q ? "font-semibold" : ""}`}>{item.name}</p>
+                    <p className="text-small text-varnish-soft">
                       {item.typicalSize} {UNIT[item.unit]} each
                       {q > 0 && (
                         <label className="ml-3 inline-flex items-center gap-1.5">
@@ -109,7 +109,7 @@ export default function ListPage() {
                   <div className="flex items-center rounded-lg border border-varnish bg-white">
                     <button type="button" aria-label={`Fewer ${item.name}`} disabled={!q} onClick={() => setItem(item.id, q - 1)}
                       className="grid size-10 place-items-center disabled:opacity-30"><Icon d={MINUS} /></button>
-                    <span className="w-7 text-center text-base font-semibold" aria-live="polite">{q}</span>
+                    <span className="w-7 text-center text-body font-semibold" aria-live="polite">{q}</span>
                     <button type="button" aria-label={`More ${item.name}`} onClick={() => setItem(item.id, q + 1)}
                       className="grid size-10 place-items-center"><Icon d={PLUS} /></button>
                   </div>
@@ -117,23 +117,23 @@ export default function ListPage() {
               );
             })}
           </ul>
-          <p className="mt-3 text-sm text-varnish-soft">All prices are demo prices until the team adds real ones.</p>
+          <p className="mt-3 text-small text-varnish-soft">All prices are demo prices until the team adds real ones.</p>
         </section>
       </main>
 
       <div className="fixed inset-x-0 bottom-0 border-t border-varnish bg-sky px-4 py-3">
         <div className="mx-auto flex max-w-xl items-center gap-3">
-          <p className="flex-1 text-sm leading-tight">
+          <p className="flex-1 text-small leading-tight">
             <span className="font-semibold">{count} items</span>
             <br />
             {limit !== undefined ? `${limit} min, home by ${clock(s.trip.homeBy)}` : "No time limit"}
           </p>
           {count > 0 ? (
-            <Link href="/plan" className="flex items-center gap-2 rounded-lg bg-wingate px-5 py-3 text-base font-semibold text-white no-underline hover:bg-varnish">
+            <Link href="/plan" className="flex items-center gap-2 rounded-lg bg-wingate px-5 py-3 text-body font-semibold text-white no-underline hover:bg-varnish">
               Plan my trip <Icon d={ARROW} />
             </Link>
           ) : (
-            <span className="rounded-lg border border-varnish/40 px-5 py-3 text-base text-varnish-soft">Add an item to plan</span>
+            <span className="rounded-lg border border-varnish/40 px-5 py-3 text-body text-varnish-soft">Add an item to plan</span>
           )}
         </div>
       </div>

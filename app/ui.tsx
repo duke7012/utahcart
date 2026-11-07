@@ -9,11 +9,13 @@ export const GOALS: { id: Goal; label: string }[] = [
 
 export function TopBar({ right }: { right?: React.ReactNode }) {
   return (
-    <header className="sticky top-0 z-10 flex items-center justify-between bg-varnish px-4 py-3 text-tan">
-      <Link href="/" className="text-xl font-bold tracking-tight text-white no-underline">
-        UtahCart
-      </Link>
-      <div className="text-sm">{right}</div>
+    <header className="sticky top-0 z-10 bg-varnish text-tan">
+      <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+        <Link href="/" className="text-head font-bold tracking-tight text-white no-underline">
+          UtahCart
+        </Link>
+        <div className="text-small">{right}</div>
+      </div>
     </header>
   );
 }
@@ -31,7 +33,7 @@ export function Segments<T extends string>({
           role="radio"
           aria-checked={value === o.id}
           onClick={() => onChange(o.id)}
-          className={`flex-1 border-l border-varnish py-2.5 text-[15px] font-semibold first:border-l-0 ${
+          className={`flex-1 border-l border-varnish py-2.5 text-body font-semibold first:border-l-0 ${
             value === o.id ? "bg-wingate text-white" : "bg-transparent text-varnish hover:bg-sky-deep"
           }`}
         >
@@ -52,3 +54,4 @@ export function Icon({ d, className = "size-5" }: { d: string; className?: strin
 export const PLUS = "M12 5v14M5 12h14";
 export const MINUS = "M5 12h14";
 export const ARROW = "M5 12h14M13 6l6 6-6 6";
+export const CHEVRON = "M6 9l6 6 6-6";

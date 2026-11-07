@@ -7,7 +7,7 @@ import { travelMinutes } from "@/lib/geo";
 import { appleMapsUrl, googleMapsUrl, legs, orderUrl } from "@/lib/handoff";
 import { clock, load, save, toTrip, type Saved } from "@/lib/session";
 import type { Goal, LineItem, Plan, Trip } from "@/lib/types";
-import { GOALS, Segments, TopBar } from "../ui";
+import { CHEVRON, GOALS, Icon, Segments, TopBar } from "../ui";
 
 type State = { status: "loading" } | { status: "error"; message: string } | { status: "ok"; plans: Plan[] };
 
@@ -64,7 +64,7 @@ export default function PlanPage() {
       <TopBar right={<Link href="/" className="text-tan underline">Edit list</Link>} />
       {saved && trip && (
         <div className="mx-auto max-w-xl">
-          <p className="flex justify-between gap-3 border-b border-varnish/25 px-4 py-3 text-[15px]">
+          <p className="flex justify-between gap-3 border-b border-varnish/25 px-4 py-3 text-body">
             <span className="truncate">{trip.start.label} → {trip.end.label}</span>
             <span className="shrink-0">{trip.mode === "car" ? "Car" : "No car"}{saved.trip.homeBy && ` · by ${clock(saved.trip.homeBy)}`}</span>
           </p>
@@ -84,7 +84,7 @@ export default function PlanPage() {
         )}
         {state.status === "ok" && state.plans.length === 0 && saved && (
           <div className="px-4 pt-8">
-            <p className="text-2xl font-bold">No plan fits by {clock(saved.trip.homeBy)}.</p>
+            <p className="text-head font-bold">No plan fits by {clock(saved.trip.homeBy)}.</p>
             <p className="mt-2">No store mix covers your whole list in that time. Try a later home-by time, switch to Car, or take an item off.</p>
             <Link href="/" className="mt-4 inline-block rounded-lg bg-varnish px-5 py-3 font-semibold text-white no-underline">Change the trip</Link>
           </div>
@@ -95,8 +95,8 @@ export default function PlanPage() {
               const same = state.plans.findIndex((q) => planKey(q) === planKey(p));
               return (
                 <section key={p.goal} aria-label={GOALS[i].label} className="w-full shrink-0 snap-start px-4 pt-5">
-                  {same < i && <p className="mb-3 text-sm font-semibold text-varnish-soft">Same plan as {GOALS[same].label}.</p>}
-                  <PlanView plan={p} trip={trip} />
+                  {same < i && <p className="mb-3 text-small font-semibold text-varnish-soft">Same plan as {GOALS[same].label}.</p>}
+                  <PlanView plan={p} plans={state.plans} trip={trip} rim={saved?.trip.homeBy ? `Home by ${clock(saved.trip.homeBy)}` : "No time limit"} />
                 </section>
               );
             })}
@@ -107,30 +107,40 @@ export default function PlanPage() {
   );
 }
 
-function PlanView({ plan, trip }: { plan: Plan; trip: Trip }) {
+/** What this plan saves: money vs one store or vs the priciest plan, or time vs the cheapest plan. */
+function savingsLine(plan: Plan, plans: Plan[]): string {
+  const cheapest = plans.reduce((a, b) => (b.money < a.money ? b : a));
+  const priciest = plans.reduce((a, b) => (b.money > a.money ? b : a));
+  const label = (p: Plan) => GOALS.find((g) => g.id === p.goal)!.label;
+  if (plan.savingsVsOneStore >= 0.5) return `${money(plan.savingsVsOneStore)} less than the cheapest single store`;
+  if (plan.money <= cheapest.money + 0.005) {
+    const vs = priciest.money - plan.money;
+    return vs >= 0.5 ? `Cheapest plan · ${money(vs)} less than ${label(priciest)}` : "Cheapest single store for your whole list";
+  }
+  const mins = cheapest.minutes - plan.minutes;
+  const extra = money(plan.money - cheapest.money);
+  return mins > 0 ? `Saves ${mins} min vs ${label(cheapest)} · costs ${extra} more` : `${extra} more than ${label(cheapest)}`;
+}
+
+function PlanView({ plan, plans, trip, rim }: { plan: Plan; plans: Plan[]; trip: Trip; rim: string }) {
   const stopPlaces = plan.stops.map((s) => {
     const st = storeById(s.storeId)!;
     return { lat: st.lat, lng: st.lng, label: shortName(s.storeId) };
   });
   const gMode = trip.mode === "car" ? "driving" : "transit";
+  const groceriesAndFees = [...plan.stops, ...plan.onlineOrders].reduce((s, g) => s + g.items.reduce((t, l) => t + l.cost, 0), 0) +
+    plan.onlineOrders.reduce((s, o) => s + o.fee, 0);
+  const driving = Math.max(0, plan.money - groceriesAndFees);
   return (
     <div className="flex gap-4">
-      <Strata plan={plan} trip={trip} />
+      <Strata plan={plan} trip={trip} rim={rim} />
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-varnish-soft">{trip.timeLimitMin ? `Rim: ${trip.timeLimitMin} min` : "No time limit"}</p>
-        <p className="text-[44px] font-bold leading-none tracking-tight">{money(plan.money)}</p>
-        <p className="mt-1.5 text-[15px]">
+        <p className="text-total font-bold leading-none tracking-tight">{money(plan.money)}</p>
+        <p className="mt-1.5 text-body">
           About {plan.minutes} min · {plan.stopCount === 0 ? "no stops" : `${plan.stopCount} stop${plan.stopCount > 1 ? "s" : ""}`}
-          {trip.mode === "car" && ` · ${plan.miles} mi`}
+          {trip.mode === "car" && plan.stopCount > 0 && ` · ${plan.miles} mi, incl. ${money(driving)} driving`}
         </p>
-        {plan.savingsVsOneStore >= 0.5 && (
-          <p className="mt-2.5 inline-block rounded bg-sage px-2 py-1 text-sm font-semibold text-white">
-            {money(plan.savingsVsOneStore)} less than the cheapest single store
-          </p>
-        )}
-        {plan.savingsVsOneStore <= -0.5 && (
-          <p className="mt-2 text-sm">{money(-plan.savingsVsOneStore)} more than the cheapest single store</p>
-        )}
+        <p className="mt-2.5 inline-block rounded bg-sage px-2 py-1 text-small font-semibold text-white">{savingsLine(plan, plans)}</p>
 
         {plan.stops.map((s, i) => (
           <Group key={s.storeId} title={`${i + 1}. ${storeById(s.storeId)?.name}`} sub="In person" lines={s.items} />
@@ -163,11 +173,11 @@ function PlanView({ plan, trip }: { plan: Plan; trip: Trip }) {
         </div>
 
         {plan.warnings.length > 0 && (
-          <ul className="mt-4 space-y-1 border-t border-varnish/25 pt-3 text-sm">
+          <ul className="mt-4 space-y-1 border-t border-varnish/25 pt-3 text-small">
             {plan.warnings.map((w) => <li key={w}>{w}</li>)}
           </ul>
         )}
-        <p className="mt-4 text-xs text-varnish-soft">Times are estimates; your maps app shows the real time.</p>
+        <p className="mt-4 text-small text-varnish-soft">Times are estimates; your maps app shows the real time.</p>
       </div>
     </div>
   );
@@ -176,15 +186,20 @@ function PlanView({ plan, trip }: { plan: Plan; trip: Trip }) {
 function Group({ title, sub, lines }: { title: string; sub: string; lines: LineItem[] }) {
   const total = lines.reduce((s, l) => s + l.cost, 0);
   return (
-    <details className="mt-4 border-t border-varnish pt-2.5">
-      <summary className="cursor-pointer list-none">
-        <span className="block text-[17px] font-semibold leading-snug">{title}</span>
-        <span className="text-sm">
-          {sub} · {lines.length} items · {money(total)}
+    <details className="group mt-4 border-t border-varnish pt-2.5">
+      <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+        <span className="block text-head font-semibold">{title}</span>
+        <span className="block text-small">
+          {sub} · {money(total)}
           {lines.some((l) => l.quote.source === "demo") && " · demo prices"}
         </span>
+        <span className="mt-1 inline-flex items-center gap-1 text-small font-semibold underline">
+          <span className="group-open:hidden">Show {lines.length} items</span>
+          <span className="hidden group-open:inline">Hide items</span>
+          <Icon d={CHEVRON} className="size-4 transition-transform group-open:rotate-180" />
+        </span>
       </summary>
-      <ul className="mt-2 space-y-1 text-sm">
+      <ul className="mt-2 space-y-1 text-small">
         {lines.map((l) => (
           <li key={l.itemId} className="flex justify-between gap-2">
             <span className="min-w-0 truncate">{itemById(l.itemId)?.name}{l.packs > 1 && ` ×${l.packs}`}</span>
@@ -202,7 +217,7 @@ function Group({ title, sub, lines }: { title: string; sub: string; lines: LineI
 function Btn({ href, primary, children }: { href: string; primary?: boolean; children: React.ReactNode }) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer"
-      className={`block rounded-lg px-3 py-3 text-center text-[15px] font-semibold no-underline ${
+      className={`block rounded-lg px-3 py-3 text-center text-body font-semibold no-underline ${
         primary ? "bg-varnish text-white hover:bg-wingate" : "border border-varnish text-varnish hover:bg-sky-deep"
       }`}>
       {children}
@@ -211,7 +226,7 @@ function Btn({ href, primary, children }: { href: string; primary?: boolean; chi
 }
 
 /** Signature: the trip's minutes stacked as sandstone layers up to the rim (the time limit); spare time is sky. */
-function Strata({ plan, trip }: { plan: Plan; trip: Trip }) {
+function Strata({ plan, trip, rim }: { plan: Plan; trip: Trip; rim: string }) {
   const pts = [trip.start, ...plan.stops.map((s) => ({ ...storeById(s.storeId)!, label: shortName(s.storeId) })), trip.end];
   const layers: { label: string; min: number; kind: "travel" | "shop" }[] = [];
   for (let i = 1; i < pts.length; i++) {
@@ -224,21 +239,23 @@ function Strata({ plan, trip }: { plan: Plan; trip: Trip }) {
   const travelTone = ["bg-navajo", "bg-tan"];
   let t = 0;
   return (
-    <figure aria-label={`About ${plan.minutes} of ${cap} minutes used`}
-      className="flex h-[min(58vh,470px)] w-[104px] shrink-0 flex-col-reverse overflow-hidden rounded border border-varnish">
+    <figure aria-label={`About ${plan.minutes} of ${cap} minutes used; ${rim}`} className="w-[104px] shrink-0">
+      <figcaption className="pb-1 text-small font-semibold leading-tight">{rim}</figcaption>
+      <div className="flex h-[min(56vh,450px)] flex-col-reverse overflow-hidden border border-t-2 border-varnish [border-top-style:dashed]">
       {layers.map((l, i) => (
         <div key={i} style={{ flexGrow: l.min, animationDelay: `${i * 70}ms` }} title={`${l.label} · ${Math.round(l.min)} min`}
-          className={`stratum flex min-h-0 items-center border-t border-varnish px-1.5 text-[13px] font-semibold leading-tight first:border-t-0 ${
+          className={`stratum flex min-h-0 items-center border-t border-varnish px-1.5 text-small font-semibold leading-tight ${
             l.kind === "shop" ? "bg-wingate text-white" : travelTone[t++ % 2]
           }`}>
           {l.min / cap > 0.07 && <span className="line-clamp-2">{l.label} {Math.round(l.min)}</span>}
         </div>
       ))}
       {spare > 0 && (
-        <div style={{ flexGrow: cap - used }} className="flex min-h-0 items-end border-b border-dashed border-varnish px-1.5 pb-1 text-[13px] leading-tight">
+        <div style={{ flexGrow: cap - used }} className="flex min-h-0 items-end px-1.5 pb-1 text-small leading-tight">
           {spare} min to spare
         </div>
       )}
+      </div>
     </figure>
   );
 }

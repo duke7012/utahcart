@@ -11,6 +11,15 @@
   --color-tan: #f0c9a0;
   --color-sage: #5e6e54;
   --font-sans: var(--font-barlow), system-ui, sans-serif;
+  /* Strict size ladder: four steps carry all hierarchy. */
+  --text-small: 13px;
+  --text-small--line-height: 1.4;
+  --text-body: 15px;
+  --text-body--line-height: 1.45;
+  --text-head: 18px;
+  --text-head--line-height: 1.25;
+  --text-total: 44px;
+  --text-total--line-height: 1;
 }
 
 html {
