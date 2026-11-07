@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+// No dev badge: the demo runs live at the table and the badge covers the Plan bar.
+const nextConfig: NextConfig = { devIndicators: false };
 
 export default nextConfig;
