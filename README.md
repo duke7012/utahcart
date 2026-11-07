@@ -21,4 +21,4 @@ Prices marked "demo price" are placeholders, not real store prices.
 - [Anthropic TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript) (`@anthropic-ai/sdk`) for receipt scanning with Claude
 - [Vitest](https://vitest.dev)
 - [ESLint](https://eslint.org) with `eslint-config-next`
-- [Geist](https://vercel.com/font) fonts via `next/font`
+- [Barlow](https://fonts.google.com/specimen/Barlow) (SIL Open Font License) via `next/font/google`
