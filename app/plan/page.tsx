@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, CircleDollarSign, ShoppingBag, Timer } from "lucide-react";
+import { ArrowLeft, ArrowRight, CircleDollarSign, ShoppingBag, Timer } from "lucide-react";
 import { itemById } from "@/lib/catalog";
 import { ampm } from "@/lib/session";
 import type { Goal, Plan } from "@/lib/types";
@@ -22,6 +22,7 @@ export default function PlansPage() {
 
   return (
     <Screen>
+      <Link href="/list" className="flex items-center gap-2 text-[13px] font-semibold text-bee no-underline"><ArrowLeft size={16} aria-hidden /> Back to your list</Link>
       <Intro eyebrow={`PLANS · ${today}`} title={<>A little planning.<br />More left over.</>}
         sub={saved && trip && `${saved.list.length} ${saved.list.length === 1 ? "item" : "items"} · ${trip.start.lat === trip.end.lat && trip.start.lng === trip.end.lng ? `${trip.start.label} · round trip` : `${trip.start.label} → ${trip.end.label}`} · ${trip.mode === "car" ? "Car" : "No car"}${trip.timeLimitMin ? ` · ${trip.timeLimitMin} min` : ""}`} />
       {saved && (

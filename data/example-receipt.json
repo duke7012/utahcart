@@ -9,7 +9,6 @@
     { "rawName": "KRO SHRD CHEDDAR 16OZ", "itemId": "cheese", "price": 2.99, "size": 16, "unit": "oz" },
     { "rawName": "GREEK YOGURT 32OZ", "itemId": "yogurt", "price": 2.99, "size": 32, "unit": "oz" },
     { "rawName": "KRO WHT BREAD 20OZ", "itemId": "bread", "price": 1.79, "size": 20, "unit": "oz" },
-    { "rawName": "HONEY OAT CEREAL 18OZ", "itemId": "cereal", "price": 2.49, "size": 18, "unit": "oz" },
-    { "rawName": "REUSABLE BAG", "itemId": null, "price": 0.99, "size": 1, "unit": "count" }
+    { "rawName": "HONEY OAT CEREAL 18OZ", "itemId": "cereal", "price": 2.49, "size": 18, "unit": "oz" }
   ]
 }

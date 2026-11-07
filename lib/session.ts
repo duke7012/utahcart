@@ -31,11 +31,13 @@ export const EMPTY: Saved = { list: [], trip: { from: null, to: null, mode: null
 const KEY = "beelow:v2";
 
 export function load(): Saved {
+  let s = EMPTY;
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return { ...EMPTY, ...JSON.parse(raw) };
+    if (raw) s = { ...EMPTY, ...JSON.parse(raw) };
   } catch {}
-  return EMPTY;
+  // Leave-at defaults to now (rounded up to 5 minutes).
+  return s.trip.leave ? s : { ...s, trip: { ...s.trip, leave: nowRounded() } };
 }
 
 /** What's still missing before BeeLow can plan, in the order the list page asks for it. */

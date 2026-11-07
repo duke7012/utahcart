@@ -86,7 +86,8 @@ export default function ScanPage() {
         return setStep("upload");
       }
       setStoreId(guessStore(j.store));
-      setReview({ ...j, keep: j.lines.map((l: Line) => !!l.itemId) });
+      const lines = (j.lines as Line[]).filter((l) => !!l.itemId); // skip bag fees and other non-grocery lines
+      setReview({ ...j, lines, keep: lines.map(() => true) });
       setStep("review");
     } catch {
       setError("Couldn't reach the scanner. Check your connection and try again.");
@@ -274,14 +275,14 @@ export default function ScanPage() {
           <div className={`${card} flex flex-col gap-2 p-[18px] text-[14px]`}>
             {impact.before !== undefined && impact.after !== undefined ? (
               <>
-                <p>{impact.before - impact.after >= 0.01 ? `Your plan will get ${money(impact.before - impact.after)} cheaper.` : "Your plan’s total stays about the same."}</p>
+                <p>{impact.before - impact.after >= 0.01 ? `Saving these prices makes your plan ${money(impact.before - impact.after)} cheaper.` : "Your plan’s total stays about the same."}</p>
                 <div className="flex justify-between text-muted"><span>Plan before</span><span>{money(impact.before)}</span></div>
                 <div className="flex justify-between"><span className="text-muted">After saving these prices</span><span className="text-[18px] font-bold">{money(impact.after)}</span></div>
               </>
             ) : <p className="text-muted">{!storeId ? "Pick the store to see how your plan changes." : planRequest(load()) ? "Checking your plan…" : "Add items and a trip to see what these prices save."}</p>}
           </div>
           <button type="button" disabled={!storeId || !chosen.length} onClick={onSave} className={primaryBtn}>
-            {storeId ? <>Save {chosen.length} {chosen.length === 1 ? "price" : "prices"} & refresh plan <Check size={18} aria-hidden /></> : "Pick the store to save"}
+            {storeId ? <>Save prices <Check size={18} aria-hidden /></> : "Pick the store to save"}
           </button>
           <button type="button" onClick={() => setStep("upload")} className="text-[13px] font-semibold text-muted">Discard and start over</button>
           <p className={fine}>Only the selected item lines, store, date and prices are saved, on this phone and in BeeLow’s shared price list. The photo and any card details are discarded.</p>
@@ -301,7 +302,8 @@ export default function ScanPage() {
           </div>
           <div className={`${card} flex flex-col gap-3 p-[18px]`}>
             <h2 className="text-[18px]">What changed</h2>
-            {saved.changes.slice(0, 4).map((c) => (
+            {saved.changes.filter((c) => c.before === undefined || Math.abs(c.before - c.after) >= 0.005).length === 0 && <p className="text-[13px] text-muted">No prices were changed.</p>}
+            {saved.changes.filter((c) => c.before === undefined || Math.abs(c.before - c.after) >= 0.005).slice(0, 6).map((c) => (
               <div key={c.name} className="flex items-center justify-between text-[13px]">
                 <span>{c.name}</span>
                 <span>
@@ -316,6 +318,9 @@ export default function ScanPage() {
             <div className="flex flex-col gap-1 rounded-[18px] bg-honey-tint p-[18px]">
               <div className="flex justify-between text-[11px] tracking-[0.6px] text-bee"><span>YOUR PLAN</span><span>UPDATED</span></div>
               <p className="text-[34px] font-bold tracking-[-1px]">{money(saved.after)} <span className="text-[16px] font-normal text-muted line-through">{money(saved.before)}</span></p>
+              <p className="text-[13px] leading-[1.45]">
+                {saved.before - saved.after >= 0.01 ? `Your plan got ${money(saved.before - saved.after)} cheaper. ` : ""}We’ve updated the prices. Thank you for uploading your receipt.
+              </p>
             </div>
           )}
           <Link href="/plan" className={primaryBtn}>Back to my updated plan <ArrowRight size={18} aria-hidden /></Link>

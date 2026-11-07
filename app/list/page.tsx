@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ArrowRight, ArrowUpRight, Car, ChevronDown, CircleCheck, Circle, Footprints, MapPin, Sparkles, Trash2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Car, ChevronDown, CircleCheck, Circle, Footprints, MapPin, Sparkles, Trash2 } from "lucide-react";
 import { DEMO_SENTENCE, type AskResult } from "@/lib/ask";
 import { itemById, places } from "@/lib/catalog";
 import { DEFAULT_SEARCH_LOCATION } from "@/lib/offers";
@@ -48,6 +48,7 @@ export default function ListPage() {
 
   return (
     <Screen>
+      <Link href="/" className="flex items-center gap-2 text-[13px] font-semibold text-bee no-underline"><ArrowLeft size={16} aria-hidden /> Back</Link>
       <Intro eyebrow="YOUR NEXT GROCERY RUN" title={count ? `${count} ${count === 1 ? "item" : "items"} on your list.` : "Start your list."}
         sub={count ? "Now fit it into your day." : "Add groceries, then tell us about your day."} />
 
@@ -73,7 +74,7 @@ export default function ListPage() {
       </section>
 
       <section className="flex flex-col gap-[14px]">
-        <SectionHead title="Your list" right={<Link href="/add" className="text-[12px] font-semibold text-bee no-underline">+ Add item</Link>} />
+        <SectionHead title="Your list" right={<Link href="/add" className="flex h-9 items-center gap-1 rounded-[10px] bg-bee px-3.5 text-[13px] font-semibold text-white no-underline hover:bg-bee-dark">+ Add item</Link>} />
         {count === 0 ? (
           <div className={`${card} p-[18px] text-[14px]`}>
             Your list is empty. <Link href="/add" className="font-semibold text-bee">Add items</Link> to start.
@@ -94,10 +95,14 @@ export default function ListPage() {
                         <span className="truncate text-[14px]">{item.name}</span>
                         <span className="text-[11px] text-muted">{e.brandLock ? `Brand locked: ${e.brandLock}` : "Any brand"}</span>
                         {e.productQuery && <span className="text-[11px] text-muted">{e.productQuery}</span>}
-                        {e.bulkOk && <span className="text-[10px] font-semibold text-bee">✓ Bulk OK</span>}
+                        {e.bulkOk && <span className="text-[10px] font-semibold text-bee">✓ Larger package OK</span>}
                       </span>
                     </button>
                     <Qty item={item} qty={e.qty} onChange={(n) => setItem(e.itemId, n)} />
+                    <button type="button" onClick={() => setItem(e.itemId, 0)} aria-label={`Remove ${item.name}`}
+                      className="grid size-9 shrink-0 place-items-center rounded-[8px] text-carrot hover:bg-canvas">
+                      <Trash2 size={16} aria-hidden />
+                    </button>
                   </div>
                   {expanded && (
                     <div className="mb-3 flex flex-col gap-3 rounded-[12px] bg-canvas px-3 py-2.5">
@@ -108,10 +113,7 @@ export default function ListPage() {
                         <input value={e.brandLock ?? ""} maxLength={100} placeholder="Any brand" onChange={(ev) => patchItem(e.itemId, { brandLock: ev.target.value })} className="mt-1 w-full rounded-[8px] border border-line bg-white p-2" />
                       </label>
                       <p className={fine}>Requested package: {item.typicalSize} {item.unit.replace("_", " ")}. Amounts count packages of this size.</p>
-                      <Toggle label="Bulk OK" hint="Allow a larger pack for this item." on={e.bulkOk} onChange={(b) => setItem(e.itemId, e.qty, b)} />
-                      <button type="button" onClick={() => setItem(e.itemId, 0)} className="flex items-center gap-1 text-[12px] font-semibold text-carrot">
-                        <Trash2 size={14} aria-hidden /> Remove
-                      </button>
+                      <Toggle label="Larger package OK" hint="If a bigger package costs less per unit, BeeLow may pick it." on={e.bulkOk} onChange={(b) => setItem(e.itemId, e.qty, b)} />
                     </div>
                   )}
                   <ItemPrices entry={e} result={prices.result(e)} busy={prices.busy(e)} onRefresh={() => prices.refresh([e])} />
@@ -120,7 +122,7 @@ export default function ListPage() {
             })}
           </ul>
         )}
-        <p className={fine}>Tap an item for product details, brand lock and Bulk OK. Bulk packs without Bulk OK are avoided when a suitable smaller pack is available; otherwise the plan warns about overbuying.</p>
+        <p className={fine}>Tap an item to edit it: product, brand, and Larger package OK. Larger packages are avoided unless you allow them, when a suitable smaller pack is available; otherwise the plan warns about overbuying.</p>
       </section>
 
       <section className="flex flex-col gap-[14px]">

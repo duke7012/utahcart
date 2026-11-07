@@ -27,7 +27,7 @@ export default function AddPage() {
           <button type="button" disabled={!qty} onClick={() => setOpen(open === item.id ? null : item.id)} className="min-w-0 flex-1 text-left">
             <span className="block text-[14px]">{item.name}</span>
             <span className={`block text-[11px] ${qty ? "font-semibold text-bee" : "text-muted"}`}>
-              {qty ? "✓ Added" : AISLES.find((a) => a.id === item.aisle)?.label} · {item.typicalSize} {UNIT_LABEL[item.unit]}
+              {qty ? "✓ Added · tap to edit" : AISLES.find((a) => a.id === item.aisle)?.label} · {item.typicalSize} {UNIT_LABEL[item.unit]}
             </span>
           </button>
           {qty ? (
@@ -42,7 +42,12 @@ export default function AddPage() {
         {qty > 0 && open === item.id && (
           <div className="mb-4 rounded-[12px] bg-canvas px-3.5 py-3">
             <p className="mb-2 text-[12px] font-semibold">Item preferences</p>
-            <Toggle label="Bulk OK" hint="Allow a larger pack for this item." on={cart.bulkOk(item.id)} onChange={(b) => cart.setItem(item.id, qty, b)} />
+            <label className="mb-3 block text-[12px]">Brand · optional
+              <input value={cart.s.list.find((e) => e.itemId === item.id)?.brandLock ?? ""} maxLength={100} placeholder="Any brand"
+                onChange={(ev) => cart.update({ ...cart.s, list: cart.s.list.map((e) => e.itemId === item.id ? { ...e, brandLock: ev.target.value } : e) })}
+                className="mt-1 w-full rounded-[8px] border border-line bg-white p-2 text-[14px]" />
+            </label>
+            <Toggle label="Larger package OK" hint="If a bigger package costs less per unit, BeeLow may pick it." on={cart.bulkOk(item.id)} onChange={(b) => cart.setItem(item.id, qty, b)} />
             <p className="mt-2 text-[10px] font-semibold text-bee">✓ Preferences saved to your list</p>
           </div>
         )}
@@ -80,7 +85,7 @@ export default function AddPage() {
           {results.length ? <ul className={`${card} px-4`}>{results.map(row)}</ul> : (
             <p className={`${card} p-[18px] text-[14px]`}>Nothing matches “{query.trim()}”. Try another word, like “milk” or “beans”.</p>
           )}
-          <p className={fine}>Tap an added item to change its preferences. Bulk OK only applies to that item.</p>
+          <p className={fine}>Tap an added item to change its preferences. Brand and Larger package OK only apply to that item.</p>
         </section>
       ) : (
         <>
@@ -105,7 +110,7 @@ export default function AddPage() {
               <img src="/figma/pantry.jpg" alt="Pantry staples on a table" className="h-[112px] w-full rounded-[16px] object-cover" />
               <ul>{STAPLES.map((id) => itemById(id)!).map(row)}</ul>
             </div>
-            <p className={fine}>Add an item, then tap it to set Bulk OK.</p>
+            <p className={fine}>Add an item, then tap it to choose a brand or allow a larger package.</p>
           </section>
           {count > 0 && (
             <div className="flex gap-3 rounded-[12px] bg-honey-tint p-[14px]">

@@ -71,7 +71,7 @@ function PlanDetail({ plan, trip, label, saved }: { plan: Plan; trip: Trip; labe
         </div>
         <p className="text-[13px]">{stops} in-person {stops === 1 ? "stop" : "stops"} · ~{plan.minutes} min to home</p>
         <p className={fine}>{plan.estimated ? "Estimated total and savings." : "Total before tax and tips."} Taxes and tips excluded.</p>
-        <p className={fine}>{leave ? `Leave ${ampm(leave)} → home about ${ampm(addMinutes(leave, plan.minutes))}. ` : ""}Estimates, not live timing.</p>
+        <p className={fine}>{leave && stops ? `Leave ${ampm(leave)} → home about ${ampm(addMinutes(leave, plan.minutes))}. ` : ""}Estimates, not live timing.</p>
       </div>
 
       <SaveTrip plan={plan} saved={saved} />
